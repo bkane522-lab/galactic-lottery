@@ -1,50 +1,37 @@
-const CACHE_NAME = "galactic-loto-v1";
-
-const APP_FILES = [
-  "/",
-  "/index.html",
-  "/manifest.json",
-  "/icon.svg"
-];
+const CACHE_NAME = "galactic-loto-no-cache-v6";
 
 self.addEventListener("install", function(event) {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(APP_FILES);
-    })
-  );
   self.skipWaiting();
-});
 
-self.addEventListener("activate", function(event) {
   event.waitUntil(
-    caches.keys().then(function(keys) {
+    caches.keys().then(function(cacheNames) {
       return Promise.all(
-        keys.map(function(key) {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
+        cacheNames.map(function(cacheName) {
+          return caches.delete(cacheName);
         })
       );
     })
   );
-  self.clients.claim();
+});
+
+self.addEventListener("activate", function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          return caches.delete(cacheName);
+        })
+      );
+    }).then(function() {
+      return self.clients.claim();
+    })
+  );
 });
 
 self.addEventListener("fetch", function(event) {
-  if (event.request.method !== "GET") {
-    return;
-  }
-
   event.respondWith(
-    fetch(event.request)
-      .then(function(response) {
-        return response;
-      })
-      .catch(function() {
-        return caches.match(event.request).then(function(cached) {
-          return cached || caches.match("/index.html");
-        });
-      })
+    fetch(event.request, { cache: "no-store" }).catch(function() {
+      return fetch(event.request);
+    })
   );
 });
