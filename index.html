@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Galactic Lottery</title>
-<meta name="theme-color" content="#0a0012" />
+<meta name="theme-color" content="#0a0012">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;700;800&display=swap');
@@ -15,18 +15,16 @@
   --violet:#7b2fff;
   --violet-soft:#b98cff;
   --gold:#f0c040;
-  --gold-soft:#ffe59a;
+  --gold-soft:#ffe8a3;
   --white:#f6f0ff;
-  --muted:rgba(246,240,255,.74);
+  --muted:rgba(246,240,255,.72);
   --card:rgba(255,255,255,.055);
-  --card-2:rgba(255,255,255,.04);
   --border:rgba(123,47,255,.28);
-  --blue:#005dff;
+  --blue:#0061ff;
   --red:#d92a2a;
   --green:#25d366;
-  --ok:#1fd18b;
-  --danger:#ff667e;
-  --shadow:0 18px 55px rgba(0,0,0,.32);
+  --ok:#21d68f;
+  --danger:#ff6b83;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -37,9 +35,9 @@ body{
   font-family:Inter,sans-serif;
   overflow-x:hidden;
   background:
-    radial-gradient(circle at 20% 18%, rgba(123,47,255,.20), transparent 30%),
-    radial-gradient(circle at 83% 72%, rgba(240,192,64,.08), transparent 30%),
-    linear-gradient(180deg,#090011,#15002d 55%,#05000b);
+    radial-gradient(circle at 20% 15%, rgba(123,47,255,.20), transparent 32%),
+    radial-gradient(circle at 82% 72%, rgba(240,192,64,.08), transparent 30%),
+    linear-gradient(180deg,#08000f,#15002d 58%,#05000b);
 }
 
 .stars{
@@ -48,18 +46,20 @@ body{
   pointer-events:none;
   z-index:0;
 }
+
 .star{
   position:absolute;
   width:2px;
   height:2px;
   border-radius:50%;
   background:#fff;
-  opacity:.75;
+  opacity:.72;
   animation:twinkle 2.8s infinite alternate ease-in-out;
 }
+
 @keyframes twinkle{
-  from{opacity:.12;transform:scale(.8)}
-  to{opacity:.92;transform:scale(1.45)}
+  from{opacity:.15;transform:scale(.8)}
+  to{opacity:.95;transform:scale(1.45)}
 }
 
 .container{
@@ -67,52 +67,48 @@ body{
   z-index:1;
   max-width:560px;
   margin:0 auto;
-  padding:20px 16px 34px;
+  padding:16px 14px 28px;
 }
 
 .header{
   text-align:center;
-  margin-bottom:20px;
+  margin-bottom:14px;
 }
 
 .logo{
-  width:86px;
-  height:86px;
-  margin:0 auto 12px;
-  border-radius:26px;
-  border:1px solid rgba(240,192,64,.22);
-  background:rgba(255,255,255,.04);
+  width:62px;
+  height:62px;
+  margin:0 auto 8px;
+  border-radius:21px;
+  border:1px solid rgba(240,192,64,.25);
+  background:rgba(255,255,255,.045);
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:0 0 34px rgba(240,192,64,.14);
-  animation:float 4s ease-in-out infinite;
+  box-shadow:0 0 28px rgba(240,192,64,.12);
 }
+
 .logo svg{
-  width:64px;
-  height:64px;
-  display:block;
-}
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
+  width:48px;
+  height:48px;
 }
 
 h1{
   font-family:Orbitron,sans-serif;
-  font-size:28px;
-  line-height:1.08;
-  letter-spacing:2px;
+  font-size:25px;
+  line-height:1.05;
+  letter-spacing:1.6px;
   font-weight:900;
-  margin-bottom:10px;
-  background:linear-gradient(135deg,var(--gold),#fff2b0,var(--gold));
+  margin-bottom:7px;
+  background:linear-gradient(135deg,var(--gold),#fff3b0,var(--gold));
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
 }
+
 .subtitle{
-  font-size:14px;
-  line-height:1.5;
+  font-size:13px;
+  line-height:1.4;
   color:var(--muted);
 }
 
@@ -122,81 +118,88 @@ h1{
   background:rgba(255,255,255,.045);
   border:1px solid var(--border);
   border-radius:16px;
-  padding:6px;
-  margin-bottom:16px;
+  padding:5px;
+  margin-bottom:12px;
 }
+
 .tab{
   flex:1;
   border:0;
   border-radius:12px;
-  padding:13px 8px;
+  padding:12px 8px;
   background:transparent;
-  color:rgba(246,240,255,.48);
+  color:rgba(246,240,255,.50);
   font-size:14px;
   font-weight:800;
   cursor:pointer;
 }
+
 .tab.active.euro{
   background:linear-gradient(135deg,#0030aa,#0061ff);
   color:#fff2a8;
-  box-shadow:0 0 22px rgba(0,93,255,.34);
+  box-shadow:0 0 20px rgba(0,97,255,.34);
 }
+
 .tab.active.loto{
   background:linear-gradient(135deg,#8a0000,#dd382f);
   color:#fff2a8;
-  box-shadow:0 0 22px rgba(221,56,47,.32);
+  box-shadow:0 0 20px rgba(221,56,47,.32);
 }
 
 .card{
   background:var(--card);
   border:1px solid var(--border);
   border-radius:22px;
-  padding:18px;
-  margin-bottom:14px;
+  padding:16px;
+  margin-bottom:12px;
   backdrop-filter:blur(12px);
-  box-shadow:var(--shadow);
+  box-shadow:0 16px 50px rgba(0,0,0,.30);
 }
+
 .card-title{
-  font-size:13px;
+  font-size:12px;
   text-transform:uppercase;
-  letter-spacing:1.5px;
+  letter-spacing:1.4px;
   font-weight:800;
   color:var(--violet-soft);
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 .next{
-  font-size:14px;
-  line-height:1.45;
+  font-size:13px;
+  line-height:1.35;
   color:var(--muted);
-  margin-bottom:14px;
+  margin-bottom:10px;
 }
 
-.countdown-grid{
+.countdown-line{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  margin-bottom:16px;
+  gap:7px;
+  margin-bottom:12px;
 }
+
 .timebox{
-  background:rgba(255,255,255,.04);
+  background:rgba(255,255,255,.045);
   border:1px solid rgba(255,255,255,.08);
-  border-radius:16px;
-  padding:10px 6px;
+  border-radius:13px;
+  padding:8px 5px;
   text-align:center;
 }
+
 .timebox strong{
   display:block;
   font-family:Orbitron,sans-serif;
-  font-size:18px;
+  font-size:15px;
   color:var(--gold-soft);
 }
+
 .timebox span{
   display:block;
-  margin-top:4px;
-  font-size:10px;
+  margin-top:2px;
+  font-size:9px;
   text-transform:uppercase;
-  letter-spacing:1px;
+  letter-spacing:.8px;
   color:var(--muted);
 }
 
@@ -205,78 +208,89 @@ h1{
   justify-content:center;
   flex-wrap:wrap;
   gap:8px;
-  margin-bottom:12px;
+  margin-bottom:9px;
 }
+
 .ball{
-  width:54px;
-  height:54px;
+  width:49px;
+  height:49px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   font-family:Orbitron,sans-serif;
-  font-size:17px;
+  font-size:16px;
   font-weight:900;
   color:#fff;
   background:
-    radial-gradient(circle at 32% 28%,rgba(255,255,255,.35),transparent 18%),
+    radial-gradient(circle at 32% 28%,rgba(255,255,255,.36),transparent 18%),
     radial-gradient(circle at 50% 55%,rgba(255,255,255,.10),rgba(0,0,0,.42));
-  border:2px solid rgba(255,255,255,.16);
-  box-shadow:0 0 18px rgba(123,47,255,.26);
+  border:2px solid rgba(255,255,255,.15);
+  box-shadow:0 0 16px rgba(123,47,255,.24);
 }
+
 .ball.extra{
-  width:48px;
-  height:48px;
+  width:44px;
+  height:44px;
   color:#ffe56b;
   border-color:rgba(240,192,64,.55);
-  box-shadow:0 0 18px rgba(240,192,64,.24);
+  box-shadow:0 0 16px rgba(240,192,64,.22);
 }
+
 .extra-label{
   text-align:center;
-  font-size:12px;
+  font-size:11px;
   color:rgba(246,240,255,.62);
   text-transform:uppercase;
-  letter-spacing:1.5px;
-  margin:7px 0 10px;
+  letter-spacing:1.4px;
+  margin:7px 0 8px;
   font-weight:700;
 }
 
 .btn{
   width:100%;
   border:0;
-  border-radius:15px;
-  padding:15px;
-  font-size:15px;
+  border-radius:14px;
+  padding:13px;
+  font-size:14px;
   font-weight:800;
   cursor:pointer;
   color:#fff;
-  margin-top:10px;
-  transition:.2s;
+  margin-top:9px;
+  transition:.18s;
 }
+
 .btn:active{transform:scale(.98)}
+
 .btn-main{
   background:linear-gradient(135deg,#003399,#0061ff);
   color:#fff2a8;
-  box-shadow:0 0 28px rgba(0,87,255,.34);
+  box-shadow:0 0 24px rgba(0,97,255,.34);
 }
+
 .btn-main.loto{
   background:linear-gradient(135deg,#8a0000,#dd382f);
-  box-shadow:0 0 28px rgba(221,56,47,.32);
+  box-shadow:0 0 24px rgba(221,56,47,.32);
 }
+
 .row{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
+  gap:9px;
 }
+
 .btn-copy{background:rgba(255,255,255,.11)}
+
 .btn-whatsapp{
   background:rgba(37,211,102,.20);
   border:1px solid rgba(37,211,102,.34);
 }
+
 .btn-insta{
   background:linear-gradient(135deg,rgba(255,0,128,.22),rgba(255,180,70,.16),rgba(123,47,255,.20));
   border:1px solid rgba(255,255,255,.12);
 }
+
 .btn-link{
   background:rgba(240,192,64,.12);
   border:1px solid rgba(240,192,64,.32);
@@ -285,24 +299,48 @@ h1{
 
 .status{
   display:none;
-  margin-top:12px;
-  padding:12px;
+  margin-top:10px;
+  padding:10px;
   border-radius:12px;
   font-size:13px;
-  line-height:1.45;
+  line-height:1.4;
   background:rgba(31,209,139,.12);
   border:1px solid rgba(31,209,139,.28);
   color:#dbfff0;
 }
+
 .status.show{display:block}
 
+.info-tabs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+  margin-bottom:11px;
+}
+
+.info-tab{
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.045);
+  color:rgba(246,240,255,.70);
+  border-radius:12px;
+  padding:9px 4px;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.info-tab.active{
+  color:#fff2a8;
+  border-color:rgba(240,192,64,.35);
+  background:rgba(240,192,64,.11);
+}
+
 .panel{
-  background:var(--card-2);
+  background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
   border-radius:16px;
-  padding:14px;
+  padding:13px;
 }
-.panel + .panel{margin-top:10px}
 
 .label{
   font-size:13px;
@@ -310,9 +348,10 @@ h1{
   color:var(--gold-soft);
   margin-bottom:8px;
 }
+
 .small{
   font-size:13px;
-  line-height:1.5;
+  line-height:1.45;
   color:var(--muted);
 }
 
@@ -322,56 +361,50 @@ h1{
   gap:7px;
   margin-top:8px;
 }
+
 .chip{
-  padding:8px 10px;
+  padding:7px 9px;
   border-radius:999px;
   background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.12);
-  font-size:13px;
+  font-size:12px;
   font-weight:800;
 }
+
 .chip.hot{
   color:#fff2a8;
   border-color:rgba(240,192,64,.30);
 }
+
 .chip.cold{
   color:#bcd9ff;
   border-color:rgba(110,170,255,.30);
 }
 
-.gain-box{
-  padding:14px;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,.09);
-  background:rgba(255,255,255,.045);
-}
 .gain-status{
   font-size:16px;
   font-weight:800;
-  margin-bottom:8px;
-}
-.gain-status.ok{color:#8dffd2}
-.gain-status.no{color:#ffd2da}
-.gain-details{
-  font-size:14px;
-  line-height:1.55;
-  color:var(--muted);
+  margin-bottom:7px;
 }
 
+.gain-status.ok{color:#8dffd2}
+.gain-status.no{color:#ffd2da}
+
 .history-item{
-  padding:10px 0;
+  padding:9px 0;
   border-bottom:1px solid rgba(255,255,255,.08);
   font-size:13px;
   color:var(--muted);
 }
+
 .history-item:last-child{border-bottom:0}
 
 .footer{
   text-align:center;
-  color:rgba(246,240,255,.42);
-  font-size:12px;
-  line-height:1.55;
-  margin-top:18px;
+  color:rgba(246,240,255,.40);
+  font-size:11px;
+  line-height:1.5;
+  margin-top:14px;
 }
 </style>
 </head>
@@ -380,9 +413,10 @@ h1{
 <div class="stars" id="stars"></div>
 
 <div class="container">
+
   <header class="header">
-    <div class="logo" aria-label="Logo Galactic Lottery">
-      <svg viewBox="0 0 120 120" role="img" aria-hidden="true">
+    <div class="logo">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
         <defs>
           <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#fff2b0"/>
@@ -394,14 +428,12 @@ h1{
             <stop offset="100%" stop-color="#5520c6"/>
           </linearGradient>
         </defs>
-
-        <circle cx="60" cy="60" r="20" fill="url(#g1)" opacity="0.95"/>
-        <circle cx="60" cy="60" r="34" fill="none" stroke="url(#g2)" stroke-width="6" opacity="0.95"/>
-        <circle cx="60" cy="60" r="47" fill="none" stroke="url(#g1)" stroke-width="3" opacity="0.85"/>
-        <path d="M60 24 L66 39 L82 39 L69 49 L74 64 L60 55 L46 64 L51 49 L38 39 L54 39 Z" fill="url(#g1)"/>
-        <circle cx="25" cy="60" r="6" fill="url(#g1)"/>
-        <circle cx="95" cy="60" r="6" fill="url(#g1)"/>
-        <circle cx="60" cy="95" r="6" fill="url(#g2)"/>
+        <circle cx="60" cy="60" r="20" fill="url(#g1)"/>
+        <circle cx="60" cy="60" r="34" fill="none" stroke="url(#g2)" stroke-width="6"/>
+        <circle cx="60" cy="60" r="47" fill="none" stroke="url(#g1)" stroke-width="3"/>
+        <path d="M60 22 L67 42 L88 42 L71 54 L78 76 L60 63 L42 76 L49 54 L32 42 L53 42 Z" fill="url(#g1)"/>
+        <circle cx="22" cy="60" r="5" fill="url(#g1)"/>
+        <circle cx="98" cy="60" r="5" fill="url(#g1)"/>
       </svg>
     </div>
 
@@ -413,370 +445,338 @@ h1{
   </header>
 
   <div class="tabs">
-    <button id="tabEuro" class="tab euro active" onclick="switchGame('euro')">⭐ EuroMillions</button>
-    <button id="tabLoto" class="tab loto" onclick="switchGame('loto')">🎱 Loto</button>
+    <button id="tabEuro" class="tab euro active" type="button">⭐ EuroMillions</button>
+    <button id="tabLoto" class="tab loto" type="button">🎱 Loto</button>
   </div>
 
   <section class="card">
     <div class="card-title" id="gameTitle">✦ EuroMillions · Votre grille</div>
     <div class="next" id="nextDraw">Prochain tirage : calcul...</div>
 
-    <div class="countdown-grid">
-      <div class="timebox"><strong id="cdDays">--</strong><span>Jours</span></div>
-      <div class="timebox"><strong id="cdHours">--</strong><span>Heures</span></div>
-      <div class="timebox"><strong id="cdMins">--</strong><span>Min</span></div>
-      <div class="timebox"><strong id="cdSecs">--</strong><span>Sec</span></div>
+    <div class="countdown-line">
+      <div class="timebox"><strong id="cdDays">--</strong><span>jours</span></div>
+      <div class="timebox"><strong id="cdHours">--</strong><span>heures</span></div>
+      <div class="timebox"><strong id="cdMins">--</strong><span>min</span></div>
+      <div class="timebox"><strong id="cdSecs">--</strong><span>sec</span></div>
     </div>
 
     <div class="balls-row" id="mainBalls"></div>
     <div class="extra-label" id="extraLabel">Étoiles</div>
     <div class="balls-row" id="extraBalls"></div>
 
-    <button class="btn btn-main" id="generateBtn" onclick="generateGrid()">🔮 Générer ma grille</button>
+    <button class="btn btn-main" id="generateBtn" type="button">🔮 Générer ma grille</button>
 
     <div class="row">
-      <button class="btn btn-copy" onclick="copyGrid()">📋 Copier</button>
-      <button class="btn btn-whatsapp" onclick="shareWhatsApp()">🟢 WhatsApp</button>
+      <button class="btn btn-copy" id="copyBtn" type="button">📋 Copier</button>
+      <button class="btn btn-whatsapp" id="whatsappBtn" type="button">🟢 WhatsApp</button>
     </div>
 
-    <button class="btn btn-insta" onclick="shareInstagram()">📸 Instagram / autres apps</button>
+    <button class="btn btn-insta" id="shareBtn" type="button">📸 Instagram / autres apps</button>
 
     <div class="status" id="status"></div>
   </section>
 
   <section class="card">
-    <div class="card-title">🏆 Dernier tirage officiel FDJ</div>
-
-    <div class="panel">
-      <div class="label" id="resultDate">Chargement...</div>
-      <div class="balls-row" id="resultMainBalls"></div>
-      <div class="extra-label" id="resultExtraLabel"></div>
-      <div class="balls-row" id="resultExtraBalls"></div>
-      <div class="small" id="resultNote"></div>
+    <div class="info-tabs">
+      <button class="info-tab active" id="infoResult" type="button">Tirage</button>
+      <button class="info-tab" id="infoGain" type="button">Gain</button>
+      <button class="info-tab" id="infoStats" type="button">Stats</button>
+      <button class="info-tab" id="infoHistory" type="button">Historique</button>
     </div>
 
-    <button class="btn btn-link" onclick="openResults()">Voir les résultats FDJ</button>
-  </section>
-
-  <section class="card">
-    <div class="card-title">💰 Gain remporté ou pas</div>
-
-    <div class="gain-box">
-      <div class="gain-status no" id="gainStatus">Aucune grille vérifiée pour l’instant</div>
-      <div class="gain-details" id="gainDetails">
-        Génère une grille pour vérifier si elle est gagnante par rapport au dernier tirage officiel affiché.
-      </div>
-    </div>
-
-    <button class="btn btn-link" onclick="openGainHelper()">Vérifier sur FDJ / Simuler mes gains</button>
-  </section>
-
-  <section class="card">
-    <div class="card-title">📊 Vraies statistiques FDJ</div>
-
-    <div class="panel">
-      <div class="label" id="statsTitle">Palmarès officiel</div>
-
-      <div class="small">Numéros les plus sortis :</div>
-      <div class="stat-line" id="hotStats"></div>
-
-      <div class="small" style="margin-top:12px;">Numéros les moins sortis :</div>
-      <div class="stat-line" id="coldStats"></div>
-
-      <div class="small" id="statsNote" style="margin-top:12px;"></div>
-    </div>
-
-    <button class="btn btn-link" onclick="openStats()">Voir les statistiques FDJ</button>
-  </section>
-
-  <section class="card">
-    <div class="card-title">📜 Historique</div>
-    <div id="historyList" class="small">Aucune grille encore...</div>
-    <button class="btn btn-copy" onclick="clearHistory()">🧹 Effacer l’historique</button>
+    <div class="panel" id="infoPanel"></div>
   </section>
 
   <div class="footer">
-    Cette application n’est pas affiliée à la FDJ.<br>
-    Pour un montant exact des gains, vérifie toujours les rapports officiels FDJ.
+    Données FDJ intégrées manuellement. Pour un montant exact, vérifie toujours les rapports officiels FDJ.
   </div>
+
 </div>
 
 <script>
-var currentGame = "euro";
-var lastGrid = null;
-var history = JSON.parse(localStorage.getItem("galactic_history_v5") || "[]");
+(function(){
+  var currentGame = "euro";
+  var currentInfo = "result";
+  var lastGrid = null;
+  var history = loadHistory();
 
-var FDJ = {
-  euro: {
-    name: "EuroMillions",
-    extraName: "Étoiles",
-    resultDate: "Mardi 16 juin 2026",
-    resultMain: [18,25,31,37,45],
-    resultExtra: [4,9],
-    resultNote: "My Million : CK 811 1 065",
-    statsUpdated: "Mise à jour FDJ : 16/06/26 · Période : depuis le 4 février 2020",
-    hot: [
-      {n:35,c:84},
-      {n:42,c:82},
-      {n:21,c:80},
-      {n:29,c:78},
-      {n:34,c:77}
-    ],
-    cold: [
-      {n:22,c:44},
-      {n:1,c:47},
-      {n:43,c:53},
-      {n:3,c:57},
-      {n:31,c:57}
-    ],
-    statsUrl: "https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/statistiques",
-    resultsUrl: "https://www.fdj.fr/jeux-de-tirage/resultats",
-    gainUrl: "https://www.fdj.fr/jeux-de-tirage/resultats"
-  },
-  loto: {
-    name: "Loto",
-    extraName: "Numéro Chance",
-    resultDate: "Mercredi 17 juin 2026",
-    resultMain: [1,15,32,37,39],
-    resultExtra: [1],
-    resultNote: "Codes gagnants + Numéro7 disponibles sur FDJ",
-    statsUpdated: "Mise à jour FDJ : 17/06/26 · Période : depuis le 14 juillet 2019",
-    hot: [
-      {n:30,c:128},
-      {n:31,c:126},
-      {n:24,c:121},
-      {n:3,c:120},
-      {n:28,c:119}
-    ],
-    cold: [
-      {n:43,c:89},
-      {n:1,c:92},
-      {n:33,c:92},
-      {n:14,c:94},
-      {n:37,c:98}
-    ],
-    statsUrl: "https://www.fdj.fr/jeux-de-tirage/loto/statistiques",
-    resultsUrl: "https://www.fdj.fr/jeux-de-tirage/resultats",
-    gainUrl: "https://www.fdj.fr/jeux-de-tirage/loto/gains"
-  }
-};
-
-function init(){
-  createStars();
-  resetBalls();
-  renderHistory();
-  renderOfficialData();
-  updateNextDraw();
-  setInterval(updateNextDraw, 1000);
-}
-
-function createStars(){
-  var stars = document.getElementById("stars");
-  stars.innerHTML = "";
-  for(var i=0;i<110;i++){
-    var s=document.createElement("div");
-    s.className="star";
-    s.style.left=Math.random()*100+"%";
-    s.style.top=Math.random()*100+"%";
-    s.style.animationDelay=(Math.random()*4)+"s";
-    stars.appendChild(s);
-  }
-}
-
-function switchGame(game){
-  currentGame = game;
-
-  document.getElementById("tabEuro").className = "tab euro" + (game==="euro" ? " active" : "");
-  document.getElementById("tabLoto").className = "tab loto" + (game==="loto" ? " active" : "");
-  document.getElementById("generateBtn").className = "btn btn-main" + (game==="loto" ? " loto" : "");
-  document.getElementById("gameTitle").textContent = game==="euro" ? "✦ EuroMillions · Votre grille" : "✦ Loto · Votre grille";
-  document.getElementById("extraLabel").textContent = game==="euro" ? "Étoiles" : "Numéro Chance";
-
-  lastGrid = null;
-  resetBalls();
-  renderOfficialData();
-  resetGainBox();
-  updateNextDraw();
-  hideStatus();
-}
-
-function resetBalls(){
-  var main = document.getElementById("mainBalls");
-  var extra = document.getElementById("extraBalls");
-  main.innerHTML = "";
-  extra.innerHTML = "";
-
-  for(var i=0;i<5;i++){
-    var b=document.createElement("div");
-    b.className="ball";
-    b.textContent="?";
-    main.appendChild(b);
-  }
-
-  var count = currentGame==="euro" ? 2 : 1;
-  for(var j=0;j<count;j++){
-    var e=document.createElement("div");
-    e.className="ball extra";
-    e.textContent="?";
-    extra.appendChild(e);
-  }
-}
-
-function renderOfficialData(){
-  var data = FDJ[currentGame];
-
-  document.getElementById("resultDate").textContent = data.name + " · " + data.resultDate;
-  renderBalls("resultMainBalls", data.resultMain, false);
-  renderBalls("resultExtraBalls", data.resultExtra, true);
-  document.getElementById("resultExtraLabel").textContent = data.extraName;
-  document.getElementById("resultNote").textContent = data.resultNote;
-
-  document.getElementById("statsTitle").textContent = "Palmarès officiel " + data.name;
-  document.getElementById("statsNote").textContent = data.statsUpdated + ".";
-  document.getElementById("hotStats").innerHTML = data.hot.map(function(x){
-    return '<span class="chip hot">' + x.n + ' · ' + x.c + ' sorties</span>';
-  }).join("");
-  document.getElementById("coldStats").innerHTML = data.cold.map(function(x){
-    return '<span class="chip cold">' + x.n + ' · ' + x.c + ' sorties</span>';
-  }).join("");
-}
-
-function renderBalls(id, nums, extra){
-  var box = document.getElementById(id);
-  box.innerHTML = "";
-  nums.forEach(function(n){
-    var b=document.createElement("div");
-    b.className="ball" + (extra ? " extra" : "");
-    b.textContent=n;
-    box.appendChild(b);
-  });
-}
-
-function pick(min,max,count){
-  var arr=[];
-  while(arr.length<count){
-    var n=Math.floor(Math.random()*(max-min+1))+min;
-    if(arr.indexOf(n)===-1) arr.push(n);
-  }
-  arr.sort(function(a,b){return a-b});
-  return arr;
-}
-
-function generateGrid(){
-  var main = currentGame==="euro" ? pick(1,50,5) : pick(1,49,5);
-  var extra = currentGame==="euro" ? pick(1,12,2) : pick(1,10,1);
-
-  renderBalls("mainBalls", main, false);
-  renderBalls("extraBalls", extra, true);
-
-  lastGrid = {
-    game: currentGame,
-    main: main,
-    extra: extra,
-    date: new Date().toISOString()
+  var FDJ = {
+    euro: {
+      name: "EuroMillions",
+      extraName: "Étoiles",
+      resultDate: "Mardi 16 juin 2026",
+      resultMain: [18,25,31,37,45],
+      resultExtra: [4,9],
+      resultNote: "My Million : CK 811 1065",
+      hot: [
+        {n:35,c:84},{n:42,c:82},{n:21,c:80},{n:29,c:78},{n:34,c:77}
+      ],
+      cold: [
+        {n:22,c:44},{n:1,c:47},{n:43,c:53},{n:3,c:57},{n:31,c:57}
+      ],
+      statsNote: "Mise à jour FDJ : 16/06/26 · Depuis le 4 février 2020",
+      statsUrl: "https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/statistiques",
+      resultsUrl: "https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/resultats/mardi-16-juin-2026"
+    },
+    loto: {
+      name: "Loto",
+      extraName: "Numéro Chance",
+      resultDate: "Mercredi 17 juin 2026",
+      resultMain: [1,15,32,37,39],
+      resultExtra: [1],
+      resultNote: "Codes gagnants et Numéro7 disponibles sur FDJ",
+      hot: [
+        {n:30,c:128},{n:31,c:126},{n:24,c:121},{n:3,c:120},{n:28,c:119}
+      ],
+      cold: [
+        {n:43,c:89},{n:1,c:92},{n:33,c:92},{n:14,c:94},{n:37,c:98}
+      ],
+      statsNote: "Mise à jour FDJ : 17/06/26 · Depuis le 14 juillet 2019",
+      statsUrl: "https://www.fdj.fr/jeux-de-tirage/loto/statistiques",
+      resultsUrl: "https://www.fdj.fr/jeux-de-tirage/loto/resultats/mercredi-17-juin-2026"
+    }
   };
 
-  history.unshift(lastGrid);
-  history = history.slice(0,8);
-  localStorage.setItem("galactic_history_v5", JSON.stringify(history));
-
-  renderHistory();
-  evaluateGain();
-  showStatus("Grille générée ✅");
-}
-
-function buildText(){
-  if(!lastGrid) return "";
-  var gameName = lastGrid.game==="euro" ? "EuroMillions" : "Loto";
-  var extraName = lastGrid.game==="euro" ? "Étoiles" : "Numéro Chance";
-
-  return "Ma grille Galactic Lottery ✨\\n\\n" +
-    gameName + "\\n" +
-    "Numéros : " + lastGrid.main.join(" - ") + "\\n" +
-    extraName + " : " + lastGrid.extra.join(" - ") + "\\n\\n" +
-    "Dernier tirage officiel FDJ intégré dans l'app.\\n" +
-    window.location.href;
-}
-
-function copyGrid(){
-  if(!lastGrid){
-    showStatus("Génère d’abord une grille.");
-    return;
+  function $(id){
+    return document.getElementById(id);
   }
-  var text=buildText();
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(function(){
-      showStatus("Grille copiée ✅");
-    }).catch(function(){
-      fallbackCopy(text);
+
+  function init(){
+    createStars();
+    bindButtons();
+    resetBalls();
+    renderInfo();
+    renderHistory();
+    updateNextDraw();
+    setInterval(updateNextDraw, 1000);
+  }
+
+  function bindButtons(){
+    $("tabEuro").addEventListener("click", function(){ switchGame("euro"); });
+    $("tabLoto").addEventListener("click", function(){ switchGame("loto"); });
+
+    $("generateBtn").addEventListener("click", generateGrid);
+    $("copyBtn").addEventListener("click", copyGrid);
+    $("whatsappBtn").addEventListener("click", shareWhatsApp);
+    $("shareBtn").addEventListener("click", shareMobile);
+
+    $("infoResult").addEventListener("click", function(){ switchInfo("result"); });
+    $("infoGain").addEventListener("click", function(){ switchInfo("gain"); });
+    $("infoStats").addEventListener("click", function(){ switchInfo("stats"); });
+    $("infoHistory").addEventListener("click", function(){ switchInfo("history"); });
+  }
+
+  function createStars(){
+    var stars = $("stars");
+    stars.innerHTML = "";
+    for(var i=0; i<95; i++){
+      var s = document.createElement("div");
+      s.className = "star";
+      s.style.left = Math.random() * 100 + "%";
+      s.style.top = Math.random() * 100 + "%";
+      s.style.animationDelay = Math.random() * 4 + "s";
+      stars.appendChild(s);
+    }
+  }
+
+  function switchGame(game){
+    currentGame = game;
+    lastGrid = null;
+
+    $("tabEuro").className = "tab euro" + (game === "euro" ? " active" : "");
+    $("tabLoto").className = "tab loto" + (game === "loto" ? " active" : "");
+
+    $("generateBtn").className = "btn btn-main" + (game === "loto" ? " loto" : "");
+    $("gameTitle").textContent = game === "euro" ? "✦ EuroMillions · Votre grille" : "✦ Loto · Votre grille";
+    $("extraLabel").textContent = game === "euro" ? "Étoiles" : "Numéro Chance";
+
+    resetBalls();
+    renderInfo();
+    updateNextDraw();
+    hideStatus();
+  }
+
+  function switchInfo(info){
+    currentInfo = info;
+
+    $("infoResult").className = "info-tab" + (info === "result" ? " active" : "");
+    $("infoGain").className = "info-tab" + (info === "gain" ? " active" : "");
+    $("infoStats").className = "info-tab" + (info === "stats" ? " active" : "");
+    $("infoHistory").className = "info-tab" + (info === "history" ? " active" : "");
+
+    renderInfo();
+  }
+
+  function resetBalls(){
+    var main = $("mainBalls");
+    var extra = $("extraBalls");
+    main.innerHTML = "";
+    extra.innerHTML = "";
+
+    for(var i=0; i<5; i++){
+      main.appendChild(makeBall("?"));
+    }
+
+    var count = currentGame === "euro" ? 2 : 1;
+    for(var j=0; j<count; j++){
+      extra.appendChild(makeBall("?", true));
+    }
+  }
+
+  function makeBall(value, isExtra){
+    var b = document.createElement("div");
+    b.className = "ball" + (isExtra ? " extra" : "");
+    b.textContent = value;
+    return b;
+  }
+
+  function renderBalls(id, numbers, isExtra){
+    var el = $(id);
+    if(!el) return;
+    el.innerHTML = "";
+    for(var i=0; i<numbers.length; i++){
+      el.appendChild(makeBall(numbers[i], isExtra));
+    }
+  }
+
+  function randomPick(min,max,count){
+    var arr = [];
+    while(arr.length < count){
+      var n = Math.floor(Math.random() * (max - min + 1)) + min;
+      if(arr.indexOf(n) === -1){
+        arr.push(n);
+      }
+    }
+    arr.sort(function(a,b){ return a-b; });
+    return arr;
+  }
+
+  function generateGrid(){
+    var main = currentGame === "euro" ? randomPick(1,50,5) : randomPick(1,49,5);
+    var extra = currentGame === "euro" ? randomPick(1,12,2) : randomPick(1,10,1);
+
+    renderBalls("mainBalls", main, false);
+    renderBalls("extraBalls", extra, true);
+
+    lastGrid = {
+      game: currentGame,
+      main: main,
+      extra: extra,
+      date: new Date().toISOString()
+    };
+
+    history.unshift(lastGrid);
+    history = history.slice(0,8);
+    saveHistory();
+
+    showStatus("Grille générée ✅");
+    switchInfo("gain");
+  }
+
+  function countMatches(a,b){
+    var total = 0;
+    for(var i=0; i<a.length; i++){
+      if(b.indexOf(a[i]) !== -1){
+        total++;
+      }
+    }
+    return total;
+  }
+
+  function getVerdict(game, main, extra){
+    if(game === "euro"){
+      var key = main + "+" + extra;
+      var ranks = {
+        "5+2":"Rang 1","5+1":"Rang 2","5+0":"Rang 3",
+        "4+2":"Rang 4","4+1":"Rang 5","3+2":"Rang 6",
+        "4+0":"Rang 7","2+2":"Rang 8","3+1":"Rang 9",
+        "3+0":"Rang 10","1+2":"Rang 11","2+1":"Rang 12","2+0":"Rang 13"
+      };
+      return ranks[key] ? {win:true, rank:ranks[key]} : {win:false, rank:"Aucun"};
+    }
+
+    var keyLoto = main + "+" + extra;
+    var ranksLoto = {
+      "5+1":"Rang 1","5+0":"Rang 2","4+1":"Rang 3",
+      "4+0":"Rang 4","3+1":"Rang 5","3+0":"Rang 6",
+      "2+1":"Rang 7","2+0":"Rang 8","1+1":"Rang 9","0+1":"Rang 10"
+    };
+    return ranksLoto[keyLoto] ? {win:true, rank:ranksLoto[keyLoto]} : {win:false, rank:"Aucun"};
+  }
+
+  function renderInfo(){
+    if(currentInfo === "result"){
+      renderResultPanel();
+    }else if(currentInfo === "gain"){
+      renderGainPanel();
+    }else if(currentInfo === "stats"){
+      renderStatsPanel();
+    }else{
+      renderHistoryPanel();
+    }
+  }
+
+  function renderResultPanel(){
+    var d = FDJ[currentGame];
+    $("infoPanel").innerHTML =
+      '<div class="label">' + d.name + " · " + d.resultDate + '</div>' +
+      '<div class="balls-row" id="officialMain"></div>' +
+      '<div class="extra-label">' + d.extraName + '</div>' +
+      '<div class="balls-row" id="officialExtra"></div>' +
+      '<div class="small">' + d.resultNote + '</div>' +
+      '<button class="btn btn-link" id="openResultsBtn" type="button">Voir les résultats FDJ</button>';
+
+    renderBalls("officialMain", d.resultMain, false);
+    renderBalls("officialExtra", d.resultExtra, true);
+
+    $("openResultsBtn").addEventListener("click", function(){
+      window.open(d.resultsUrl, "_blank");
     });
-  }else{
-    fallbackCopy(text);
   }
-}
 
-function fallbackCopy(text){
-  var area=document.createElement("textarea");
-  area.value=text;
-  document.body.appendChild(area);
-  area.select();
-  document.execCommand("copy");
-  area.remove();
-  showStatus("Grille copiée ✅");
-}
+  function renderGainPanel(){
+    var d = FDJ[currentGame];
 
-function shareWhatsApp(){
-  if(!lastGrid){
-    showStatus("Génère d’abord une grille.");
-    return;
-  }
-  var url="https://wa.me/?text=" + encodeURIComponent(buildText());
-  window.open(url,"_blank");
-}
+    if(!lastGrid){
+      $("infoPanel").innerHTML =
+        '<div class="gain-status no">Aucune grille vérifiée</div>' +
+        '<div class="small">Génère une grille pour comparer avec le dernier tirage officiel affiché.</div>' +
+        '<button class="btn btn-link" id="openGainBtn" type="button">Vérifier sur FDJ</button>';
 
-function shareInstagram(){
-  if(!lastGrid){
-    showStatus("Génère d’abord une grille.");
-    return;
-  }
-  var text=buildText();
+      $("openGainBtn").addEventListener("click", function(){
+        window.open(d.resultsUrl, "_blank");
+      });
+      return;
+    }
 
-  if(navigator.share){
-    navigator.share({
-      title:"Galactic Lottery",
-      text:text,
-      url:window.location.href
-    }).catch(function(){
-      fallbackCopy(text);
-      showStatus("Texte copié ✅ Ouvre Instagram et colle ta grille.");
+    var mainMatches = countMatches(lastGrid.main, d.resultMain);
+    var extraMatches = countMatches(lastGrid.extra, d.resultExtra);
+    var verdict = getVerdict(currentGame, mainMatches, extraMatches);
+
+    var statusClass = verdict.win ? "ok" : "no";
+    var statusText = verdict.win ? "✅ Gagnant" : "❌ Non gagnant";
+
+    $("infoPanel").innerHTML =
+      '<div class="gain-status ' + statusClass + '">' + statusText + '</div>' +
+      '<div class="small">' +
+        'Ta grille : <strong>' + lastGrid.main.join(" - ") + '</strong> | <strong>' + lastGrid.extra.join(" - ") + '</strong><br>' +
+        'Correspondances : <strong>' + mainMatches + ' numéro(s)</strong> + <strong>' + extraMatches + " " + d.extraName.toLowerCase() + '</strong><br>' +
+        'Rang estimé : <strong>' + verdict.rank + '</strong><br>' +
+        'Montant exact : à vérifier sur les rapports FDJ.' +
+      '</div>' +
+      '<button class="btn btn-link" id="openGainBtn" type="button">Vérifier sur FDJ</button>';
+
+    $("openGainBtn").addEventListener("click", function(){
+      window.open(d.resultsUrl, "_blank");
     });
-  }else{
-    fallbackCopy(text);
-    showStatus("Texte copié ✅ Ouvre Instagram et colle ta grille.");
-  }
-}
-
-function countMatches(a,b){
-  var count=0;
-  for(var i=0;i<a.length;i++){
-    if(b.indexOf(a[i])!==-1) count++;
-  }
-  return count;
-}
-
-function evaluateGain(){
-  if(!lastGrid){
-    resetGainBox();
-    return;
   }
 
-  var data = FDJ[currentGame];
-  var mainMatches = countMatches(lastGrid.main, data.resultMain);
-  var extraMatches = countMatches(lastGrid.extra, data.resultExtra);
+  function renderStatsPanel(){
+    var d = FDJ[currentGame];
 
-  var verdict = getVerdict(currentGame, mainMatches, extraMatches);
+    var hot = "";
+    for(var i=0; i<d.hot.length; i++){
+      hot += '<span class="chip hot">' + d.hot[i].n + " · " + d.hot[i].c + '</span>';
+    }
 
-  var gainStatus = document.getElementById("gainStatus");
-  var gainDetails = document.getElementById("gainDetails");
-
-  gainStatus.tex
+    var cold 
