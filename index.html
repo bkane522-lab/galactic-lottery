@@ -14,47 +14,44 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700;800;900&display=swap');
-
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
-  min-height:100vh;
-  font-family:Inter,sans-serif;
+  min-height:100svh;
+  font-family:Arial,Helvetica,sans-serif;
   background:
     radial-gradient(circle at 20% 0%,rgba(116,69,255,.35),transparent 30%),
-    radial-gradient(circle at 80% 8%,rgba(248,217,92,.16),transparent 22%),
-    linear-gradient(180deg,#060014 0%,#071A5A 38%,#04000c 100%);
+    radial-gradient(circle at 82% 8%,rgba(248,217,92,.18),transparent 22%),
+    linear-gradient(180deg,#050012 0%,#071A5A 42%,#030009 100%);
   color:#071A5A;
 }
 
 .app{
+  width:100%;
   max-width:540px;
+  min-height:100svh;
   margin:0 auto;
-  min-height:100vh;
-  padding-bottom:34px;
+  padding:8px 12px 12px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
 .hero{
   position:relative;
   overflow:hidden;
-  padding:20px 18px 24px;
   color:white;
+  border-radius:0 0 24px 24px;
+  padding:12px;
   background:
-    radial-gradient(circle at 85% 8%,rgba(255,220,95,.28),transparent 23%),
-    radial-gradient(circle at 12% 22%,rgba(120,77,255,.38),transparent 30%),
-    linear-gradient(135deg,#071a5a 0%,#08247f 55%,#08001b 100%);
-  border-bottom-left-radius:30px;
-  border-bottom-right-radius:30px;
-  box-shadow:0 18px 42px rgba(0,0,0,.32);
+    radial-gradient(circle at 85% 10%,rgba(255,220,95,.25),transparent 24%),
+    radial-gradient(circle at 10% 20%,rgba(120,77,255,.35),transparent 30%),
+    linear-gradient(135deg,#071a5a 0%,#08247f 56%,#08001b 100%);
+  box-shadow:0 14px 32px rgba(0,0,0,.28);
 }
 
 .hero:before{
@@ -63,169 +60,146 @@ body{
   inset:0;
   background-image:
     radial-gradient(circle,rgba(255,255,255,.75) 1px,transparent 1px),
-    radial-gradient(circle,rgba(255,255,255,.30) 1px,transparent 1px);
-  background-size:42px 42px,70px 70px;
-  background-position:4px 8px,20px 30px;
+    radial-gradient(circle,rgba(255,255,255,.28) 1px,transparent 1px);
+  background-size:42px 42px,72px 72px;
   opacity:.12;
 }
 
-.heroTop,
-.heroMain{
+.heroContent{
   position:relative;
   z-index:1;
 }
 
-.heroTop{
+.topLine{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:12px;
+  align-items:center;
+  gap:10px;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:9px;
 }
 
 .logo{
-  width:50px;
-  height:50px;
-  border-radius:15px;
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.22);
+  width:44px;
+  height:44px;
+  border-radius:14px;
   display:grid;
   place-items:center;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.24);
   overflow:hidden;
-  box-shadow:0 0 22px rgba(240,198,73,.18);
 }
 
 .logo svg{
-  width:46px;
-  height:46px;
-  display:block;
+  width:42px;
+  height:42px;
 }
 
 .brandText strong{
   display:block;
-  font-family:Orbitron,sans-serif;
   font-size:15px;
-  letter-spacing:1.4px;
+  letter-spacing:2px;
   color:#fff;
 }
 
 .brandText span{
   display:block;
-  margin-top:4px;
+  margin-top:2px;
   font-size:11px;
-  color:rgba(255,255,255,.74);
   font-weight:800;
+  color:rgba(255,255,255,.72);
 }
 
-.priceTag{
-  background:rgba(255,255,255,.13);
-  border:1px solid rgba(255,255,255,.20);
+.pill{
+  padding:8px 11px;
   border-radius:999px;
-  padding:9px 12px;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.24);
   color:#fff1a8;
+  font-size:12px;
   font-weight:900;
-  font-size:13px;
   white-space:nowrap;
 }
 
-.heroMain{
-  margin-top:22px;
-}
-
-.kicker{
-  font-size:15px;
-  color:rgba(255,255,255,.82);
-  font-weight:900;
-}
-
 .bigTitle{
-  margin-top:7px;
-  font-family:Orbitron,sans-serif;
+  margin-top:12px;
   color:#f8d95c;
-  font-size:28px;
+  font-size:24px;
   line-height:1.05;
-  letter-spacing:1.4px;
+  letter-spacing:1.5px;
+  font-weight:900;
   text-transform:uppercase;
 }
 
 .bigTitle span{
   display:block;
+  margin-top:3px;
   color:#fff;
-  font-size:17px;
+  font-size:14px;
   letter-spacing:2px;
-  margin-top:6px;
 }
 
 .heroDesc{
-  margin-top:11px;
-  color:rgba(255,255,255,.83);
-  font-size:14px;
-  line-height:1.4;
+  margin-top:7px;
+  color:rgba(255,255,255,.82);
+  font-size:13px;
+  line-height:1.3;
 }
 
 .gameTabs{
-  margin-top:18px;
+  margin-top:11px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
+  gap:9px;
 }
 
 .gameBtn{
   border:0;
   border-radius:999px;
-  padding:12px 10px;
+  padding:11px 8px;
   background:rgba(255,255,255,.12);
-  color:rgba(255,255,255,.82);
+  color:rgba(255,255,255,.78);
   font-size:14px;
   font-weight:900;
   cursor:pointer;
 }
 
 .gameBtn.active{
-  background:#fff;
+  background:white;
   color:#071A5A;
-  box-shadow:0 8px 22px rgba(0,0,0,.22);
-}
-
-.content{
-  padding:16px 14px 0;
+  box-shadow:0 8px 20px rgba(0,0,0,.20);
 }
 
 .card{
-  background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(244,247,255,.95));
-  border:1px solid rgba(255,255,255,.74);
+  background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(244,247,255,.96));
+  border:1px solid rgba(255,255,255,.75);
   border-radius:24px;
-  padding:16px;
-  box-shadow:0 12px 28px rgba(0,0,0,.16);
-  margin-bottom:14px;
-  color:#071A5A;
+  padding:13px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
 }
 
 .cardHeader{
   display:flex;
-  align-items:flex-start;
   justify-content:space-between;
-  gap:12px;
-  margin-bottom:12px;
+  align-items:flex-start;
+  gap:10px;
 }
 
 .cardTitle{
-  font-size:19px;
+  font-size:20px;
   font-weight:900;
   color:#071A5A;
-  line-height:1.15;
 }
 
 .cardSub{
-  margin-top:5px;
+  margin-top:3px;
   font-size:13px;
-  color:#6b7284;
-  font-weight:700;
+  font-weight:800;
+  color:#71798c;
 }
 
 .badge{
@@ -233,111 +207,104 @@ body{
   border-radius:999px;
   background:#eef3ff;
   color:#063B9D;
-  font-size:12px;
+  font-size:13px;
   font-weight:900;
-  white-space:nowrap;
 }
 
 .timer{
+  margin-top:11px;
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  margin:12px 0 14px;
+  gap:7px;
 }
 
 .timeBox{
+  text-align:center;
+  border-radius:15px;
   background:#f2f6ff;
   border:1px solid #dde7fb;
-  border-radius:16px;
-  padding:9px 4px;
-  text-align:center;
+  padding:8px 3px;
 }
 
 .timeBox b{
   display:block;
-  font-family:Orbitron,sans-serif;
-  color:#071A5A;
   font-size:16px;
+  color:#071A5A;
   line-height:1;
 }
 
 .timeBox span{
   display:block;
-  margin-top:5px;
+  margin-top:4px;
   color:#7b8499;
-  font-size:9px;
+  font-size:8px;
   letter-spacing:.8px;
   text-transform:uppercase;
   font-weight:900;
 }
 
 .gridLabel{
-  margin:14px 0 9px;
-  color:#6b7284;
-  font-size:12px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:1.7px;
+  margin:10px 0 7px;
   text-align:center;
+  color:#6b7284;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.7px;
+  text-transform:uppercase;
 }
 
 .balls{
+  min-height:42px;
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  gap:9px;
+  align-items:center;
+  gap:8px;
 }
 
 .ball{
-  width:48px;
-  height:48px;
+  width:42px;
+  height:42px;
   border-radius:50%;
-  background:#fff;
-  color:#071A5A;
-  border:1px solid #dce4f3;
-  box-shadow:
-    0 6px 13px rgba(8,21,64,.12),
-    inset 0 -2px 5px rgba(8,21,64,.05);
   display:grid;
   place-items:center;
-  font-family:Orbitron,sans-serif;
-  font-size:17px;
+  background:white;
+  color:#071A5A;
+  border:1px solid #dce4f3;
+  box-shadow:0 6px 13px rgba(8,21,64,.13);
+  font-size:16px;
   font-weight:900;
 }
 
 .ball.extra{
-  color:#071A5A;
   border:2px solid #f3c83d;
   background:#fffdf2;
-  box-shadow:
-    0 6px 18px rgba(243,200,61,.30),
-    inset 0 -2px 5px rgba(8,21,64,.04);
+  box-shadow:0 6px 18px rgba(243,200,61,.30);
 }
 
 .generatorGrid{
+  margin-top:12px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:16px;
+  gap:9px;
 }
 
 .actionGrid{
+  margin-top:9px;
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
-  gap:10px;
-  margin-top:10px;
+  gap:9px;
 }
 
 .btn{
   width:100%;
+  min-height:48px;
   border:0;
-  border-radius:18px;
-  padding:14px 10px;
-  color:white;
+  border-radius:16px;
+  padding:10px 6px;
   font-size:14px;
   font-weight:900;
   cursor:pointer;
-  min-height:54px;
 }
 
 .btn:active{
@@ -347,13 +314,11 @@ body{
 .classic{
   background:linear-gradient(135deg,#003cbb,#0077ff);
   color:#fff6bd;
-  box-shadow:0 10px 24px rgba(0,92,255,.24);
 }
 
 .premium{
   background:linear-gradient(135deg,#8a5cff,#f3c83d);
   color:#071A5A;
-  box-shadow:0 10px 24px rgba(243,200,61,.22);
 }
 
 .copy{
@@ -364,33 +329,37 @@ body{
 
 .wa{
   background:linear-gradient(135deg,#128C4A,#25D366);
-  color:#fff;
-  border:1px solid rgba(37,211,102,.75);
-  box-shadow:0 10px 20px rgba(37,211,102,.25);
+  color:white;
 }
 
 .verify{
   background:#101832;
-  color:#fff;
+  color:white;
+}
+
+.miniInfo{
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(244,247,255,.94));
+  border-radius:22px;
+  padding:10px;
+  box-shadow:0 10px 24px rgba(0,0,0,.15);
 }
 
 .infoTabs{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:8px;
+  gap:6px;
   background:#eef2f8;
-  border-radius:18px;
-  padding:5px;
-  margin-bottom:12px;
+  border-radius:16px;
+  padding:4px;
 }
 
 .infoTab{
   border:0;
-  border-radius:14px;
+  border-radius:12px;
+  padding:8px 3px;
   background:transparent;
   color:#6b7284;
-  padding:10px 4px;
-  font-size:12px;
+  font-size:11px;
   font-weight:900;
   cursor:pointer;
 }
@@ -398,101 +367,69 @@ body{
 .infoTab.active{
   background:#fff;
   color:#071A5A;
-  box-shadow:0 6px 16px rgba(8,21,64,.08);
+  box-shadow:0 5px 12px rgba(8,21,64,.08);
 }
 
 .panel{
   display:none;
+  margin-top:8px;
+  min-height:55px;
+  max-height:78px;
+  overflow:auto;
+  color:#667085;
+  font-size:13px;
+  line-height:1.35;
 }
 
 .panel.active{
   display:block;
 }
 
-.panelBox{
-  background:#f7f9fd;
-  border:1px solid #e3eaf6;
-  border-radius:18px;
-  padding:14px;
-}
-
-.panelTitle{
+.panel strong{
   color:#071A5A;
-  font-size:16px;
-  font-weight:900;
-  margin-bottom:10px;
-}
-
-.small{
-  color:#667085;
-  font-size:14px;
-  line-height:1.45;
 }
 
 .chips{
   display:flex;
   flex-wrap:wrap;
-  gap:7px;
-  margin:8px 0 12px;
+  gap:5px;
+  margin-top:5px;
 }
 
 .chip{
-  background:#fff;
+  background:white;
   border:1px solid #e1e7f2;
   border-radius:999px;
-  padding:7px 10px;
+  padding:5px 8px;
   color:#071A5A;
-  font-size:12px;
+  font-size:11px;
   font-weight:900;
-}
-
-.chip.hot{
-  background:#fff8dc;
-  border-color:#f3c83d;
-}
-
-.chip.cold{
-  background:#edf6ff;
-  border-color:#b7dbff;
-}
-
-.historyItem{
-  padding:9px 0;
-  border-bottom:1px solid #e7edf6;
-  color:#667085;
-  font-size:13px;
-  line-height:1.35;
-}
-
-.historyItem:last-child{
-  border-bottom:0;
 }
 
 .footer{
   text-align:center;
-  color:rgba(255,255,255,.60);
-  font-size:12px;
-  line-height:1.45;
-  padding:8px 18px 0;
+  color:rgba(255,255,255,.58);
+  font-size:11px;
+  line-height:1.35;
 }
 
 .toast{
   position:fixed;
   left:50%;
-  bottom:28px;
+  bottom:22px;
   transform:translateX(-50%);
+  max-width:92%;
   background:#071A5A;
-  color:#fff;
+  color:white;
   padding:11px 14px;
   border-radius:999px;
   font-size:13px;
   font-weight:900;
-  box-shadow:0 10px 24px rgba(0,0,0,.24);
+  box-shadow:0 10px 24px rgba(0,0,0,.26);
   opacity:0;
   pointer-events:none;
   transition:.2s;
-  z-index:20;
-  max-width:92%;
+  z-index:50;
   text-align:center;
 }
 
@@ -500,22 +437,71 @@ body{
   opacity:1;
 }
 
-@media(max-width:380px){
+@media(max-height:720px){
+  .app{
+    gap:7px;
+    padding:6px 10px 8px;
+  }
+
+  .hero{
+    padding:10px;
+  }
+
   .bigTitle{
-    font-size:25px;
+    margin-top:8px;
+    font-size:21px;
+  }
+
+  .heroDesc{
+    display:none;
+  }
+
+  .gameTabs{
+    margin-top:9px;
+  }
+
+  .gameBtn{
+    padding:10px 6px;
+  }
+
+  .card{
+    padding:11px;
+  }
+
+  .timer{
+    margin-top:9px;
+  }
+
+  .timeBox{
+    padding:7px 3px;
   }
 
   .ball{
-    width:43px;
-    height:43px;
+    width:38px;
+    height:38px;
     font-size:15px;
   }
 
   .btn{
+    min-height:44px;
     font-size:13px;
   }
 
+  .miniInfo{
+    display:none;
+  }
+
+  .footer{
+    display:none;
+  }
+}
+
+@media(max-width:370px){
   .actionGrid{
+    grid-template-columns:1fr;
+  }
+
+  .generatorGrid{
     grid-template-columns:1fr;
   }
 }
@@ -526,148 +512,121 @@ body{
 
 <div class="app">
 
-  <section class="hero" id="top">
-    <div class="heroTop">
-      <div class="brand">
-        <div class="logo">
-          <svg viewBox="0 0 120 120">
-            <defs>
-              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#fff7c2"/>
-                <stop offset="50%" stop-color="#f0c040"/>
-                <stop offset="100%" stop-color="#9c6500"/>
-              </linearGradient>
-            </defs>
-            <rect x="7" y="7" width="106" height="106" rx="28" fill="#14002b" stroke="#f0c040" stroke-width="3"/>
-            <ellipse cx="60" cy="60" rx="48" ry="18" fill="none" stroke="url(#g)" stroke-width="6" transform="rotate(-18 60 60)"/>
-            <ellipse cx="60" cy="60" rx="45" ry="17" fill="none" stroke="#7b2fff" stroke-width="4" transform="rotate(22 60 60)"/>
-            <path d="M60 34 L68 52 L87 52 L71 64 L77 84 L60 72 L43 84 L49 64 L33 52 L52 52 Z" fill="url(#g)"/>
-            <circle cx="91" cy="39" r="11" fill="#180030" stroke="url(#g)" stroke-width="3"/>
-            <text x="91" y="44" text-anchor="middle" font-size="13" font-weight="900" fill="#fff1a8">7</text>
-            <circle cx="30" cy="78" r="11" fill="#180030" stroke="url(#g)" stroke-width="3"/>
-            <text x="30" y="83" text-anchor="middle" font-size="12" font-weight="900" fill="#fff1a8">12</text>
-            <circle cx="75" cy="96" r="11" fill="#180030" stroke="url(#g)" stroke-width="3"/>
-            <text x="75" y="101" text-anchor="middle" font-size="11" font-weight="900" fill="#fff1a8">24</text>
-          </svg>
+  <header class="hero">
+    <div class="heroContent">
+      <div class="topLine">
+        <div class="brand">
+          <div class="logo">
+            <svg viewBox="0 0 120 120">
+              <defs>
+                <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#fff7c2"/>
+                  <stop offset="50%" stop-color="#f0c040"/>
+                  <stop offset="100%" stop-color="#9c6500"/>
+                </linearGradient>
+              </defs>
+              <rect x="7" y="7" width="106" height="106" rx="28" fill="#14002b" stroke="#f0c040" stroke-width="3"/>
+              <ellipse cx="60" cy="60" rx="48" ry="18" fill="none" stroke="url(#gold)" stroke-width="6" transform="rotate(-18 60 60)"/>
+              <ellipse cx="60" cy="60" rx="45" ry="17" fill="none" stroke="#7b2fff" stroke-width="4" transform="rotate(22 60 60)"/>
+              <path d="M60 34 L68 52 L87 52 L71 64 L77 84 L60 72 L43 84 L49 64 L33 52 L52 52 Z" fill="url(#gold)"/>
+              <circle cx="91" cy="39" r="11" fill="#180030" stroke="url(#gold)" stroke-width="3"/>
+              <text x="91" y="44" text-anchor="middle" font-size="13" font-weight="900" fill="#fff1a8">7</text>
+              <circle cx="30" cy="78" r="11" fill="#180030" stroke="url(#gold)" stroke-width="3"/>
+              <text x="30" y="83" text-anchor="middle" font-size="12" font-weight="900" fill="#fff1a8">12</text>
+            </svg>
+          </div>
+
+          <div class="brandText">
+            <strong>GALACTIC</strong>
+            <span>Euromillions · Loto</span>
+          </div>
         </div>
 
-        <div class="brandText">
-          <strong>GALACTIC</strong>
-          <span>Euromillions · Loto</span>
-        </div>
+        <div class="pill">Smart</div>
       </div>
 
-      <div class="priceTag" id="priceTag">Aléatoire</div>
-    </div>
-
-    <div class="heroMain">
-      <div class="kicker">Ce soir, tente ta grille</div>
       <div class="bigTitle">
         Générateur Premium
-        <span>100% hasard</span>
+        <span>Classique + Smart</span>
       </div>
+
       <div class="heroDesc">
-        Crée une grille EuroMillions ou Loto en quelques secondes.
-        Sans promesse de gain.
+        Grille aléatoire ou Premium calculée en privé. Sans promesse de gain.
       </div>
 
       <div class="gameTabs">
-        <button id="tabEuro" class="gameBtn active" type="button">⭐ EuroMillions</button>
-        <button id="tabLoto" class="gameBtn" type="button">🎱 Loto</button>
+        <button id="tabEuro" class="gameBtn active" type="button" onclick="switchGame('euro')">⭐ EuroMillions</button>
+        <button id="tabLoto" class="gameBtn" type="button" onclick="switchGame('loto')">🎱 Loto</button>
       </div>
+    </div>
+  </header>
+
+  <section class="card">
+    <div class="cardHeader">
+      <div>
+        <div class="cardTitle" id="gameTitle">EuroMillions</div>
+        <div class="cardSub" id="nextDraw">Prochain tirage : calcul...</div>
+      </div>
+      <div class="badge" id="gameBadge">5 + 2</div>
+    </div>
+
+    <div class="timer">
+      <div class="timeBox"><b id="days">--</b><span>Jours</span></div>
+      <div class="timeBox"><b id="hours">--</b><span>Heures</span></div>
+      <div class="timeBox"><b id="mins">--</b><span>Min</span></div>
+      <div class="timeBox"><b id="secs">--</b><span>Sec</span></div>
+    </div>
+
+    <div class="gridLabel">Numéros</div>
+    <div id="mainBalls" class="balls"></div>
+
+    <div id="extraLabel" class="gridLabel">Étoiles</div>
+    <div id="extraBalls" class="balls"></div>
+
+    <div class="generatorGrid">
+      <button class="btn classic" type="button" onclick="generateClassic()">🎲 Classique</button>
+      <button class="btn premium" type="button" onclick="generatePremium()">✨ Premium</button>
+    </div>
+
+    <div class="actionGrid">
+      <button class="btn copy" type="button" onclick="copyGrid()">📋 Copier</button>
+      <button class="btn wa" type="button" onclick="sendWhatsApp()">WhatsApp</button>
+      <button class="btn verify" type="button" onclick="verifyResult()">🔎 Vérifier</button>
     </div>
   </section>
 
-  <main class="content">
-
-    <section class="card" id="gridSection">
-      <div class="cardHeader">
-        <div>
-          <div class="cardTitle" id="gameTitle">EuroMillions</div>
-          <div class="cardSub" id="nextDraw">Prochain tirage : calcul...</div>
-        </div>
-        <div class="badge" id="gameBadge">5 + 2</div>
-      </div>
-
-      <div class="timer">
-        <div class="timeBox"><b id="days">--</b><span>Jours</span></div>
-        <div class="timeBox"><b id="hours">--</b><span>Heures</span></div>
-        <div class="timeBox"><b id="mins">--</b><span>Min</span></div>
-        <div class="timeBox"><b id="secs">--</b><span>Sec</span></div>
-      </div>
-
-      <div class="gridLabel">Numéros</div>
-      <div id="mainBalls" class="balls"></div>
-
-      <div id="extraLabel" class="gridLabel">Étoiles</div>
-      <div id="extraBalls" class="balls"></div>
-
-      <div class="generatorGrid">
-        <button id="classicBtn" class="btn classic" type="button">🎲 Grille classique</button>
-        <button id="premiumBtn" class="btn premium" type="button">✨ Grille Premium</button>
-      </div>
-
-      <div class="actionGrid">
-        <button id="copyBtn" class="btn copy" type="button">📋 Copier</button>
-        <button id="whatsappBtn" class="btn wa" type="button">🟢 WhatsApp</button>
-        <button id="verifyBtn" class="btn verify" type="button">🔎 Vérifier</button>
-      </div>
-    </section>
-
-    <section class="card" id="infoSection">
-      <div class="infoTabs">
-        <button class="infoTab active" data-panel="tirage" type="button">Tirage</button>
-        <button class="infoTab" data-panel="gain" type="button">Gain</button>
-        <button class="infoTab" data-panel="stats" type="button">Stats</button>
-        <button class="infoTab" data-panel="historique" type="button">Historique</button>
-      </div>
-
-      <div id="tirage" class="panel active">
-        <div class="panelBox">
-          <div class="panelTitle">🏆 Tirage de référence</div>
-          <div class="small" id="resultTitle"></div>
-          <div id="resultMain" class="balls"></div>
-          <div id="resultExtraLabel" class="gridLabel"></div>
-          <div id="resultExtra" class="balls"></div>
-          <div class="small">À vérifier sur le site officiel FDJ pour le résultat exact.</div>
-        </div>
-      </div>
-
-      <div id="gain" class="panel">
-        <div class="panelBox">
-          <div class="panelTitle">💰 Gain remporté ou pas</div>
-          <div class="small" id="gainTitle">Aucune comparaison</div>
-          <br>
-          <div class="small" id="gainText">Génère une grille pour comparer.</div>
-        </div>
-      </div>
-
-      <div id="stats" class="panel">
-        <div class="panelBox">
-          <div class="panelTitle">📊 Statistiques</div>
-          <div class="small">Numéros les plus sortis</div>
-          <div id="hotStats" class="chips"></div>
-          <div class="small">Numéros les moins sortis</div>
-          <div id="coldStats" class="chips"></div>
-          <div class="small" id="statsNote"></div>
-        </div>
-      </div>
-
-      <div id="historique" class="panel">
-        <div class="panelBox">
-          <div class="panelTitle">📜 Historique</div>
-          <div id="history" class="small">Aucune grille encore.</div>
-          <button id="clearBtn" class="btn copy" type="button">🧹 Effacer</button>
-        </div>
-      </div>
-    </section>
-
-    <div class="footer">
-      Application indépendante, non affiliée à la FDJ.<br>
-      Les numéros sont générés aléatoirement.
+  <section class="miniInfo">
+    <div class="infoTabs">
+      <button class="infoTab active" id="tabTirage" type="button" onclick="showPanel('tirage')">Tirage</button>
+      <button class="infoTab" id="tabGain" type="button" onclick="showPanel('gain')">Gain</button>
+      <button class="infoTab" id="tabStats" type="button" onclick="showPanel('stats')">Stats</button>
+      <button class="infoTab" id="tabHistory" type="button" onclick="showPanel('history')">Historique</button>
     </div>
 
-  </main>
+    <div id="tirage" class="panel active">
+      <strong id="resultTitle">Tirage de référence</strong><br>
+      <span id="resultText">À vérifier sur le site officiel FDJ.</span>
+    </div>
+
+    <div id="gain" class="panel">
+      <strong id="gainTitle">Comparaison</strong><br>
+      <span id="gainText">Génère une grille pour comparer.</span>
+    </div>
+
+    <div id="stats" class="panel">
+      <strong>Stats indicatives</strong>
+      <div class="chips" id="statsChips"></div>
+    </div>
+
+    <div id="history" class="panel">
+      <strong>Historique</strong><br>
+      <span id="historyText">Aucune grille encore.</span>
+    </div>
+  </section>
+
+  <div class="footer">
+    Application indépendante, non affiliée à la FDJ. Les numéros sont générés aléatoirement.
+  </div>
 
 </div>
 
@@ -677,80 +636,64 @@ body{
 var currentGame = "euro";
 var lastGrid = null;
 var historyList = [];
-var premiumUnlocked = localStorage.getItem("galactic_premium_unlocked") === "yes";
 var PREMIUM_CODE = "GALAXY2026";
+var premiumUnlocked = false;
 
-var results = {
+try{
+  premiumUnlocked = localStorage.getItem("galactic_premium_unlocked") === "yes";
+}catch(e){
+  premiumUnlocked = false;
+}
+
+var data = {
   euro:{
     name:"EuroMillions",
-    extraName:"Étoiles",
     badge:"5 + 2",
-    price:"Aléatoire",
+    extraName:"Étoiles",
     officialUrl:"https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/resultats",
-    main:[18,25,31,37,45],
-    extra:[4,9],
+    resultMain:[18,25,31,37,45],
+    resultExtra:[4,9],
     hot:[35,42,21,23,19],
-    cold:[22,1,43,34,13],
-    hotDisplay:[[35,84],[42,82],[21,80],[23,79],[19,77]],
-    coldDisplay:[[22,44],[1,47],[43,53],[34,54],[13,55]],
-    note:"Statistiques indicatives à vérifier régulièrement sur FDJ."
+    cold:[22,1,43,34,13]
   },
   loto:{
     name:"Loto",
-    extraName:"Numéro Chance",
     badge:"5 + 1",
-    price:"Aléatoire",
+    extraName:"Numéro Chance",
     officialUrl:"https://www.fdj.fr/jeux-de-tirage/loto/resultats",
-    main:[1,15,32,37,39],
-    extra:[1],
+    resultMain:[1,15,32,37,39],
+    resultExtra:[1],
     hot:[30,31,24,7,41],
-    cold:[43,1,33,46,8],
-    hotDisplay:[[30,128],[31,126],[24,121],[7,119],[41,117]],
-    coldDisplay:[[43,89],[1,92],[33,92],[46,95],[8,96]],
-    note:"Statistiques indicatives à vérifier régulièrement sur FDJ."
+    cold:[43,1,33,46,8]
   }
 };
 
-function el(id){
+function get(id){
   return document.getElementById(id);
 }
 
-function toast(text){
-  var t = el("toast");
-  t.textContent = text;
-  t.className = "toast show";
+function toast(message){
+  var box = get("toast");
+  box.textContent = message;
+  box.className = "toast show";
   setTimeout(function(){
-    t.className = "toast";
-  },2500);
+    box.className = "toast";
+  },2200);
 }
 
 function pickNumbers(min,max,count){
-  var numbers = [];
-
-  while(numbers.length < count){
+  var arr = [];
+  while(arr.length < count){
     var n = Math.floor(Math.random() * (max - min + 1)) + min;
-    if(numbers.indexOf(n) === -1){
-      numbers.push(n);
+    if(arr.indexOf(n) === -1){
+      arr.push(n);
     }
   }
-
-  numbers.sort(function(a,b){ return a-b; });
-  return numbers;
+  arr.sort(function(a,b){ return a-b; });
+  return arr;
 }
 
-function renderBalls(boxId,numbers,isExtra){
-  var box = el(boxId);
-  box.innerHTML = "";
-
-  numbers.forEach(function(num){
-    var div = document.createElement("div");
-    div.className = "ball" + (isExtra ? " extra" : "");
-    div.textContent = num;
-    box.appendChild(div);
-  });
-}
-
-function randomGrid(){
+function makeRandomGrid(mode){
   var main;
   var extra;
 
@@ -764,16 +707,15 @@ function randomGrid(){
 
   return {
     game:currentGame,
+    mode:mode,
     main:main,
-    extra:extra,
-    mode:"classique"
+    extra:extra
   };
 }
 
 function scoreGrid(grid){
-  var r = results[currentGame];
+  var r = data[currentGame];
   var main = grid.main;
-  var extra = grid.extra;
   var score = 0;
 
   var odd = main.filter(function(n){ return n % 2 !== 0; }).length;
@@ -796,7 +738,6 @@ function scoreGrid(grid){
   }
 
   var under31 = main.filter(function(n){ return n <= 31; }).length;
-
   if(under31 <= 3){
     score += 22;
   }else{
@@ -804,7 +745,6 @@ function scoreGrid(grid){
   }
 
   var consecutive = 0;
-
   for(var i=1;i<main.length;i++){
     if(main[i] === main[i-1] + 1){
       consecutive++;
@@ -836,14 +776,11 @@ function scoreGrid(grid){
   }
 
   var zones = {};
-
   main.forEach(function(n){
-    var z = Math.ceil(n / 10);
-    zones[z] = true;
+    zones[Math.ceil(n / 10)] = true;
   });
 
   var zoneCount = Object.keys(zones).length;
-
   if(zoneCount >= 4){
     score += 22;
   }else if(zoneCount === 3){
@@ -863,12 +800,8 @@ function scoreGrid(grid){
     score += 8;
   }
 
-  if(extra.length === 2 && Math.abs(extra[0] - extra[1]) >= 3){
+  if(grid.extra.length === 2 && Math.abs(grid.extra[0] - grid.extra[1]) >= 3){
     score += 8;
-  }
-
-  if(extra.length === 1){
-    score += 4;
   }
 
   score += Math.random() * 8;
@@ -876,62 +809,161 @@ function scoreGrid(grid){
   return score;
 }
 
-function smartGrid(){
+function makeSmartGrid(){
   var best = null;
-  var bestScore = -99999;
+  var bestScore = -999999;
 
   for(var i=0;i<700;i++){
-    var candidate = randomGrid();
-    var score = scoreGrid(candidate);
+    var grid = makeRandomGrid("premium");
+    var s = scoreGrid(grid);
 
-    if(score > bestScore){
-      bestScore = score;
-      best = candidate;
+    if(s > bestScore){
+      bestScore = s;
+      best = grid;
     }
   }
 
-  best.mode = "premium";
   best.privateScore = Math.round(bestScore);
-
   return best;
 }
 
-function applyGrid(grid){
+function renderBalls(id,numbers,extra){
+  var box = get(id);
+  box.innerHTML = "";
+
+  numbers.forEach(function(n){
+    var b = document.createElement("div");
+    b.className = extra ? "ball extra" : "ball";
+    b.textContent = n;
+    box.appendChild(b);
+  });
+}
+
+function applyGrid(grid,silent){
   lastGrid = grid;
 
   renderBalls("mainBalls",grid.main,false);
   renderBalls("extraBalls",grid.extra,true);
 
   historyList.unshift(grid);
-  if(historyList.length > 8){
+  if(historyList.length > 5){
     historyList.pop();
   }
 
   updateGain();
   updateHistory();
+
+  if(!silent){
+    toast(grid.mode === "premium" ? "Grille Premium générée ✨" : "Grille classique générée ✅");
+  }
 }
 
 function generateClassic(){
-  applyGrid(randomGrid());
-  toast("Grille classique générée ✅");
+  applyGrid(makeRandomGrid("classique"),false);
 }
 
-function unlockPremium(){
-  if(premiumUnlocked){
-    return true;
-  }
+function generatePremium(){
+  if(!premiumUnlocked){
+    var code = prompt("Code Premium :");
 
-  var code = prompt("Code Premium :");
+    if(code === null){
+      return;
+    }
 
-  if(code === null){
-    return false;
-  }
+    if(code.trim().toUpperCase() !== PREMIUM_CODE){
+      toast("Code Premium incorrect.");
+      return;
+    }
 
-  if(code.trim().toUpperCase() === PREMIUM_CODE){
     premiumUnlocked = true;
-    localStorage.setItem("galactic_premium_unlocked","yes");
-    toast("Accès Premium activé ✨");
-    return true;
+
+    try{
+      localStorage.setItem("galactic_premium_unlocked","yes");
+    }catch(e){}
   }
 
-  toas
+  applyGrid(makeSmartGrid(),false);
+}
+
+function switchGame(game){
+  currentGame = game;
+  var r = data[currentGame];
+
+  get("tabEuro").className = game === "euro" ? "gameBtn active" : "gameBtn";
+  get("tabLoto").className = game === "loto" ? "gameBtn active" : "gameBtn";
+
+  get("gameTitle").textContent = r.name;
+  get("gameBadge").textContent = r.badge;
+  get("extraLabel").textContent = r.extraName;
+
+  renderReference();
+  renderStats();
+  applyGrid(makeRandomGrid("classique"),true);
+  updateTimer();
+}
+
+function countMatches(a,b){
+  var count = 0;
+  a.forEach(function(n){
+    if(b.indexOf(n) !== -1){
+      count++;
+    }
+  });
+  return count;
+}
+
+function updateGain(){
+  if(!lastGrid){
+    return;
+  }
+
+  var r = data[currentGame];
+  var mainMatch = countMatches(lastGrid.main,r.resultMain);
+  var extraMatch = countMatches(lastGrid.extra,r.resultExtra);
+  var win = false;
+
+  if(currentGame === "euro"){
+    win = mainMatch >= 2 || extraMatch === 2;
+  }else{
+    win = mainMatch >= 2 || extraMatch === 1;
+  }
+
+  get("gainTitle").textContent = win ? "✅ Potentiellement gagnant" : "❌ Non gagnant";
+  get("gainText").innerHTML =
+    mainMatch + " numéro(s) trouvé(s), " +
+    extraMatch + " " + r.extraName.toLowerCase() +
+    ". Montant exact à vérifier sur FDJ.";
+}
+
+function renderReference(){
+  var r = data[currentGame];
+
+  get("resultTitle").textContent = r.name + " · tirage de référence";
+  get("resultText").textContent =
+    "Numéros : " + r.resultMain.join(" - ") +
+    " | " + r.extraName + " : " + r.resultExtra.join(" - ");
+}
+
+function renderStats(){
+  var r = data[currentGame];
+  var box = get("statsChips");
+  box.innerHTML = "";
+
+  r.hot.forEach(function(n){
+    var chip = document.createElement("span");
+    chip.className = "chip";
+    chip.textContent = "🔥 " + n;
+    box.appendChild(chip);
+  });
+
+  r.cold.forEach(function(n){
+    var chip = document.createElement("span");
+    chip.className = "chip";
+    chip.textContent = "❄️ " + n;
+    box.appendChild(chip);
+  });
+}
+
+function updateHistory(){
+  if(historyList.length === 0){
+    get("historyText").textContent = "Aucune grille encore.";
