@@ -1,0 +1,19 @@
+{
+  "name": "Galactic Euromillions - Loto",
+  "short_name": "Galactic Loto",
+  "description": "Générateur aléatoire EuroMillions et Loto.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#090011",
+  "theme_color": "#0a0012",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
