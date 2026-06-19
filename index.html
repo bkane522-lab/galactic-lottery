@@ -239,6 +239,11 @@ h1 span{
   background:linear-gradient(135deg,#7b2fff66,#ff007f55,#ffbf0055);
 }
 
+.threads{
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.24);
+}
+
 .status{
   display:none;
   margin-top:12px;
@@ -296,6 +301,32 @@ h1 span{
   color:#fff1a8;
   font-weight:900;
   margin-bottom:8px;
+}
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:10px 0 14px;
+}
+
+.chip{
+  padding:8px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.13);
+  font-size:13px;
+  font-weight:900;
+}
+
+.hot{
+  color:#fff1a8;
+  border-color:rgba(240,192,64,.35);
+}
+
+.cold{
+  color:#c2dcff;
+  border-color:rgba(120,170,255,.30);
 }
 
 .historyItem{
@@ -385,7 +416,10 @@ h1 span{
     <button id="whatsappBtn" class="btn wa" type="button">🟢 WhatsApp</button>
   </div>
 
-  <button id="instagramBtn" class="btn insta" type="button">📸 Copier pour Instagram</button>
+  <div class="grid2">
+    <button id="instagramBtn" class="btn insta" type="button">📸 Instagram</button>
+    <button id="threadsBtn" class="btn threads" type="button">🧵 Threads</button>
+  </div>
 
   <div id="status" class="status"></div>
 </section>
@@ -414,11 +448,15 @@ h1 span{
   </div>
 
   <div id="stats" class="panel">
-    <div class="title">📊 Stats</div>
-    <div class="small">
-      Cette partie peut servir à afficher les numéros chauds/froids plus tard.<br>
-      Pour une version fiable, il faudra connecter les vraies données FDJ.
-    </div>
+    <div class="title">📊 Statistiques</div>
+
+    <div class="label">Numéros les plus sortis</div>
+    <div id="hotStats" class="chips"></div>
+
+    <div class="label">Numéros les moins sortis</div>
+    <div id="coldStats" class="chips"></div>
+
+    <div id="statsNote" class="small"></div>
   </div>
 
   <div id="historique" class="panel">
@@ -445,13 +483,19 @@ var results = {
     name:"EuroMillions",
     extraName:"Étoiles",
     main:[18,25,31,37,45],
-    extra:[4,9]
+    extra:[4,9],
+    hot:[[35,84],[42,82],[21,80],[23,79],[19,77]],
+    cold:[[22,44],[1,47],[43,53],[34,54],[13,55]],
+    note:"Statistiques indicatives à vérifier régulièrement sur FDJ."
   },
   loto:{
     name:"Loto",
     extraName:"Numéro Chance",
     main:[1,15,32,37,39],
-    extra:[1]
+    extra:[1],
+    hot:[[30,128],[31,126],[24,121],[7,119],[41,117]],
+    cold:[[43,89],[1,92],[33,92],[46,95],[8,96]],
+    note:"Statistiques indicatives à vérifier régulièrement sur FDJ."
   }
 };
 
@@ -549,6 +593,7 @@ function switchGame(game){
   }
 
   renderResult();
+  renderStats();
   generateGrid();
   updateTimer();
 }
@@ -561,6 +606,31 @@ function renderResult(){
 
   renderBalls("resultMain",r.main,false);
   renderBalls("resultExtra",r.extra,true);
+}
+
+function renderStats(){
+  var r = results[currentGame];
+  var hotBox = el("hotStats");
+  var coldBox = el("coldStats");
+
+  hotBox.innerHTML = "";
+  coldBox.innerHTML = "";
+
+  r.hot.forEach(function(item){
+    var chip = document.createElement("div");
+    chip.className = "chip hot";
+    chip.textContent = item[0] + " · " + item[1];
+    hotBox.appendChild(chip);
+  });
+
+  r.cold.forEach(function(item){
+    var chip = document.createElement("div");
+    chip.className = "chip cold";
+    chip.textContent = item[0] + " · " + item[1];
+    coldBox.appendChild(chip);
+  });
+
+  el("statsNote").textContent = r.note;
 }
 
 function countMatches(a,b){
@@ -634,6 +704,21 @@ function copyText(){
   showMessage("Grille copiée ✅");
 }
 
+function copySilently(){
+  var text = shareText();
+
+  if(!text){
+    return;
+  }
+
+  var area = document.createElement("textarea");
+  area.value = text;
+  document.body.appendChild(area);
+  area.select();
+  document.execCommand("copy");
+  document.body.removeChild(area);
+}
+
 function shareWhatsApp(){
   var text = shareText();
 
@@ -643,6 +728,26 @@ function shareWhatsApp(){
   }
 
   window.location.href = "https://wa.me/?text=" + encodeURIComponent(text);
+}
+
+function openInstagram(){
+  copySilently();
+  showMessage("Instagram ouvert ✅");
+
+  setTimeout(function(){
+    window.location.href = "https://www.instagram.com/";
+  },300);
+}
+
+function openThreads(){
+  var text = shareText();
+
+  if(!text){
+    showMessage("Aucune grille disponible.");
+    return;
+  }
+
+  window.location.href = "https://www.threads.net/intent/post?text=" + encodeURIComponent(text);
 }
 
 function updateHistory(){
@@ -734,12 +839,8 @@ function start(){
   el("generateBtn").addEventListener("click",generateGrid);
   el("copyBtn").addEventListener("click",copyText);
   el("whatsappBtn").addEventListener("click",shareWhatsApp);
-
-  el("instagramBtn").addEventListener("click",function(){
-    copyText();
-    showMessage("Texte copié ✅ Colle-le dans Instagram.");
-  });
-
+  el("instagramBtn").addEventListener("click",openInstagram);
+  el("threadsBtn").addEventListener("click",openThreads);
   el("clearBtn").addEventListener("click",clearHistory);
 
   document.querySelectorAll(".infoTab").forEach(function(btn){
@@ -749,6 +850,7 @@ function start(){
   });
 
   renderResult();
+  renderStats();
   generateGrid();
   updateTimer();
   setInterval(updateTimer,1000);
