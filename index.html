@@ -79,6 +79,19 @@ h1 span{
   line-height:1.4;
 }
 
+.installBtn{
+  width:100%;
+  border:1px solid rgba(240,192,64,.45);
+  border-radius:16px;
+  padding:13px 10px;
+  margin-top:14px;
+  color:#fff1a8;
+  font-size:15px;
+  font-weight:900;
+  background:rgba(240,192,64,.12);
+  box-shadow:0 0 18px rgba(240,192,64,.14);
+}
+
 .tabs{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -386,6 +399,10 @@ h1 span{
     Générateur aléatoire EuroMillions et Loto.<br>
     Sans garantie de gain.
   </div>
+
+  <button id="installBtn" class="installBtn" type="button">
+    📲 Installer l’application
+  </button>
 </header>
 
 <div class="tabs">
@@ -477,6 +494,7 @@ h1 span{
 var currentGame = "euro";
 var lastGrid = null;
 var historyList = [];
+var deferredInstallPrompt = null;
 
 var results = {
   euro:{
@@ -501,6 +519,45 @@ var results = {
 
 function el(id){
   return document.getElementById(id);
+}
+
+function isAppInstalled(){
+  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+}
+
+window.addEventListener("beforeinstallprompt", function(event){
+  event.preventDefault();
+  deferredInstallPrompt = event;
+});
+
+window.addEventListener("appinstalled", function(){
+  showMessage("Application installée ✅");
+  el("installBtn").textContent = "✅ Application installée";
+});
+
+function installApp(){
+  if(isAppInstalled()){
+    showMessage("Application déjà installée ✅");
+    return;
+  }
+
+  if(deferredInstallPrompt){
+    deferredInstallPrompt.prompt();
+
+    deferredInstallPrompt.userChoice.then(function(){
+      deferredInstallPrompt = null;
+    });
+
+    return;
+  }
+
+  var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  if(isIOS){
+    showMessage("Sur iPhone : Partager → Sur l’écran d’accueil.");
+  }else{
+    showMessage("Menu ⋮ → Installer l’application ou Ajouter à l’écran d’accueil.");
+  }
 }
 
 function pickNumbers(min,max,count){
@@ -540,7 +597,7 @@ function showMessage(text){
 
   setTimeout(function(){
     box.className = "status";
-  },3000);
+  },3500);
 }
 
 function generateGrid(){
@@ -828,50 +885,14 @@ function updateTimer(){
 }
 
 function start(){
+  el("installBtn").addEventListener("click",installApp);
+
+  if(isAppInstalled()){
+    el("installBtn").textContent = "✅ Application installée";
+  }
+
   el("btnEuro").addEventListener("click",function(){
     switchGame("euro");
   });
 
-  el("btnLoto").addEventListener("click",function(){
-    switchGame("loto");
-  });
-
-  el("generateBtn").addEventListener("click",generateGrid);
-  el("copyBtn").addEventListener("click",copyText);
-  el("whatsappBtn").addEventListener("click",shareWhatsApp);
-  el("instagramBtn").addEventListener("click",openInstagram);
-  el("threadsBtn").addEventListener("click",openThreads);
-  el("clearBtn").addEventListener("click",clearHistory);
-
-  document.querySelectorAll(".infoTab").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      switchPanel(btn.getAttribute("data-panel"));
-    });
-  });
-
-  renderResult();
-  renderStats();
-  generateGrid();
-  updateTimer();
-  setInterval(updateTimer,1000);
-}
-
-document.addEventListener("DOMContentLoaded",start);
-</script>
-
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function() {
-    navigator.serviceWorker.register("/service-worker.js")
-      .then(function() {
-        console.log("Service Worker enregistré");
-      })
-      .catch(function(error) {
-        console.log("Erreur Service Worker :", error);
-      });
-  });
-}
-</script>
-
-</body>
-</html>
+  el("btnLoto"
