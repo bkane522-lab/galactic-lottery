@@ -1,743 +1,876 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Galactic Euromillions - Loto</title>
-
-  <meta name="theme-color" content="#0a0012" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Galactic Lotto" />
-
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="icon.svg" />
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
-
-    :root{
-      --bg:#0a0012;
-      --bg2:#160028;
-      --card:#231036;
-      --card2:#2a1541;
-      --line:rgba(255,255,255,.10);
-      --line2:rgba(255,215,90,.35);
-      --text:#f5eeff;
-      --muted:rgba(245,238,255,.76);
-      --muted2:rgba(245,238,255,.55);
-      --gold:#f3cf68;
-      --gold2:#f6e29a;
-      --purple:#9b71ff;
-      --blue1:#2457ff;
-      --blue2:#3a82ff;
-      --green1:#213a36;
-      --green2:#2d524b;
-      --soft:#3a2b52;
-      --pink1:#5b1f7c;
-      --pink2:#8f3146;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --radius:24px;
-    }
-
-    *{
-      box-sizing:border-box;
-      -webkit-tap-highlight-color:transparent;
-    }
-
-    html,body{
-      margin:0;
-      padding:0;
-      min-height:100%;
-      background:
-        radial-gradient(circle at top center, rgba(84,0,170,.55), transparent 35%),
-        radial-gradient(circle at 20% 20%, rgba(98,0,255,.15), transparent 30%),
-        linear-gradient(180deg, #090012 0%, #120020 45%, #080010 100%);
-      color:var(--text);
-      font-family:Inter, sans-serif;
-    }
-
-    body{
-      padding:18px 14px 28px;
-    }
-
-    .app{
-      max-width:760px;
-      margin:0 auto;
-    }
-
-    .card{
-      background:linear-gradient(180deg, rgba(41,19,63,.97), rgba(30,12,46,.98));
-      border:1px solid rgba(180,130,255,.20);
-      border-radius:30px;
-      box-shadow:var(--shadow);
-    }
-
-    .hero{
-      text-align:center;
-      padding:20px 10px 12px;
-    }
-
-    .logo-wrap{
-      width:106px;
-      height:106px;
-      margin:0 auto 12px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:28px;
-      border:1px solid rgba(243,207,104,.36);
-      background:rgba(255,255,255,.03);
-      box-shadow:0 0 30px rgba(137,74,255,.18);
-      overflow:hidden;
-    }
-
-    .logo-wrap img{
-      width:88px;
-      height:88px;
-      object-fit:contain;
-      display:block;
-    }
-
-    .title{
-      margin:0;
-      text-align:center;
-      line-height:1.05;
-      font-family:Orbitron, sans-serif;
-      font-size:clamp(30px, 6vw, 52px);
-      font-weight:800;
-      color:var(--gold);
-      letter-spacing:1.6px;
-      text-transform:uppercase;
-    }
-
-    .subtitle{
-      margin:14px auto 0;
-      max-width:620px;
-      font-size:clamp(17px, 2.7vw, 20px);
-      line-height:1.45;
-      color:var(--muted);
-    }
-
-    .install-zone{
-      margin:16px auto 6px;
-      display:flex;
-      justify-content:center;
-    }
-
-    .install-btn{
-      display:none;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:10px 18px;
-      width:auto;
-      min-width:0;
-      max-width:280px;
-      border-radius:18px;
-      border:1px solid rgba(243,207,104,.35);
-      background:linear-gradient(180deg, rgba(72,38,102,.55), rgba(43,24,61,.65));
-      color:var(--gold2);
-      font-weight:800;
-      font-size:15px;
-      box-shadow:0 8px 20px rgba(0,0,0,.18);
-      cursor:pointer;
-    }
-
-    .switch{
-      margin:16px 0 14px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-
-    .switch button{
-      border:none;
-      border-radius:22px;
-      padding:20px 16px;
-      font-size:18px;
-      font-weight:800;
-      color:var(--text);
-      cursor:pointer;
-      background:#35204f;
-      border:1px solid rgba(255,255,255,.08);
-      transition:.2s ease;
-    }
-
-    .switch button.active{
-      background:linear-gradient(90deg, var(--blue1), var(--blue2));
-      box-shadow:0 0 22px rgba(58,130,255,.22);
-      color:#fff0b2;
-    }
-
-    .main-card{
-      padding:22px 18px 18px;
-    }
-
-    .section-kicker{
-      font-family:Orbitron, sans-serif;
-      color:#ceb1ff;
-      letter-spacing:2px;
-      text-transform:uppercase;
-      font-size:17px;
-      margin:0 0 18px;
-      font-weight:700;
-    }
-
-    .draw-line{
-      font-size:18px;
-      color:var(--muted);
-      margin:0 0 18px;
-      line-height:1.4;
-    }
-
-    .timer{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:12px;
-      margin-bottom:20px;
-    }
-
-    .timer-box{
-      padding:12px 8px 11px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.09);
-      border-radius:22px;
-      text-align:center;
-      min-height:90px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
-
-    .timer-value{
-      font-family:Orbitron, sans-serif;
-      font-size:clamp(22px, 5vw, 30px);
-      color:#f9e58d;
-      font-weight:800;
-      line-height:1;
-      margin-bottom:8px;
-    }
-
-    .timer-label{
-      font-size:13px;
-      letter-spacing:1px;
-      text-transform:uppercase;
-      color:var(--muted2);
-      font-weight:700;
-    }
-
-    .balls{
-      display:flex;
-      justify-content:center;
-      gap:14px;
-      flex-wrap:wrap;
-      margin:16px 0 8px;
-      min-height:82px;
-    }
-
-    .ball{
-      width:72px;
-      height:72px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-family:Orbitron, sans-serif;
-      font-weight:800;
-      font-size:26px;
-      color:#fff;
-      background:
-        radial-gradient(circle at 30% 26%, rgba(255,255,255,.45), transparent 18%),
-        radial-gradient(circle at 50% 50%, #2c2140 0%, #1d1430 65%, #160f24 100%);
-      border:2px solid rgba(165,139,255,.28);
-      box-shadow:
-        inset 0 0 12px rgba(255,255,255,.05),
-        0 0 16px rgba(142,97,255,.22);
-    }
-
-    .ball.special{
-      border-color:rgba(243,207,104,.75);
-      box-shadow:
-        inset 0 0 10px rgba(255,255,255,.04),
-        0 0 24px rgba(243,207,104,.18);
-    }
-
-    .sub-label{
-      text-align:center;
-      font-family:Orbitron, sans-serif;
-      font-size:18px;
-      letter-spacing:3px;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.78);
-      margin:8px 0 8px;
-      font-weight:700;
-    }
-
-    .actions{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-    }
-
-    .actions .full{
-      grid-column:1 / -1;
-    }
-
-    button{
-      font-family:Inter, sans-serif;
-    }
-
-    .btn{
-      border:none;
-      border-radius:22px;
-      padding:20px 16px;
-      font-size:18px;
-      font-weight:800;
-      cursor:pointer;
-      color:#fff;
-      transition:transform .08s ease, opacity .2s ease, background .2s ease;
-      min-height:74px;
-    }
-
-    .btn:active{
-      transform:scale(.985);
-    }
-
-    .btn-primary{
-      background:linear-gradient(90deg, var(--blue1), var(--blue2));
-      color:#ffe8a3;
-      box-shadow:0 0 22px rgba(58,130,255,.22);
-    }
-
-    .btn-copy{
-      background:#4d3b67;
-    }
-
-    .btn-wa{
-      background:linear-gradient(90deg, #29433f, #315d56);
-    }
-
-    .btn-insta{
-      background:linear-gradient(90deg, #6922a2, #8b355d, #b86f1d);
-    }
-
-    .btn-thread{
-      background:#5d4a74;
-    }
-
-    .tabs-card{
-      margin-top:18px;
-      padding:18px;
-    }
-
-    .tabs{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:12px;
-      margin-bottom:14px;
-    }
-
-    .tab-btn{
-      border:none;
-      border-radius:18px;
-      min-height:64px;
-      padding:16px 8px;
-      background:rgba(255,255,255,.04);
-      color:rgba(255,255,255,.72);
-      font-size:17px;
-      font-weight:800;
-      cursor:pointer;
-      border:1px solid rgba(255,255,255,.07);
-    }
-
-    .tab-btn.active{
-      color:#f7e194;
-      border-color:rgba(243,207,104,.55);
-      box-shadow:inset 0 0 0 1px rgba(243,207,104,.18);
-    }
-
-    .panel{
-      display:none;
-      background:rgba(255,255,255,.04);
-      border-radius:24px;
-      border:1px solid rgba(255,255,255,.05);
-      padding:18px;
-    }
-
-    .panel.active{
-      display:block;
-    }
-
-    .panel-title{
-      margin:0 0 14px;
-      font-family:Orbitron, sans-serif;
-      font-size:16px;
-      letter-spacing:2px;
-      text-transform:uppercase;
-      color:#d6b9ff;
-    }
-
-    .mini-card{
-      background:rgba(255,255,255,.035);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:20px;
-      padding:16px;
-      margin-top:12px;
-    }
-
-    .mini-card h4{
-      margin:0 0 10px;
-      font-size:18px;
-      color:#f8e59a;
-    }
-
-    .mini-card p, .panel p, .panel li{
-      font-size:17px;
-      line-height:1.5;
-      color:var(--muted);
-      margin:0 0 10px;
-    }
-
-    .panel ul{
-      padding-left:18px;
-      margin:8px 0 0;
-    }
-
-    .history-item{
-      padding:12px 0;
-      border-bottom:1px solid rgba(255,255,255,.07);
-      font-size:16px;
-      color:var(--muted);
-    }
-
-    .history-item:last-child{
-      border-bottom:none;
-    }
-
-    .link-row{
-      display:grid;
-      gap:12px;
-      margin-top:14px;
-    }
-
-    .link-btn{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      text-decoration:none;
-      min-height:66px;
-      border-radius:20px;
-      padding:16px;
-      border:1px solid rgba(243,207,104,.35);
-      background:linear-gradient(180deg, rgba(79,53,44,.40), rgba(54,36,31,.60));
-      color:#f8e59a;
-      font-size:17px;
-      font-weight:800;
-    }
-
-    .footer-note{
-      text-align:center;
-      color:rgba(255,255,255,.56);
-      font-size:16px;
-      line-height:1.45;
-      margin:16px 10px 0;
-    }
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:22px;
-      transform:translateX(-50%) translateY(20px);
-      min-width:220px;
-      max-width:90vw;
-      padding:14px 18px;
-      border-radius:16px;
-      background:rgba(20,12,30,.96);
-      color:#fff;
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow:0 10px 24px rgba(0,0,0,.35);
-      opacity:0;
-      pointer-events:none;
-      transition:.25s ease;
-      text-align:center;
-      z-index:9999;
-      font-weight:700;
-    }
-
-    .toast.show{
-      opacity:1;
-      transform:translateX(-50%) translateY(0);
-    }
-
-    @media (max-width:640px){
-      body{
-        padding:12px 10px 24px;
-      }
-
-      .main-card,
-      .tabs-card{
-        padding:16px 14px;
-      }
-
-      .switch{
-        gap:10px;
-      }
-
-      .switch button{
-        padding:16px 10px;
-        font-size:16px;
-      }
-
-      .timer{
-        gap:10px;
-      }
-
-      .timer-box{
-        min-height:82px;
-        border-radius:18px;
-      }
-
-      .ball{
-        width:60px;
-        height:60px;
-        font-size:22px;
-      }
-
-      .btn{
-        min-height:68px;
-        padding:17px 14px;
-        font-size:17px;
-      }
-
-      .tabs{
-        gap:10px;
-      }
-
-      .tab-btn{
-        min-height:58px;
-        font-size:16px;
-      }
-
-      .subtitle{
-        font-size:16px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Galactic Euromillions - Loto</title>
+
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0012">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Galactic Loto">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;700;800&display=swap');
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+  font-family:Inter,sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at top,#3b0b78,transparent 35%),
+    linear-gradient(180deg,#080010,#16002d,#050008);
+}
+
+.wrap{
+  max-width:540px;
+  margin:auto;
+  padding:18px 14px 30px;
+}
+
+header{
+  text-align:center;
+  margin-bottom:18px;
+}
+
+.logo{
+  width:76px;
+  height:76px;
+  margin:0 auto 12px;
+  border-radius:22px;
+  background:linear-gradient(135deg,#1b0038,#090011);
+  border:2px solid #f0c040;
+  display:grid;
+  place-items:center;
+  box-shadow:0 0 25px rgba(240,192,64,.35);
+}
+
+.logo svg{
+  width:72px;
+  height:72px;
+}
+
+h1{
+  font-family:Orbitron,sans-serif;
+  text-align:center;
+  font-size:23px;
+  line-height:1.15;
+  letter-spacing:2px;
+  color:#f7d56b;
+}
+
+h1 span{
+  font-size:18px;
+}
+
+.sub{
+  margin-top:8px;
+  color:rgba(255,255,255,.72);
+  font-size:14px;
+  line-height:1.4;
+}
+
+.tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:16px;
+}
+
+.tab{
+  border:0;
+  border-radius:16px;
+  padding:14px 10px;
+  font-size:15px;
+  font-weight:800;
+  color:#fff;
+  background:rgba(255,255,255,.10);
+}
+
+.tab.active.euro{
+  background:linear-gradient(135deg,#003399,#0077ff);
+  color:#fff1a8;
+}
+
+.tab.active.loto{
+  background:linear-gradient(135deg,#8b0000,#e92e2e);
+  color:#fff1a8;
+}
+
+.card{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(180,110,255,.35);
+  border-radius:24px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:0 18px 45px rgba(0,0,0,.28);
+}
+
+.title{
+  color:#c7a8ff;
+  font-size:13px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+
+.next{
+  color:rgba(255,255,255,.75);
+  font-size:14px;
+  margin-bottom:12px;
+}
+
+.timer{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-bottom:16px;
+}
+
+.time{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:14px;
+  text-align:center;
+  padding:8px 4px;
+}
+
+.time b{
+  display:block;
+  color:#fff1a8;
+  font-family:Orbitron,sans-serif;
+  font-size:15px;
+}
+
+.time span{
+  display:block;
+  color:rgba(255,255,255,.6);
+  font-size:10px;
+  text-transform:uppercase;
+  margin-top:3px;
+}
+
+.balls{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:9px;
+  margin:12px 0;
+  min-height:50px;
+}
+
+.ball{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-family:Orbitron,sans-serif;
+  font-size:17px;
+  font-weight:900;
+  color:white;
+  background:radial-gradient(circle at 30% 25%,#ffffff55,transparent 25%),linear-gradient(135deg,#35105f,#100021);
+  border:2px solid rgba(255,255,255,.20);
+  box-shadow:0 0 16px rgba(123,47,255,.35);
+}
+
+.ball.extra{
+  color:#fff1a8;
+  border-color:#f0c040;
+  box-shadow:0 0 18px rgba(240,192,64,.35);
+}
+
+.extraLabel{
+  text-align:center;
+  margin-top:12px;
+  color:rgba(255,255,255,.68);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.btn{
+  width:100%;
+  border:0;
+  border-radius:16px;
+  padding:14px 10px;
+  margin-top:10px;
+  color:white;
+  font-size:15px;
+  font-weight:900;
+}
+
+.mainBtn{
+  background:linear-gradient(135deg,#003399,#0077ff);
+  color:#fff1a8;
+}
+
+.mainBtn.loto{
+  background:linear-gradient(135deg,#8b0000,#e92e2e);
+}
+
+.grid2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.copy{
+  background:rgba(255,255,255,.14);
+}
+
+.wa{
+  background:rgba(37,211,102,.23);
+  border:1px solid rgba(37,211,102,.40);
+}
+
+.insta{
+  background:linear-gradient(135deg,#7b2fff66,#ff007f55,#ffbf0055);
+}
+
+.threads{
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.24);
+}
+
+.status{
+  display:none;
+  margin-top:12px;
+  padding:11px;
+  border-radius:14px;
+  background:rgba(31,209,139,.15);
+  color:#ddfff2;
+  font-size:14px;
+}
+
+.status.show{
+  display:block;
+}
+
+.infoTabs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-bottom:12px;
+}
+
+.infoTab{
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.72);
+  padding:11px 4px;
+  font-weight:900;
+}
+
+.infoTab.active{
+  color:#fff1a8;
+  border-color:#f0c040;
+  background:rgba(240,192,64,.12);
+}
+
+.panel{
+  display:none;
+  background:rgba(255,255,255,.05);
+  border-radius:18px;
+  padding:13px;
+}
+
+.panel.active{
+  display:block;
+}
+
+.small{
+  color:rgba(255,255,255,.75);
+  font-size:14px;
+  line-height:1.45;
+}
+
+.label{
+  color:#fff1a8;
+  font-weight:900;
+  margin-bottom:8px;
+}
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:10px 0 14px;
+}
+
+.chip{
+  padding:8px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.13);
+  font-size:13px;
+  font-weight:900;
+}
+
+.hot{
+  color:#fff1a8;
+  border-color:rgba(240,192,64,.35);
+}
+
+.cold{
+  color:#c2dcff;
+  border-color:rgba(120,170,255,.30);
+}
+
+.historyItem{
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,.10);
+  color:rgba(255,255,255,.75);
+  font-size:13px;
+}
+
+.footer{
+  text-align:center;
+  color:rgba(255,255,255,.45);
+  font-size:12px;
+  line-height:1.4;
+  margin-top:14px;
+}
+</style>
 </head>
+
 <body>
-  <div class="app">
-    <section class="hero">
-      <div class="logo-wrap">
-        <img src="icon.svg" alt="Logo Galactic Euromillions - Loto">
-      </div>
 
-      <h1 class="title">GALACTIC<br>EUROMILLIONS<br>- LOTO -</h1>
-      <p class="subtitle">Générateur aléatoire EuroMillions et Loto.<br>Sans garantie de gain.</p>
+<div class="wrap">
 
-      <div class="install-zone">
-        <button id="installBtn" class="install-btn" type="button">📲 Installer l’application</button>
-      </div>
-    </section>
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 120 120">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#fff7c2"/>
+          <stop offset="50%" stop-color="#f0c040"/>
+          <stop offset="100%" stop-color="#9c6500"/>
+        </linearGradient>
+      </defs>
 
-    <section class="switch">
-      <button id="gameEuro" class="active" type="button">⭐ EuroMillions</button>
-      <button id="gameLoto" type="button">🎱 Loto</button>
-    </section>
+      <rect x="7" y="7" width="106" height="106" rx="28" fill="#14002b" stroke="#f0c040" stroke-width="3"/>
+      <ellipse cx="60" cy="60" rx="48" ry="18" fill="none" stroke="url(#g)" stroke-width="6" transform="rotate(-18 60 60)"/>
+      <ellipse cx="60" cy="60" rx="45" ry="17" fill="none" stroke="#7b2fff" stroke-width="4" transform="rotate(22 60 60)"/>
+      <path d="M60 34 L68 52 L87 52 L71 64 L77 84 L60 72 L43 84 L49 64 L33 52 L52 52 Z" fill="url(#g)"/>
 
-    <section class="card main-card">
-      <h2 id="gridTitle" class="section-kicker">✦ EUROMILLIONS · VOTRE GRILLE</h2>
-      <p id="drawText" class="draw-line">Prochain tirage : calcul...</p>
+      <circle cx="91" cy="39" r="11" fill="#180030" stroke="url(#g)" stroke-width="3"/>
+      <text x="91" y="44" text-anchor="middle" font-size="13" font-weight="900" fill="#fff1a8">7</text>
 
-      <div class="timer">
-        <div class="timer-box">
-          <div id="days" class="timer-value">--</div>
-          <div class="timer-label">Jours</div>
-        </div>
-        <div class="timer-box">
-          <div id="hours" class="timer-value">--</div>
-          <div class="timer-label">Heures</div>
-        </div>
-        <div class="timer-box">
-          <div id="minutes" class="timer-value">--</div>
-          <div class="timer-label">Min</div>
-        </div>
-        <div class="timer-box">
-          <div id="seconds" class="timer-value">--</div>
-          <div class="timer-label">Sec</div>
-        </div>
-      </div>
+      <circle cx="30" cy="78" r="11" fill="#180030" stroke="url(#g)" stroke-width="3"/>
+      <text x="30" y="83" text-anchor="middle" font-size="12" font-weight="900" fill="#fff1a8">12</text>
 
-      <div id="mainBalls" class="balls"></div>
-
-      <div id="specialLabel" class="sub-label">ÉTOILES</div>
-      <div id="specialBalls" class="balls"></div>
-
-      <div class="actions">
-        <button id="generateBtn" class="btn btn-primary full" type="button">🔮 Générer ma grille</button>
-        <button id="copyBtn" class="btn btn-copy" type="button">📋 Copier</button>
-        <button id="waBtn" class="btn btn-wa" type="button">🟢 WhatsApp</button>
-        <button id="instaBtn" class="btn btn-insta" type="button">📸 Instagram</button>
-        <button id="threadsBtn" class="btn btn-thread" type="button">🧵 Threads</button>
-      </div>
-    </section>
-
-    <section class="card tabs-card">
-      <div class="tabs">
-        <button class="tab-btn active" data-tab="tirage" type="button">Tirage</button>
-        <button class="tab-btn" data-tab="gain" type="button">Gain</button>
-        <button class="tab-btn" data-tab="stats" type="button">Stats</button>
-        <button class="tab-btn" data-tab="history" type="button">Historique</button>
-      </div>
-
-      <div id="panel-tirage" class="panel active">
-        <h3 class="panel-title">🏆 Tirage de référence</h3>
-        <div class="mini-card">
-          <h4 id="referenceTitle">Référence actuelle</h4>
-          <p id="referenceText">Ta grille affichée ci-dessus sert de référence visuelle.</p>
-          <p>Pour le résultat exact et officiel, vérifie toujours sur le site FDJ.</p>
-        </div>
-        <div class="link-row">
-          <a id="officialResultLink" class="link-btn" href="https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/resultats" target="_blank" rel="noopener noreferrer">Voir les résultats officiels</a>
-        </div>
-      </div>
-
-      <div id="panel-gain" class="panel">
-        <h3 class="panel-title">💰 Gain remporté ou pas</h3>
-        <div class="mini-card">
-          <h4>Information</h4>
-          <p>Cette version compare et partage tes grilles, mais ne calcule pas un gain officiel FDJ en temps réel.</p>
-          <p>Utilise le bouton ci-dessous pour vérifier les résultats sur la page officielle.</p>
-        </div>
-        <div class="link-row">
-          <a id="officialCheckLink" class="link-btn" href="https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/resultats" target="_blank" rel="noopener noreferrer">Vérifier sur le site officiel FDJ</a>
-        </div>
-      </div>
-
-      <div id="panel-stats" class="panel">
-        <h3 class="panel-title">📊 Statistiques</h3>
-        <div class="mini-card">
-          <h4>Sur tes grilles générées</h4>
-          <p id="statsGeneratedCount">Aucune grille générée pour l’instant.</p>
-          <p id="statsMost">Numéros les plus fréquents : —</p>
-          <p id="statsLeast">Numéros les moins fréquents : —</p>
-        </div>
-        <div class="link-row">
-          <a id="officialStatsLink" class="link-btn" href="https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/statistiques" target="_blank" rel="noopener noreferrer">Voir les statistiques officielles</a>
-        </div>
-      </div>
-
-      <div id="panel-history" class="panel">
-        <h3 class="panel-title">📜 Historique</h3>
-        <div id="historyList"></div>
-        <div class="link-row">
-          <button id="clearHistoryBtn" class="btn btn-copy" type="button">🧹 Effacer l’historique</button>
-        </div>
-      </div>
-    </section>
-
-    <p class="footer-note">
-      Application indépendante, non affiliée à la FDJ.<br>
-      Les numéros sont générés aléatoirement.
-    </p>
+      <circle cx="75" cy="96" r="11" fill="#180030" stroke="url(#g)" stroke-width="3"/>
+      <text x="75" y="101" text-anchor="middle" font-size="11" font-weight="900" fill="#fff1a8">24</text>
+    </svg>
   </div>
 
-  <div id="toast" class="toast"></div>
+  <h1>
+    GALACTIC EUROMILLIONS<br>
+    <span>- LOTO -</span>
+  </h1>
 
-  <script>
-    (function () {
-      "use strict";
+  <div class="sub">
+    Générateur aléatoire EuroMillions et Loto.<br>
+    Sans garantie de gain.
+  </div>
+</header>
 
-      const state = {
-        game: "euro",
-        currentGrid: null,
-        history: [],
-        timerInterval: null,
-        deferredPrompt: null
-      };
+<div class="tabs">
+  <button id="btnEuro" class="tab euro active" type="button">⭐ EuroMillions</button>
+  <button id="btnLoto" class="tab loto" type="button">🎱 Loto</button>
+</div>
 
-      const STORAGE_KEY = "galacticLotteryHistoryV3";
+<section class="card">
+  <div id="gameTitle" class="title">✦ EuroMillions · Votre grille</div>
+  <div id="nextDraw" class="next">Prochain tirage : calcul...</div>
 
-      const els = {
-        installBtn: document.getElementById("installBtn"),
-        gameEuro: document.getElementById("gameEuro"),
-        gameLoto: document.getElementById("gameLoto"),
-        gridTitle: document.getElementById("gridTitle"),
-        drawText: document.getElementById("drawText"),
-        days: document.getElementById("days"),
-        hours: document.getElementById("hours"),
-        minutes: document.getElementById("minutes"),
-        seconds: document.getElementById("seconds"),
-        mainBalls: document.getElementById("mainBalls"),
-        specialLabel: document.getElementById("specialLabel"),
-        specialBalls: document.getElementById("specialBalls"),
-        generateBtn: document.getElementById("generateBtn"),
-        copyBtn: document.getElementById("copyBtn"),
-        waBtn: document.getElementById("waBtn"),
-        instaBtn: document.getElementById("instaBtn"),
-        threadsBtn: document.getElementById("threadsBtn"),
-        tabButtons: Array.from(document.querySelectorAll(".tab-btn")),
-        panels: {
-          tirage: document.getElementById("panel-tirage"),
-          gain: document.getElementById("panel-gain"),
-          stats: document.getElementById("panel-stats"),
-          history: document.getElementById("panel-history")
-        },
-        referenceTitle: document.getElementById("referenceTitle"),
-        referenceText: document.getElementById("referenceText"),
-        officialResultLink: document.getElementById("officialResultLink"),
-        officialCheckLink: document.getElementById("officialCheckLink"),
-        officialStatsLink: document.getElementById("officialStatsLink"),
-        statsGeneratedCount: document.getElementById("statsGeneratedCount"),
-        statsMost: document.getElementById("statsMost"),
-        statsLeast: document.getElementById("statsLeast"),
-        historyList: document.getElementById("historyList"),
-        clearHistoryBtn: document.getElementById("clearHistoryBtn"),
-        toast: document.getElementById("toast")
-      };
+  <div class="timer">
+    <div class="time"><b id="days">--</b><span>Jours</span></div>
+    <div class="time"><b id="hours">--</b><span>Heures</span></div>
+    <div class="time"><b id="mins">--</b><span>Min</span></div>
+    <div class="time"><b id="secs">--</b><span>Sec</span></div>
+  </div>
 
-      function showToast(text) {
-        els.toast.textContent = text;
-        els.toast.classList.add("show");
-        clearTimeout(showToast._timer);
-        showToast._timer = setTimeout(() => {
-          els.toast.classList.remove("show");
-        }, 2400);
-      }
+  <div id="mainBalls" class="balls"></div>
 
-      function pad(n) {
-        return String(n).padStart(2, "0");
-      }
+  <div id="extraLabel" class="extraLabel">Étoiles</div>
+  <div id="extraBalls" class="balls"></div>
 
-      function randomUniqueNumbers(count, min, max) {
-        const set = new Set();
-        while (set.size < count) {
-          const n = Math.floor(Math.random() * (max - min + 1)) + min;
-          set.add(n);
-        }
-        return Array.from(set).sort((a, b) => a - b);
-      }
+  <button id="generateBtn" class="btn mainBtn" type="button">🔮 Générer ma grille</button>
 
-      function getConfig(game) {
-        if (game === "euro") {
-          return {
-            label: "EUROMILLIONS",
-            subLabel: "ÉTOILES",
-            mainCount: 5,
-            mainMin: 1,
-            mainMax: 50,
-            specialCount: 2,
-            specialMin: 1,
-            specialMax: 12,
-            resultsUrl: "https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/resultats",
-            statsUrl: "https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/statistiques"
-          };
-        }
-        return {
-          label: "LOTO",
-          subLabel: "NUMÉRO CHANCE",
-          mainCount: 5,
-          mainMin: 1
+  <div class="grid2">
+    <button id="copyBtn" class="btn copy" type="button">📋 Copier</button>
+    <button id="whatsappBtn" class="btn wa" type="button">🟢 WhatsApp</button>
+  </div>
+
+  <div class="grid2">
+    <button id="instagramBtn" class="btn insta" type="button">📸 Instagram</button>
+    <button id="threadsBtn" class="btn threads" type="button">🧵 Threads</button>
+  </div>
+
+  <div id="status" class="status"></div>
+</section>
+
+<section class="card">
+  <div class="infoTabs">
+    <button class="infoTab active" data-panel="tirage" type="button">Tirage</button>
+    <button class="infoTab" data-panel="gain" type="button">Gain</button>
+    <button class="infoTab" data-panel="stats" type="button">Stats</button>
+    <button class="infoTab" data-panel="historique" type="button">Historique</button>
+  </div>
+
+  <div id="tirage" class="panel active">
+    <div class="title">🏆 Tirage de référence</div>
+    <div id="resultTitle" class="label"></div>
+    <div id="resultMain" class="balls"></div>
+    <div id="resultExtraLabel" class="extraLabel"></div>
+    <div id="resultExtra" class="balls"></div>
+    <div class="small">À vérifier sur le site officiel FDJ pour le résultat exact.</div>
+  </div>
+
+  <div id="gain" class="panel">
+    <div class="title">💰 Gain remporté ou pas</div>
+    <div id="gainTitle" class="label">Aucune comparaison</div>
+    <div id="gainText" class="small">Génère une grille pour comparer.</div>
+  </div>
+
+  <div id="stats" class="panel">
+    <div class="title">📊 Statistiques</div>
+
+    <div class="label">Numéros les plus sortis</div>
+    <div id="hotStats" class="chips"></div>
+
+    <div class="label">Numéros les moins sortis</div>
+    <div id="coldStats" class="chips"></div>
+
+    <div id="statsNote" class="small"></div>
+  </div>
+
+  <div id="historique" class="panel">
+    <div class="title">📜 Historique</div>
+    <div id="history" class="small">Aucune grille encore.</div>
+    <button id="clearBtn" class="btn copy" type="button">🧹 Effacer</button>
+  </div>
+</section>
+
+<div class="footer">
+  Application indépendante, non affiliée à la FDJ.<br>
+  Les numéros sont générés aléatoirement.
+</div>
+
+</div>
+
+<script>
+var currentGame = "euro";
+var lastGrid = null;
+var historyList = [];
+
+var results = {
+  euro:{
+    name:"EuroMillions",
+    extraName:"Étoiles",
+    main:[18,25,31,37,45],
+    extra:[4,9],
+    hot:[[35,84],[42,82],[21,80],[23,79],[19,77]],
+    cold:[[22,44],[1,47],[43,53],[34,54],[13,55]],
+    note:"Statistiques indicatives à vérifier régulièrement sur FDJ."
+  },
+  loto:{
+    name:"Loto",
+    extraName:"Numéro Chance",
+    main:[1,15,32,37,39],
+    extra:[1],
+    hot:[[30,128],[31,126],[24,121],[7,119],[41,117]],
+    cold:[[43,89],[1,92],[33,92],[46,95],[8,96]],
+    note:"Statistiques indicatives à vérifier régulièrement sur FDJ."
+  }
+};
+
+function el(id){
+  return document.getElementById(id);
+}
+
+function pickNumbers(min,max,count){
+  var numbers = [];
+
+  while(numbers.length < count){
+    var n = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    if(numbers.indexOf(n) === -1){
+      numbers.push(n);
+    }
+  }
+
+  numbers.sort(function(a,b){
+    return a-b;
+  });
+
+  return numbers;
+}
+
+function renderBalls(boxId,numbers,isExtra){
+  var box = el(boxId);
+  box.innerHTML = "";
+
+  numbers.forEach(function(num){
+    var div = document.createElement("div");
+    div.className = "ball" + (isExtra ? " extra" : "");
+    div.textContent = num;
+    box.appendChild(div);
+  });
+}
+
+function showMessage(text){
+  var box = el("status");
+  box.textContent = text;
+  box.className = "status show";
+
+  setTimeout(function(){
+    box.className = "status";
+  },3000);
+}
+
+function generateGrid(){
+  var main;
+  var extra;
+
+  if(currentGame === "euro"){
+    main = pickNumbers(1,50,5);
+    extra = pickNumbers(1,12,2);
+  }else{
+    main = pickNumbers(1,49,5);
+    extra = pickNumbers(1,10,1);
+  }
+
+  lastGrid = {
+    game:currentGame,
+    main:main,
+    extra:extra
+  };
+
+  renderBalls("mainBalls",main,false);
+  renderBalls("extraBalls",extra,true);
+
+  historyList.unshift(lastGrid);
+
+  if(historyList.length > 8){
+    historyList.pop();
+  }
+
+  updateGain();
+  updateHistory();
+  showMessage("Nouvelle grille générée ✅");
+}
+
+function switchGame(game){
+  currentGame = game;
+
+  if(game === "euro"){
+    el("btnEuro").className = "tab euro active";
+    el("btnLoto").className = "tab loto";
+    el("generateBtn").className = "btn mainBtn";
+    el("gameTitle").textContent = "✦ EuroMillions · Votre grille";
+    el("extraLabel").textContent = "Étoiles";
+  }else{
+    el("btnEuro").className = "tab euro";
+    el("btnLoto").className = "tab loto active";
+    el("generateBtn").className = "btn mainBtn loto";
+    el("gameTitle").textContent = "✦ Loto · Votre grille";
+    el("extraLabel").textContent = "Numéro Chance";
+  }
+
+  renderResult();
+  renderStats();
+  generateGrid();
+  updateTimer();
+}
+
+function renderResult(){
+  var r = results[currentGame];
+
+  el("resultTitle").textContent = r.name + " · résultat de référence";
+  el("resultExtraLabel").textContent = r.extraName;
+
+  renderBalls("resultMain",r.main,false);
+  renderBalls("resultExtra",r.extra,true);
+}
+
+function renderStats(){
+  var r = results[currentGame];
+  var hotBox = el("hotStats");
+  var coldBox = el("coldStats");
+
+  hotBox.innerHTML = "";
+  coldBox.innerHTML = "";
+
+  r.hot.forEach(function(item){
+    var chip = document.createElement("div");
+    chip.className = "chip hot";
+    chip.textContent = item[0] + " · " + item[1];
+    hotBox.appendChild(chip);
+  });
+
+  r.cold.forEach(function(item){
+    var chip = document.createElement("div");
+    chip.className = "chip cold";
+    chip.textContent = item[0] + " · " + item[1];
+    coldBox.appendChild(chip);
+  });
+
+  el("statsNote").textContent = r.note;
+}
+
+function countMatches(a,b){
+  var count = 0;
+
+  a.forEach(function(n){
+    if(b.indexOf(n) !== -1){
+      count++;
+    }
+  });
+
+  return count;
+}
+
+function updateGain(){
+  if(!lastGrid){
+    return;
+  }
+
+  var r = results[currentGame];
+  var mainMatch = countMatches(lastGrid.main,r.main);
+  var extraMatch = countMatches(lastGrid.extra,r.extra);
+
+  var win = false;
+
+  if(currentGame === "euro"){
+    if(mainMatch >= 2 || extraMatch === 2){
+      win = true;
+    }
+  }else{
+    if(mainMatch >= 2 || extraMatch === 1){
+      win = true;
+    }
+  }
+
+  el("gainTitle").textContent = win ? "✅ Potentiellement gagnant" : "❌ Non gagnant";
+  el("gainText").innerHTML =
+    mainMatch + " numéro(s) trouvé(s)<br>" +
+    extraMatch + " " + r.extraName.toLowerCase() + " trouvé(s)<br>" +
+    "Montant exact à vérifier sur FDJ.";
+}
+
+function shareText(){
+  if(!lastGrid){
+    return "";
+  }
+
+  var r = results[lastGrid.game];
+
+  return "Ma grille Galactic Euromillions - Loto\n" +
+    r.name + "\n" +
+    "Numéros : " + lastGrid.main.join(" - ") + "\n" +
+    r.extraName + " : " + lastGrid.extra.join(" - ");
+}
+
+function copyText(){
+  var text = shareText();
+
+  if(!text){
+    showMessage("Aucune grille disponible.");
+    return;
+  }
+
+  var area = document.createElement("textarea");
+  area.value = text;
+  document.body.appendChild(area);
+  area.select();
+  document.execCommand("copy");
+  document.body.removeChild(area);
+
+  showMessage("Grille copiée ✅");
+}
+
+function copySilently(){
+  var text = shareText();
+
+  if(!text){
+    return;
+  }
+
+  var area = document.createElement("textarea");
+  area.value = text;
+  document.body.appendChild(area);
+  area.select();
+  document.execCommand("copy");
+  document.body.removeChild(area);
+}
+
+function shareWhatsApp(){
+  var text = shareText();
+
+  if(!text){
+    showMessage("Aucune grille disponible.");
+    return;
+  }
+
+  window.location.href = "https://wa.me/?text=" + encodeURIComponent(text);
+}
+
+function openInstagram(){
+  copySilently();
+
+  setTimeout(function(){
+    window.location.href = "https://www.instagram.com/";
+  },300);
+}
+
+function openThreads(){
+  var text = shareText();
+
+  if(!text){
+    showMessage("Aucune grille disponible.");
+    return;
+  }
+
+  window.location.href = "https://www.threads.net/intent/post?text=" + encodeURIComponent(text);
+}
+
+function updateHistory(){
+  var box = el("history");
+
+  if(historyList.length === 0){
+    box.textContent = "Aucune grille encore.";
+    return;
+  }
+
+  box.innerHTML = "";
+
+  historyList.forEach(function(item){
+    var r = results[item.game];
+    var div = document.createElement("div");
+    div.className = "historyItem";
+    div.textContent = r.name + " : " + item.main.join(" - ") + " | " + item.extra.join(" - ");
+    box.appendChild(div);
+  });
+}
+
+function clearHistory(){
+  historyList = [];
+  updateHistory();
+  showMessage("Historique effacé ✅");
+}
+
+function switchPanel(panel){
+  document.querySelectorAll(".infoTab").forEach(function(btn){
+    btn.classList.remove("active");
+  });
+
+  document.querySelectorAll(".panel").forEach(function(p){
+    p.classList.remove("active");
+  });
+
+  document.querySelector('[data-panel="' + panel + '"]').classList.add("active");
+  el(panel).classList.add("active");
+}
+
+function nextDrawDate(){
+  var now = new Date();
+  var days = currentGame === "euro" ? [2,5] : [1,3,6];
+  var hour = currentGame === "euro" ? 21 : 20;
+  var minute = currentGame === "euro" ? 5 : 20;
+
+  for(var i=0;i<8;i++){
+    var d = new Date(now);
+    d.setDate(now.getDate()+i);
+    d.setHours(hour,minute,0,0);
+
+    if(days.indexOf(d.getDay()) !== -1 && d > now){
+      return d;
+    }
+  }
+
+  return now;
+}
+
+function updateTimer(){
+  var target = nextDrawDate();
+  var diff = target - new Date();
+
+  if(diff < 0){
+    diff = 0;
+  }
+
+  el("days").textContent = Math.floor(diff / 86400000);
+  el("hours").textContent = Math.floor((diff % 86400000) / 3600000);
+  el("mins").textContent = Math.floor((diff % 3600000) / 60000);
+  el("secs").textContent = Math.floor((diff % 60000) / 1000);
+
+  el("nextDraw").textContent =
+    "Prochain tirage : " +
+    target.toLocaleDateString("fr-FR",{weekday:"long",day:"2-digit",month:"long"}) +
+    " vers " +
+    target.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+}
+
+function start(){
+  el("btnEuro").addEventListener("click",function(){
+    switchGame("euro");
+  });
+
+  el("btnLoto").addEventListener("click",function(){
+    switchGame("loto");
+  });
+
+  el("generateBtn").addEventListener("click",generateGrid);
+  el("copyBtn").addEventListener("click",copyText);
+  el("whatsappBtn").addEventListener("click",shareWhatsApp);
+  el("instagramBtn").addEventListener("click",openInstagram);
+  el("threadsBtn").addEventListener("click",openThreads);
+  el("clearBtn").addEventListener("click",clearHistory);
+
+  document.querySelectorAll(".infoTab").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      switchPanel(btn.getAttribute("data-panel"));
+    });
+  });
+
+  renderResult();
+  renderStats();
+  generateGrid();
+  updateTimer();
+  setInterval(updateTimer,1000);
+}
+
+document.addEventListener("DOMContentLoaded",start);
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function() {
+    navigator.serviceWorker.register("/service-worker.js")
+      .then(function() {
+        console.log("Service Worker enregistré");
+      })
+      .catch(function(error) {
+        console.log("Erreur Service Worker :", error);
+      });
+  });
+}
+</script>
+
+</body>
+</html>
