@@ -4,21 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Galactic Euromillions - Loto</title>
-<meta name="theme-color" content="#0a0012">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;700;800&display=swap');
-
-:root{
-  --bg:#090011;
-  --bg2:#160030;
-  --card:rgba(255,255,255,.06);
-  --line:rgba(145,80,255,.30);
-  --gold:#f0c040;
-  --gold2:#fff1a8;
-  --txt:#f6f0ff;
-  --muted:rgba(246,240,255,.74);
-}
 
 *{
   box-sizing:border-box;
@@ -28,294 +16,235 @@
 
 body{
   min-height:100vh;
-  color:var(--txt);
   font-family:Inter,sans-serif;
-  overflow-x:hidden;
+  color:#fff;
   background:
-    radial-gradient(circle at 20% 14%,rgba(123,47,255,.22),transparent 30%),
-    radial-gradient(circle at 80% 80%,rgba(240,192,64,.08),transparent 30%),
-    linear-gradient(180deg,var(--bg),var(--bg2) 58%,#05000b);
-}
-
-#stars{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-}
-
-.star{
-  position:absolute;
-  width:2px;
-  height:2px;
-  border-radius:50%;
-  background:white;
-  opacity:.65;
-  animation:twinkle 3s infinite alternate;
-}
-
-@keyframes twinkle{
-  from{opacity:.12;transform:scale(.7)}
-  to{opacity:.9;transform:scale(1.4)}
+    radial-gradient(circle at top,#3b0b78,transparent 35%),
+    linear-gradient(180deg,#080010,#16002d,#050008);
 }
 
 .wrap{
-  position:relative;
-  z-index:1;
   max-width:540px;
-  margin:0 auto;
-  padding:14px 14px 24px;
+  margin:auto;
+  padding:18px 14px 30px;
 }
 
-.head{
+header{
   text-align:center;
-  margin-bottom:12px;
+  margin-bottom:18px;
 }
 
 .logo{
-  width:72px;
-  height:72px;
+  width:76px;
+  height:76px;
+  margin:0 auto 12px;
   border-radius:22px;
-  margin:0 auto 10px;
-  overflow:hidden;
+  background:linear-gradient(135deg,#1b0038,#090011);
+  border:2px solid #f0c040;
   display:grid;
   place-items:center;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(240,192,64,.35);
-  box-shadow:0 0 30px rgba(240,192,64,.22);
+  box-shadow:0 0 25px rgba(240,192,64,.35);
 }
 
 .logo svg{
-  width:100%;
-  height:100%;
-  display:block;
+  width:72px;
+  height:72px;
 }
 
 h1{
   font-family:Orbitron,sans-serif;
-  font-size:23px;
-  letter-spacing:2px;
-  line-height:1.15;
   text-align:center;
-  width:100%;
-  margin:0 auto 8px;
-  background:linear-gradient(135deg,var(--gold),#fff6c9,var(--gold));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+  font-size:23px;
+  line-height:1.15;
+  letter-spacing:2px;
+  color:#f7d56b;
 }
 
 h1 span{
   font-size:18px;
-  letter-spacing:3px;
 }
 
 .sub{
-  font-size:13px;
-  line-height:1.35;
-  color:var(--muted);
-  text-align:center;
+  margin-top:8px;
+  color:rgba(255,255,255,.72);
+  font-size:14px;
+  line-height:1.4;
 }
 
 .tabs{
-  display:flex;
-  gap:8px;
-  background:rgba(255,255,255,.045);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:5px;
-  margin:12px 0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:16px;
 }
 
 .tab{
-  flex:1;
   border:0;
-  border-radius:12px;
-  padding:12px 6px;
-  background:transparent;
-  color:rgba(246,240,255,.52);
-  font-size:14px;
+  border-radius:16px;
+  padding:14px 10px;
+  font-size:15px;
   font-weight:800;
-  cursor:pointer;
+  color:#fff;
+  background:rgba(255,255,255,.10);
 }
 
-.tab.on.euro{
-  background:linear-gradient(135deg,#0030a8,#0061ff);
-  color:var(--gold2);
+.tab.active.euro{
+  background:linear-gradient(135deg,#003399,#0077ff);
+  color:#fff1a8;
 }
 
-.tab.on.loto{
-  background:linear-gradient(135deg,#850000,#df2d2d);
-  color:var(--gold2);
+.tab.active.loto{
+  background:linear-gradient(135deg,#8b0000,#e92e2e);
+  color:#fff1a8;
 }
 
 .card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:22px;
-  padding:15px;
-  margin-bottom:12px;
-  box-shadow:0 18px 50px rgba(0,0,0,.26);
-  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(180,110,255,.35);
+  border-radius:24px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:0 18px 45px rgba(0,0,0,.28);
 }
 
 .title{
-  font-size:12px;
+  color:#c7a8ff;
+  font-size:13px;
+  font-weight:900;
   text-transform:uppercase;
-  letter-spacing:1.4px;
-  color:#c19cff;
-  font-weight:800;
-  margin-bottom:10px;
+  letter-spacing:2px;
+  margin-bottom:12px;
 }
 
 .next{
-  font-size:13px;
-  color:var(--muted);
-  line-height:1.3;
-  margin-bottom:10px;
+  color:rgba(255,255,255,.75);
+  font-size:14px;
+  margin-bottom:12px;
 }
 
 .timer{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:7px;
-  margin:8px 0 12px;
+  gap:8px;
+  margin-bottom:16px;
 }
 
 .time{
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:13px;
-  padding:7px 4px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:14px;
   text-align:center;
+  padding:8px 4px;
 }
 
 .time b{
   display:block;
+  color:#fff1a8;
   font-family:Orbitron,sans-serif;
-  font-size:14px;
-  color:var(--gold2);
+  font-size:15px;
 }
 
 .time span{
   display:block;
-  font-size:9px;
-  letter-spacing:.8px;
-  color:var(--muted);
+  color:rgba(255,255,255,.6);
+  font-size:10px;
   text-transform:uppercase;
-  margin-top:2px;
+  margin-top:3px;
 }
 
 .balls{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  gap:8px;
-  margin:8px 0;
+  gap:9px;
+  margin:12px 0;
+  min-height:50px;
 }
 
 .ball{
-  width:47px;
-  height:47px;
+  width:48px;
+  height:48px;
   border-radius:50%;
   display:grid;
   place-items:center;
   font-family:Orbitron,sans-serif;
-  font-size:16px;
+  font-size:17px;
   font-weight:900;
-  background:
-    radial-gradient(circle at 32% 28%,rgba(255,255,255,.35),transparent 18%),
-    radial-gradient(circle at 50% 55%,rgba(255,255,255,.10),rgba(0,0,0,.42));
-  border:2px solid rgba(255,255,255,.15);
-  box-shadow:0 0 16px rgba(123,47,255,.25);
+  color:white;
+  background:radial-gradient(circle at 30% 25%,#ffffff55,transparent 25%),linear-gradient(135deg,#35105f,#100021);
+  border:2px solid rgba(255,255,255,.20);
+  box-shadow:0 0 16px rgba(123,47,255,.35);
 }
 
 .ball.extra{
-  width:43px;
-  height:43px;
-  color:var(--gold2);
-  border-color:rgba(240,192,64,.52);
-  box-shadow:0 0 16px rgba(240,192,64,.22);
+  color:#fff1a8;
+  border-color:#f0c040;
+  box-shadow:0 0 18px rgba(240,192,64,.35);
 }
 
 .extraLabel{
   text-align:center;
-  font-size:11px;
-  color:rgba(246,240,255,.65);
-  font-weight:800;
+  margin-top:12px;
+  color:rgba(255,255,255,.68);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:2px;
   text-transform:uppercase;
-  letter-spacing:1.3px;
-  margin-top:8px;
 }
 
 .btn{
   width:100%;
   border:0;
-  border-radius:15px;
-  padding:13px 10px;
-  margin-top:9px;
+  border-radius:16px;
+  padding:14px 10px;
+  margin-top:10px;
   color:white;
-  font-weight:800;
-  font-size:14px;
-  cursor:pointer;
-}
-
-.btn:active{
-  transform:scale(.98);
+  font-size:15px;
+  font-weight:900;
 }
 
 .mainBtn{
-  background:linear-gradient(135deg,#003399,#0061ff);
-  color:var(--gold2);
-  box-shadow:0 0 24px rgba(0,97,255,.28);
+  background:linear-gradient(135deg,#003399,#0077ff);
+  color:#fff1a8;
 }
 
 .mainBtn.loto{
-  background:linear-gradient(135deg,#880000,#df2d2d);
-  box-shadow:0 0 24px rgba(223,45,45,.28);
+  background:linear-gradient(135deg,#8b0000,#e92e2e);
 }
 
 .grid2{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:9px;
+  gap:10px;
 }
 
 .copy{
-  background:rgba(255,255,255,.11);
+  background:rgba(255,255,255,.14);
 }
 
 .wa{
-  background:rgba(37,211,102,.20);
-  border:1px solid rgba(37,211,102,.33);
+  background:rgba(37,211,102,.23);
+  border:1px solid rgba(37,211,102,.40);
 }
 
 .insta{
-  background:linear-gradient(135deg,rgba(255,0,128,.22),rgba(255,180,70,.16),rgba(123,47,255,.2));
-  border:1px solid rgba(255,255,255,.12);
-}
-
-.threads{
-  background:rgba(255,255,255,.13);
-  border:1px solid rgba(255,255,255,.24);
+  background:linear-gradient(135deg,#7b2fff66,#ff007f55,#ffbf0055);
 }
 
 .link{
-  background:rgba(240,192,64,.12);
-  border:1px solid rgba(240,192,64,.32);
-  color:var(--gold2);
+  background:rgba(240,192,64,.16);
+  border:1px solid rgba(240,192,64,.35);
+  color:#fff1a8;
 }
 
 .status{
   display:none;
-  margin-top:10px;
-  border-radius:12px;
-  padding:10px;
-  font-size:13px;
-  line-height:1.35;
-  background:rgba(31,209,139,.12);
-  border:1px solid rgba(31,209,139,.28);
+  margin-top:12px;
+  padding:11px;
+  border-radius:14px;
+  background:rgba(31,209,139,.15);
   color:#ddfff2;
+  font-size:14px;
 }
 
 .status.show{
@@ -326,147 +255,88 @@ h1 span{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:8px;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 .infoTab{
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.045);
-  color:rgba(246,240,255,.70);
-  border-radius:13px;
-  padding:10px 4px;
-  font-weight:800;
-  font-size:12px;
-  cursor:pointer;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.72);
+  padding:11px 4px;
+  font-weight:900;
 }
 
 .infoTab.active{
-  color:var(--gold2);
-  border-color:rgba(240,192,64,.45);
-  background:rgba(240,192,64,.10);
+  color:#fff1a8;
+  border-color:#f0c040;
+  background:rgba(240,192,64,.12);
 }
 
 .panel{
   display:none;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:15px;
-  padding:12px;
+  background:rgba(255,255,255,.05);
+  border-radius:18px;
+  padding:13px;
 }
 
 .panel.active{
   display:block;
 }
 
-.label{
-  font-size:13px;
-  font-weight:800;
-  color:var(--gold2);
-  margin-bottom:7px;
-}
-
 .small{
-  font-size:12.5px;
-  color:var(--muted);
-  line-height:1.35;
+  color:rgba(255,255,255,.75);
+  font-size:14px;
+  line-height:1.45;
 }
 
-.chips{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:7px;
+.label{
+  color:#fff1a8;
+  font-weight:900;
+  margin-bottom:8px;
 }
 
-.chip{
-  padding:7px 9px;
-  border-radius:999px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.12);
-  font-size:12px;
-  font-weight:800;
-}
-
-.hot{
-  color:var(--gold2);
-}
-
-.cold{
-  color:#c2dcff;
-}
-
-.gainOk{
-  color:#8dffd2;
-}
-
-.gainNo{
-  color:#ffd4dc;
-}
-
-.history{
-  max-height:120px;
-  overflow:auto;
-}
-
-.hist{
-  padding:7px 0;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  font-size:12.5px;
-  color:var(--muted);
+.historyItem{
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,.10);
+  color:rgba(255,255,255,.75);
+  font-size:13px;
 }
 
 .footer{
   text-align:center;
-  color:rgba(246,240,255,.42);
-  font-size:11px;
+  color:rgba(255,255,255,.45);
+  font-size:12px;
   line-height:1.4;
-  margin-top:12px;
+  margin-top:14px;
 }
 </style>
 </head>
 
-<body onload="startApp()">
-<div id="stars"></div>
+<body>
 
 <div class="wrap">
 
-<header class="head">
+<header>
   <div class="logo">
-    <svg viewBox="0 0 120 120" aria-label="Galactic Euromillions Loto Logo">
+    <svg viewBox="0 0 120 120">
       <defs>
-        <radialGradient id="bgGlow" cx="50%" cy="50%" r="65%">
-          <stop offset="0%" stop-color="#7b2fff"/>
-          <stop offset="55%" stop-color="#18003a"/>
-          <stop offset="100%" stop-color="#05000b"/>
-        </radialGradient>
-
-        <linearGradient id="goldLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stop-color="#fff7c2"/>
-          <stop offset="45%" stop-color="#f0c040"/>
+          <stop offset="50%" stop-color="#f0c040"/>
           <stop offset="100%" stop-color="#9c6500"/>
         </linearGradient>
-
-        <linearGradient id="purpleLogo" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#caa7ff"/>
-          <stop offset="100%" stop-color="#4d16b8"/>
-        </linearGradient>
       </defs>
-
-      <rect x="6" y="6" width="108" height="108" rx="28" fill="url(#bgGlow)" stroke="#f0c040" stroke-width="2"/>
-      <circle cx="60" cy="60" r="28" fill="#12002a" stroke="url(#goldLogo)" stroke-width="5"/>
-      <ellipse cx="60" cy="60" rx="46" ry="18" fill="none" stroke="url(#goldLogo)" stroke-width="5" transform="rotate(-18 60 60)"/>
-      <ellipse cx="60" cy="60" rx="44" ry="17" fill="none" stroke="url(#purpleLogo)" stroke-width="3" transform="rotate(22 60 60)"/>
-
-      <path d="M60 36 L67 52 L84 52 L70 63 L76 81 L60 70 L44 81 L50 63 L36 52 L53 52 Z" fill="url(#goldLogo)"/>
-
-      <circle cx="91" cy="39" r="10" fill="#1b0038" stroke="url(#goldLogo)" stroke-width="3"/>
-      <text x="91" y="44" text-anchor="middle" font-size="13" font-weight="900" fill="#fff1a8" font-family="Arial">7</text>
-
-      <circle cx="30" cy="78" r="10" fill="#1b0038" stroke="url(#goldLogo)" stroke-width="3"/>
-      <text x="30" y="83" text-anchor="middle" font-size="12" font-weight="900" fill="#fff1a8" font-family="Arial">12</text>
-
-      <circle cx="75" cy="96" r="10" fill="#1b0038" stroke="url(#goldLogo)" stroke-width="3"/>
-      <text x="75" y="101" text-anchor="middle" font-size="11" font-weight="900" fill="#fff1a8" font-family="Arial">24</text>
+      <rect x="7" y="7" width="106" height="106" rx="28" fill="#14002b" stroke="#f0c040" stroke-width="3"/>
+      <ellipse cx="60" cy="60" rx="48" ry="18" fill="none" stroke="url(#g)" stroke-width="6" transform="rotate(-18 60 60)"/>
+      <ellipse cx="60" cy="60" rx="45" ry="17" fill="none" stroke="#7b2fff" stroke-width="4" transform="rotate(22 60 60)"/>
+      <path d="M60 34 L68 52 L87 52 L71 64 L77 84 L60 72 L43 84 L49 64 L33 52 L52 52 Z" fill="url(#g)"/>
+      <circle cx="91" cy="39" r="11" fill="#180030" stroke="url(#g)" stroke-width="3"/>
+      <text x="91" y="44" text-anchor="middle" font-size="13" font-weight="900" fill="#fff1a8">7</text>
+      <circle cx="30" cy="78" r="11" fill="#180030" stroke="url(#g)" stroke-width="3"/>
+      <text x="30" y="83" text-anchor="middle" font-size="12" font-weight="900" fill="#fff1a8">12</text>
+      <circle cx="75" cy="96" r="11" fill="#180030" stroke="url(#g)" stroke-width="3"/>
+      <text x="75" y="101" text-anchor="middle" font-size="11" font-weight="900" fill="#fff1a8">24</text>
     </svg>
   </div>
 
@@ -475,23 +345,26 @@ h1 span{
     <span>- LOTO -</span>
   </h1>
 
-  <div class="sub">Générateur aléatoire EuroMillions et Loto.<br>Sans garantie de gain.</div>
+  <div class="sub">
+    Générateur aléatoire EuroMillions et Loto.<br>
+    Sans garantie de gain.
+  </div>
 </header>
 
 <div class="tabs">
-  <button id="tabEuro" class="tab euro on" type="button" onclick="switchGame('euro')">⭐ EuroMillions</button>
-  <button id="tabLoto" class="tab loto" type="button" onclick="switchGame('loto')">🎱 Loto</button>
+  <button id="btnEuro" class="tab euro active" type="button">⭐ EuroMillions</button>
+  <button id="btnLoto" class="tab loto" type="button">🎱 Loto</button>
 </div>
 
 <section class="card">
-  <div class="title" id="gameTitle">✦ EuroMillions · Votre grille</div>
-  <div class="next" id="nextDraw">Prochain tirage : calcul...</div>
+  <div id="gameTitle" class="title">✦ EuroMillions · Votre grille</div>
+  <div id="nextDraw" class="next">Prochain tirage : calcul...</div>
 
   <div class="timer">
-    <div class="time"><b id="d">--</b><span>Jours</span></div>
-    <div class="time"><b id="h">--</b><span>Heures</span></div>
-    <div class="time"><b id="m">--</b><span>Min</span></div>
-    <div class="time"><b id="s">--</b><span>Sec</span></div>
+    <div class="time"><b id="days">--</b><span>Jours</span></div>
+    <div class="time"><b id="hours">--</b><span>Heures</span></div>
+    <div class="time"><b id="mins">--</b><span>Min</span></div>
+    <div class="time"><b id="secs">--</b><span>Sec</span></div>
   </div>
 
   <div id="mainBalls" class="balls"></div>
@@ -499,305 +372,224 @@ h1 span{
   <div id="extraLabel" class="extraLabel">Étoiles</div>
   <div id="extraBalls" class="balls"></div>
 
-  <button id="generateBtn" class="btn mainBtn" type="button" onclick="generateButton()">🔮 Générer ma grille</button>
+  <button id="generateBtn" class="btn mainBtn" type="button">🔮 Générer ma grille</button>
 
   <div class="grid2">
-    <button id="copyBtn" class="btn copy" type="button" onclick="copyGrid()">📋 Copier</button>
-    <button id="waBtn" class="btn wa" type="button" onclick="shareWhatsApp()">🟢 WhatsApp</button>
+    <button id="copyBtn" class="btn copy" type="button">📋 Copier</button>
+    <button id="whatsappBtn" class="btn wa" type="button">🟢 WhatsApp</button>
   </div>
 
-  <div class="grid2">
-    <button id="instaBtn" class="btn insta" type="button" onclick="shareInstagram()">📸 Instagram</button>
-    <button id="threadsBtn" class="btn threads" type="button" onclick="shareThreads()">🧵 Threads</button>
-  </div>
+  <button id="instagramBtn" class="btn insta" type="button">📸 Copier pour Instagram</button>
 
   <div id="status" class="status"></div>
 </section>
 
 <section class="card">
   <div class="infoTabs">
-    <button class="infoTab active" id="panelBtnTirage" type="button" onclick="switchPanel('tirage')">Tirage</button>
-    <button class="infoTab" id="panelBtnGain" type="button" onclick="switchPanel('gain')">Gain</button>
-    <button class="infoTab" id="panelBtnStats" type="button" onclick="switchPanel('stats')">Stats</button>
-    <button class="infoTab" id="panelBtnHistorique" type="button" onclick="switchPanel('historique')">Historique</button>
+    <button class="infoTab active" data-panel="tirage" type="button">Tirage</button>
+    <button class="infoTab" data-panel="gain" type="button">Gain</button>
+    <button class="infoTab" data-panel="stats" type="button">Stats</button>
+    <button class="infoTab" data-panel="historique" type="button">Historique</button>
   </div>
 
   <div id="tirage" class="panel active">
-    <div class="title">🏆 Dernier tirage FDJ</div>
-    <div class="label" id="resultDate">Chargement...</div>
-    <div id="resMain" class="balls"></div>
-    <div id="resExtraLabel" class="extraLabel"></div>
-    <div id="resExtra" class="balls"></div>
-    <div class="small" id="resultNote"></div>
-    <button id="openResultsBtn" class="btn link" type="button" onclick="openResults()">Voir les résultats FDJ</button>
+    <div class="title">🏆 Tirage de référence</div>
+    <div id="resultTitle" class="label"></div>
+    <div id="resultMain" class="balls"></div>
+    <div id="resultExtraLabel" class="extraLabel"></div>
+    <div id="resultExtra" class="balls"></div>
+    <div class="small">À vérifier sur le site officiel FDJ pour le résultat exact.</div>
   </div>
 
   <div id="gain" class="panel">
     <div class="title">💰 Gain remporté ou pas</div>
-    <div class="label" id="gainStatus">Aucune grille</div>
-    <div class="small" id="gainText">Génère une grille pour comparer avec le dernier tirage affiché.</div>
+    <div id="gainTitle" class="label">Aucune comparaison</div>
+    <div id="gainText" class="small">Génère une grille pour comparer.</div>
   </div>
 
   <div id="stats" class="panel">
-    <div class="title">📊 Stats FDJ</div>
-    <div class="small">Plus sortis :</div>
-    <div id="hot" class="chips"></div>
-    <div class="small" style="margin-top:8px">Moins sortis :</div>
-    <div id="cold" class="chips"></div>
-    <div id="statNote" class="small" style="margin-top:8px"></div>
-    <button id="openStatsBtn" class="btn link" type="button" onclick="openStats()">Voir les statistiques FDJ</button>
+    <div class="title">📊 Stats</div>
+    <div class="small">
+      Cette partie peut servir à afficher les numéros chauds/froids plus tard.<br>
+      Pour une version fiable, il faudra connecter les vraies données FDJ.
+    </div>
   </div>
 
   <div id="historique" class="panel">
     <div class="title">📜 Historique</div>
-    <div id="history" class="history small">Aucune grille encore...</div>
-    <button id="clearBtn" class="btn copy" type="button" onclick="clearHistory()">🧹 Effacer</button>
+    <div id="history" class="small">Aucune grille encore.</div>
+    <button id="clearBtn" class="btn copy" type="button">🧹 Effacer</button>
   </div>
 </section>
 
 <div class="footer">
-  Application indépendante non affiliée à la FDJ.<br>
-  Montants exacts à vérifier sur les rapports officiels FDJ.
+  Application indépendante, non affiliée à la FDJ.<br>
+  Les numéros sont générés aléatoirement.
 </div>
 
 </div>
 
 <script>
-var appReady = false;
-var game = "euro";
+var currentGame = "euro";
 var lastGrid = null;
-var historyKey = "galactic_history_v14";
 var historyList = [];
 
-try {
-  historyList = JSON.parse(localStorage.getItem(historyKey) || "[]");
-} catch(e) {
-  historyList = [];
-}
-
-var FDJ = {
+var results = {
   euro:{
     name:"EuroMillions",
-    extra:"Étoiles",
-    date:"Mardi 16 juin 2026",
+    extraName:"Étoiles",
     main:[18,25,31,37,45],
-    ex:[4,9],
-    note:"My Million : CK 811 1065",
-    hot:[[35,84],[42,82],[21,80]],
-    cold:[[22,44],[1,47],[43,53]],
-    stat:"Palmarès officiel FDJ à vérifier sur la page statistiques.",
-    statsUrl:"https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/statistiques",
-    resUrl:"https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/resultats/mardi-16-juin-2026"
+    extra:[4,9]
   },
   loto:{
     name:"Loto",
-    extra:"Numéro Chance",
-    date:"Mercredi 17 juin 2026",
+    extraName:"Numéro Chance",
     main:[1,15,32,37,39],
-    ex:[1],
-    note:"Codes Loto et Numéro7 disponibles sur FDJ.",
-    hot:[[30,128],[31,126],[24,121]],
-    cold:[[43,89],[1,92],[33,92]],
-    stat:"Palmarès officiel FDJ à vérifier sur la page statistiques.",
-    statsUrl:"https://www.fdj.fr/jeux-de-tirage/loto/statistiques",
-    resUrl:"https://www.fdj.fr/jeux-de-tirage/loto/resultats/mercredi-17-juin-2026"
+    extra:[1]
   }
 };
 
-function get(id){
+function el(id){
   return document.getElementById(id);
 }
 
-function put(id,text){
-  var el = get(id);
-  if(el){
-    el.textContent = text;
+function pickNumbers(min,max,count){
+  var numbers = [];
+
+  while(numbers.length < count){
+    var n = Math.floor(Math.random() * (max - min + 1)) + min;
+    if(numbers.indexOf(n) === -1){
+      numbers.push(n);
+    }
   }
+
+  numbers.sort(function(a,b){ return a-b; });
+  return numbers;
 }
 
-function createStars(){
-  var box = get("stars");
-  if(!box) return;
-
+function renderBalls(boxId,numbers,isExtra){
+  var box = el(boxId);
   box.innerHTML = "";
 
-  for(var i=0;i<90;i++){
-    var st = document.createElement("i");
-    st.className = "star";
-    st.style.left = Math.random()*100 + "%";
-    st.style.top = Math.random()*100 + "%";
-    st.style.animationDelay = Math.random()*4 + "s";
-    box.appendChild(st);
-  }
+  numbers.forEach(function(num){
+    var div = document.createElement("div");
+    div.className = "ball" + (isExtra ? " extra" : "");
+    div.textContent = num;
+    box.appendChild(div);
+  });
 }
 
-function renderBalls(id, arr, extra){
-  var box = get(id);
-  if(!box) return;
+function showMessage(text){
+  var box = el("status");
+  box.textContent = text;
+  box.className = "status show";
 
-  box.innerHTML = "";
-
-  for(var i=0;i<arr.length;i++){
-    var b = document.createElement("div");
-    b.className = "ball" + (extra ? " extra" : "");
-    b.textContent = arr[i];
-    box.appendChild(b);
-  }
+  setTimeout(function(){
+    box.className = "status";
+  },3000);
 }
 
-function pick(min,max,count){
-  var arr = [];
+function generateGrid(){
+  var main;
+  var extra;
 
-  while(arr.length < count){
-    var n = Math.floor(Math.random()*(max-min+1)) + min;
-
-    if(arr.indexOf(n) === -1){
-      arr.push(n);
-    }
+  if(currentGame === "euro"){
+    main = pickNumbers(1,50,5);
+    extra = pickNumbers(1,12,2);
+  }else{
+    main = pickNumbers(1,49,5);
+    extra = pickNumbers(1,10,1);
   }
-
-  arr.sort(function(a,b){return a-b;});
-  return arr;
-}
-
-function renderOfficial(){
-  var f = FDJ[game];
-
-  put("resultDate", f.name + " · " + f.date);
-  put("resExtraLabel", f.extra);
-  put("resultNote", f.note);
-  put("statNote", f.stat);
-
-  renderBalls("resMain", f.main, false);
-  renderBalls("resExtra", f.ex, true);
-
-  var hot = get("hot");
-  var cold = get("cold");
-
-  if(hot){
-    hot.innerHTML = "";
-    for(var i=0;i<f.hot.length;i++){
-      hot.innerHTML += '<span class="chip hot">' + f.hot[i][0] + ' · ' + f.hot[i][1] + '</span>';
-    }
-  }
-
-  if(cold){
-    cold.innerHTML = "";
-    for(var j=0;j<f.cold.length;j++){
-      cold.innerHTML += '<span class="chip cold">' + f.cold[j][0] + ' · ' + f.cold[j][1] + '</span>';
-    }
-  }
-}
-
-function displayGrid(main, ex){
-  renderBalls("mainBalls", main, false);
-  renderBalls("extraBalls", ex, true);
 
   lastGrid = {
-    game:game,
+    game:currentGame,
     main:main,
-    ex:ex,
-    date:new Date().toISOString()
+    extra:extra
   };
 
-  evaluateGain();
-}
-
-function starterGrid(){
-  if(game === "euro"){
-    displayGrid(pick(1,50,5), pick(1,12,2));
-  } else {
-    displayGrid(pick(1,49,5), pick(1,10,1));
-  }
-}
-
-function generateButton(){
-  starterGrid();
+  renderBalls("mainBalls",main,false);
+  renderBalls("extraBalls",extra,true);
 
   historyList.unshift(lastGrid);
-  historyList = historyList.slice(0,8);
+  if(historyList.length > 8){
+    historyList.pop();
+  }
 
-  localStorage.setItem(historyKey, JSON.stringify(historyList));
+  updateGain();
+  updateHistory();
+  showMessage("Nouvelle grille générée ✅");
+}
 
-  renderHistory();
-  message("Nouvelle grille générée ✅");
+function switchGame(game){
+  currentGame = game;
+
+  if(game === "euro"){
+    el("btnEuro").className = "tab euro active";
+    el("btnLoto").className = "tab loto";
+    el("generateBtn").className = "btn mainBtn";
+    el("gameTitle").textContent = "✦ EuroMillions · Votre grille";
+    el("extraLabel").textContent = "Étoiles";
+  }else{
+    el("btnEuro").className = "tab euro";
+    el("btnLoto").className = "tab loto active";
+    el("generateBtn").className = "btn mainBtn loto";
+    el("gameTitle").textContent = "✦ Loto · Votre grille";
+    el("extraLabel").textContent = "Numéro Chance";
+  }
+
+  renderResult();
+  generateGrid();
+  updateTimer();
+}
+
+function renderResult(){
+  var r = results[currentGame];
+
+  el("resultTitle").textContent = r.name + " · résultat de référence";
+  el("resultExtraLabel").textContent = r.extraName;
+
+  renderBalls("resultMain",r.main,false);
+  renderBalls("resultExtra",r.extra,true);
 }
 
 function countMatches(a,b){
-  var c = 0;
+  var count = 0;
 
-  for(var i=0;i<a.length;i++){
-    if(b.indexOf(a[i]) > -1){
-      c++;
+  a.forEach(function(n){
+    if(b.indexOf(n) !== -1){
+      count++;
     }
-  }
+  });
 
-  return c;
+  return count;
 }
 
-function getRank(g,m,e){
-  if(g === "euro"){
-    var r = {
-      "5+2":"Rang 1",
-      "5+1":"Rang 2",
-      "5+0":"Rang 3",
-      "4+2":"Rang 4",
-      "4+1":"Rang 5",
-      "3+2":"Rang 6",
-      "4+0":"Rang 7",
-      "2+2":"Rang 8",
-      "3+1":"Rang 9",
-      "3+0":"Rang 10",
-      "1+2":"Rang 11",
-      "2+1":"Rang 12",
-      "2+0":"Rang 13"
-    };
-
-    return r[m + "+" + e] || "Aucun";
-  }
-
-  var l = {
-    "5+1":"Rang 1",
-    "5+0":"Rang 2",
-    "4+1":"Rang 3",
-    "4+0":"Rang 4",
-    "3+1":"Rang 5",
-    "3+0":"Rang 6",
-    "2+1":"Rang 7",
-    "2+0":"Rang 8",
-    "1+1":"Rang 9",
-    "0+1":"Rang 10"
-  };
-
-  return l[m + "+" + e] || "Aucun";
-}
-
-function evaluateGain(){
+function updateGain(){
   if(!lastGrid){
-    put("gainStatus","Aucune grille");
-    put("gainText","Génère une grille pour comparer avec le dernier tirage affiché.");
     return;
   }
 
-  var f = FDJ[game];
-  var m = countMatches(lastGrid.main, f.main);
-  var e = countMatches(lastGrid.ex, f.ex);
-  var rank = getRank(game,m,e);
+  var r = results[currentGame];
+  var mainMatch = countMatches(lastGrid.main,r.main);
+  var extraMatch = countMatches(lastGrid.extra,r.extra);
 
-  var status = get("gainStatus");
-  var text = get("gainText");
+  var win = false;
 
-  if(status){
-    status.textContent = rank === "Aucun" ? "❌ Non gagnant" : "✅ Gagnant";
-    status.className = "label " + (rank === "Aucun" ? "gainNo" : "gainOk");
+  if(currentGame === "euro"){
+    if(mainMatch >= 2 || extraMatch === 2){
+      win = true;
+    }
+  }else{
+    if(mainMatch >= 2 || extraMatch === 1){
+      win = true;
+    }
   }
 
-  if(text){
-    text.innerHTML =
-      m + " numéro(s) + " + e + " " + f.extra.toLowerCase() +
-      "<br>Rang estimé : <b>" + rank + "</b>" +
-      "<br>Montant exact à vérifier sur FDJ.";
-  }
+  el("gainTitle").textContent = win ? "✅ Potentiellement gagnant" : "❌ Non gagnant";
+  el("gainText").innerHTML =
+    mainMatch + " numéro(s) trouvé(s)<br>" +
+    extraMatch + " " + r.extraName.toLowerCase() + " trouvé(s)<br>" +
+    "Montant exact à vérifier sur FDJ.";
 }
 
 function shareText(){
@@ -805,121 +597,93 @@ function shareText(){
     return "";
   }
 
-  var f = FDJ[lastGrid.game];
+  var r = results[lastGrid.game];
 
   return "Ma grille Galactic Euromillions - Loto\n" +
-    f.name + "\n" +
-    "Numéros : " + lastGrid.main.join(" - ") + "\n" +
-    f.extra + " : " + lastGrid.ex.join(" - ") + "\n" +
-    window.location.href;
+  r.name + "\n" +
+  "Numéros : " + lastGrid.main.join(" - ") + "\n" +
+  r.extraName + " : " + lastGrid.extra.join(" - ");
 }
 
-function copyGrid(){
+function copyText(){
   var text = shareText();
 
   if(!text){
-    message("Aucune grille disponible.");
+    showMessage("Aucune grille disponible.");
     return;
   }
 
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(function(){
-      message("Grille copiée ✅");
-    }).catch(function(){
-      fallbackCopy(text);
-    });
-  } else {
-    fallbackCopy(text);
-  }
-}
-
-function fallbackCopy(text){
   var area = document.createElement("textarea");
   area.value = text;
   document.body.appendChild(area);
   area.select();
   document.execCommand("copy");
-  area.remove();
+  document.body.removeChild(area);
 
-  message("Grille copiée ✅");
+  showMessage("Grille copiée ✅");
 }
 
 function shareWhatsApp(){
   var text = shareText();
 
   if(!text){
-    message("Aucune grille disponible.");
+    showMessage("Aucune grille disponible.");
     return;
   }
 
-  window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
+  window.location.href = "https://wa.me/?text=" + encodeURIComponent(text);
 }
 
-function shareInstagram(){
-  var text = shareText();
+function updateHistory(){
+  var box = el("history");
 
-  if(!text){
-    message("Aucune grille disponible.");
+  if(historyList.length === 0){
+    box.textContent = "Aucune grille encore.";
     return;
   }
 
-  if(navigator.share){
-    navigator.share({
-      title:"Galactic Euromillions - Loto",
-      text:text,
-      url:window.location.href
-    }).catch(function(){
-      fallbackCopy(text);
-    });
-  } else {
-    fallbackCopy(text);
-    message("Texte copié ✅ Ouvre Instagram et colle ta grille.");
-  }
+  box.innerHTML = "";
+
+  historyList.forEach(function(item){
+    var r = results[item.game];
+    var div = document.createElement("div");
+    div.className = "historyItem";
+    div.textContent = r.name + " : " + item.main.join(" - ") + " | " + item.extra.join(" - ");
+    box.appendChild(div);
+  });
 }
 
-function shareThreads(){
-  var text = shareText();
-
-  if(!text){
-    message("Aucune grille disponible.");
-    return;
-  }
-
-function shareThreads(){
-  var text = shareText();
-
-  if(!text){
-    message("Aucune grille disponible.");
-    return;
-  }
-
-  window.open("https://www.threads.net/intent/post?text=" + encodeURIComponent(text), "_blank");
+function clearHistory(){
+  historyList = [];
+  updateHistory();
+  showMessage("Historique effacé ✅");
 }
 
-function message(text){
-  var box = get("status");
-  if(!box) return;
+function switchPanel(panel){
+  document.querySelectorAll(".infoTab").forEach(function(btn){
+    btn.classList.remove("active");
+  });
 
-  box.textContent = text;
-  box.className = "status show";
+  document.querySelectorAll(".panel").forEach(function(p){
+    p.classList.remove("active");
+  });
 
-  setTimeout(function(){
-    box.className = "status";
-  },3500);
+  document.querySelector('[data-panel="' + panel + '"]').classList.add("active");
+  el(panel).classList.add("active");
 }
 
-function nextDraw(){
+function nextDrawDate(){
   var now = new Date();
-  var days = game === "euro" ? [2,5] : [1,3,6];
-  var hour = game === "euro" ? 21 : 20;
-  var minute = game === "euro" ? 5 : 20;
+  var days = currentGame === "euro" ? [2,5] : [1,3,6];
+  var hour = currentGame === "euro" ? 21 : 20;
+  var minute = currentGame === "euro" ? 5 : 20;
 
   for(var i=0;i<8;i++){
     var d = new Date(now);
     d.setDate(now.getDate()+i);
     d.setHours(hour,minute,0,0);
 
-    if(days.indexOf(d.getDay()) > -1 && d > now){
+    if(days.indexOf(d.getDay()) !== -1 && d > now){
       return d;
     }
   }
@@ -928,117 +692,50 @@ function nextDraw(){
 }
 
 function updateTimer(){
-  var d0 = nextDraw();
-  var diff = Math.max(0,d0 - new Date());
+  var target = nextDrawDate();
+  var diff = target - new Date();
 
-  put("d", ("0" + Math.floor(diff/86400000)).slice(-2));
-  put("h", ("0" + Math.floor((diff%86400000)/3600000)).slice(-2));
-  put("m", ("0" + Math.floor((diff%3600000)/60000)).slice(-2));
-  put("s", ("0" + Math.floor((diff%60000)/1000)).slice(-2));
+  if(diff < 0){
+    diff = 0;
+  }
 
-  put(
-    "nextDraw",
+  el("days").textContent = Math.floor(diff / 86400000);
+  el("hours").textContent = Math.floor((diff % 86400000) / 3600000);
+  el("mins").textContent = Math.floor((diff % 3600000) / 60000);
+  el("secs").textContent = Math.floor((diff % 60000) / 1000);
+
+  el("nextDraw").textContent =
     "Prochain tirage : " +
-    d0.toLocaleDateString("fr-FR",{weekday:"long",day:"2-digit",month:"long"}) +
+    target.toLocaleDateString("fr-FR",{weekday:"long",day:"2-digit",month:"long"}) +
     " vers " +
-    d0.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})
-  );
+    target.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
 }
 
-function switchGame(g){
-  game = g;
+function start(){
+  el("btnEuro").addEventListener("click",function(){ switchGame("euro"); });
+  el("btnLoto").addEventListener("click",function(){ switchGame("loto"); });
+  el("generateBtn").addEventListener("click",generateGrid);
+  el("copyBtn").addEventListener("click",copyText);
+  el("whatsappBtn").addEventListener("click",shareWhatsApp);
+  el("instagramBtn").addEventListener("click",function(){
+    copyText();
+    showMessage("Texte copié ✅ Colle-le dans Instagram.");
+  });
+  el("clearBtn").addEventListener("click",clearHistory);
 
-  get("tabEuro").className = "tab euro" + (g === "euro" ? " on" : "");
-  get("tabLoto").className = "tab loto" + (g === "loto" ? " on" : "");
-  get("generateBtn").className = "btn mainBtn" + (g === "loto" ? " loto" : "");
+  document.querySelectorAll(".infoTab").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      switchPanel(btn.getAttribute("data-panel"));
+    });
+  });
 
-  put("gameTitle", g === "euro" ? "✦ EuroMillions · Votre grille" : "✦ Loto · Votre grille");
-  put("extraLabel", g === "euro" ? "Étoiles" : "Numéro Chance");
-
-  renderOfficial();
-  starterGrid();
+  renderResult();
+  generateGrid();
   updateTimer();
-}
-
-function switchPanel(panelId){
-  var tabs = document.querySelectorAll(".infoTab");
-  var panels = document.querySelectorAll(".panel");
-
-  for(var i=0;i<tabs.length;i++){
-    tabs[i].classList.remove("active");
-  }
-
-  for(var j=0;j<panels.length;j++){
-    panels[j].classList.remove("active");
-  }
-
-  var btn = null;
-
-  if(panelId === "tirage") btn = get("panelBtnTirage");
-  if(panelId === "gain") btn = get("panelBtnGain");
-  if(panelId === "stats") btn = get("panelBtnStats");
-  if(panelId === "historique") btn = get("panelBtnHistorique");
-
-  if(btn) btn.classList.add("active");
-
-  var panel = get(panelId);
-  if(panel) panel.classList.add("active");
-}
-
-function openResults(){
-  window.open(FDJ[game].resUrl, "_blank");
-}
-
-function openStats(){
-  window.open(FDJ[game].statsUrl, "_blank");
-}
-
-function renderHistory(){
-  var box = get("history");
-
-  if(!box) return;
-
-  if(historyList.length === 0){
-    box.textContent = "Aucune grille encore...";
-    return;
-  }
-
-  var html = "";
-
-  for(var i=0;i<historyList.length;i++){
-    var item = historyList[i];
-
-    html += '<div class="hist">' +
-      (item.game === "euro" ? "⭐ EuroMillions" : "🎱 Loto") +
-      " : " + item.main.join(" - ") +
-      " | " + item.ex.join(" - ") +
-      "</div>";
-  }
-
-  box.innerHTML = html;
-}
-
-function clearHistory(){
-  historyList = [];
-  localStorage.setItem(historyKey, JSON.stringify(historyList));
-  renderHistory();
-  message("Historique effacé ✅");
-}
-
-function startApp(){
-  if(appReady) return;
-  appReady = true;
-
-  createStars();
-  renderOfficial();
-  renderHistory();
-  starterGrid();
-  updateTimer();
-
   setInterval(updateTimer,1000);
 }
 
-document.addEventListener("DOMContentLoaded", startApp);
+document.addEventListener("DOMContentLoaded",start);
 </script>
 
 </body>
