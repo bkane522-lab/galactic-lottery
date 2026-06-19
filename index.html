@@ -14,10 +14,10 @@
   --cosmic:#12002a;
   --violet:#7b2fff;
   --gold:#f0c040;
-  --white:#f4efff;
-  --muted:rgba(244,239,255,.68);
+  --white:#f5efff;
+  --muted:rgba(245,239,255,.72);
   --card:rgba(255,255,255,.055);
-  --border:rgba(123,47,255,.28);
+  --border:rgba(123,47,255,.30);
   --blue:#0057ff;
   --red:#d62525;
   --green:#25d366;
@@ -71,33 +71,46 @@ body{
   margin-bottom:22px;
 }
 
-.lion{
-  font-size:58px;
-  margin-bottom:8px;
-  filter:drop-shadow(0 0 22px rgba(240,192,64,.45));
+.logo{
+  width:82px;
+  height:82px;
+  margin:0 auto 12px;
+  border-radius:28px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(240,192,64,.28);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 0 32px rgba(240,192,64,.18);
   animation:float 4s ease-in-out infinite;
+}
+
+.logo svg{
+  width:64px;
+  height:64px;
+  display:block;
 }
 
 @keyframes float{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
+  50%{transform:translateY(-7px)}
 }
 
 h1{
   font-family:Orbitron,sans-serif;
-  font-size:26px;
-  line-height:1.1;
+  font-size:28px;
+  line-height:1.05;
   letter-spacing:2px;
   font-weight:900;
   background:linear-gradient(135deg,var(--gold),#fff2b0,var(--gold));
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-  margin-bottom:8px;
+  margin-bottom:9px;
 }
 
 .subtitle{
-  font-size:13px;
+  font-size:14px;
   color:var(--muted);
   line-height:1.45;
 }
@@ -118,7 +131,7 @@ h1{
   border-radius:12px;
   padding:13px 8px;
   background:transparent;
-  color:rgba(244,239,255,.46);
+  color:rgba(244,239,255,.50);
   font-size:14px;
   font-weight:800;
   cursor:pointer;
@@ -147,16 +160,16 @@ h1{
 }
 
 .card-title{
-  font-size:12px;
+  font-size:13px;
   text-transform:uppercase;
-  letter-spacing:2px;
+  letter-spacing:1.4px;
   color:#b88cff;
-  margin-bottom:14px;
+  margin-bottom:13px;
   font-weight:800;
 }
 
 .next{
-  font-size:13px;
+  font-size:14px;
   color:var(--muted);
   margin-bottom:18px;
   line-height:1.45;
@@ -186,8 +199,6 @@ h1{
     radial-gradient(circle at 50% 55%,rgba(255,255,255,.12),rgba(0,0,0,.42));
   border:2px solid rgba(255,255,255,.16);
   box-shadow:0 0 18px rgba(123,47,255,.3);
-  transform:scale(1);
-  transition:.25s;
 }
 
 .ball.extra{
@@ -200,11 +211,12 @@ h1{
 
 .extra-label{
   text-align:center;
-  font-size:11px;
-  color:rgba(244,239,255,.52);
+  font-size:12px;
+  color:rgba(244,239,255,.62);
   text-transform:uppercase;
-  letter-spacing:2px;
+  letter-spacing:1.4px;
   margin:8px 0 10px;
+  font-weight:700;
 }
 
 .btn{
@@ -258,6 +270,51 @@ h1{
 
 .status.show{display:block}
 
+.official-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+
+.official-box{
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.045);
+  border-radius:16px;
+  padding:14px;
+}
+
+.official-label{
+  color:var(--gold);
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.official-text{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.45;
+}
+
+.stat-line{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:8px;
+}
+
+.chip{
+  padding:8px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.085);
+  border:1px solid rgba(255,255,255,.12);
+  font-size:13px;
+  font-weight:800;
+}
+
+.chip.hot{color:#fff2a8;border-color:rgba(240,192,64,.35)}
+.chip.cold{color:#b8d7ff;border-color:rgba(90,160,255,.35)}
+
 .history-item{
   padding:10px 0;
   border-bottom:1px solid rgba(255,255,255,.08);
@@ -268,7 +325,7 @@ h1{
 .history-item:last-child{border-bottom:0}
 
 .small{
-  font-size:12px;
+  font-size:13px;
   line-height:1.5;
   color:var(--muted);
   margin-top:10px;
@@ -276,8 +333,8 @@ h1{
 
 .footer{
   text-align:center;
-  color:rgba(244,239,255,.38);
-  font-size:11px;
+  color:rgba(244,239,255,.44);
+  font-size:12px;
   line-height:1.55;
   margin-top:20px;
 }
@@ -290,7 +347,30 @@ h1{
 <div class="container">
 
   <header class="header">
-    <div class="lion">🦁</div>
+    <div class="logo" aria-label="Logo lion Galactic Lottery">
+      <svg viewBox="0 0 120 120" role="img">
+        <defs>
+          <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fff2a8"/>
+            <stop offset="48%" stop-color="#f0c040"/>
+            <stop offset="100%" stop-color="#a66a00"/>
+          </linearGradient>
+          <radialGradient id="mane" cx="50%" cy="45%" r="60%">
+            <stop offset="0%" stop-color="#f0c040"/>
+            <stop offset="100%" stop-color="#4b246e"/>
+          </radialGradient>
+        </defs>
+        <path d="M60 8 L72 22 L91 17 L94 37 L109 50 L96 64 L100 84 L80 88 L69 106 L60 92 L51 106 L40 88 L20 84 L24 64 L11 50 L26 37 L29 17 L48 22 Z" fill="url(#mane)" opacity="0.95"/>
+        <path d="M37 43 C39 25 81 25 83 43 C91 54 83 83 60 88 C37 83 29 54 37 43 Z" fill="url(#gold)"/>
+        <path d="M39 36 L28 25 L47 30 Z" fill="#f0c040"/>
+        <path d="M81 36 L92 25 L73 30 Z" fill="#f0c040"/>
+        <circle cx="48" cy="52" r="4" fill="#15002d"/>
+        <circle cx="72" cy="52" r="4" fill="#15002d"/>
+        <path d="M58 60 L62 60 L60 65 Z" fill="#15002d"/>
+        <path d="M50 72 C55 78 65 78 70 72" stroke="#15002d" stroke-width="4" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+
     <h1>GALACTIC LOTTERY</h1>
     <div class="subtitle">
       Générateur aléatoire de grilles EuroMillions et Loto.<br>
@@ -325,12 +405,37 @@ h1{
   </section>
 
   <section class="card">
-    <div class="card-title">📊 Vraies statistiques</div>
-    <p class="small">
-      Les statistiques ci-dessous ouvrent les pages officielles FDJ. Elles sont plus fiables que des fausses données intégrées dans l’application.
-    </p>
+    <div class="card-title">🏆 Dernier résultat officiel FDJ</div>
 
-    <button class="btn btn-stats" onclick="openStats()">📊 Voir les statistiques officielles FDJ</button>
+    <div class="official-grid">
+      <div class="official-box">
+        <div class="official-label" id="resultDate">Chargement...</div>
+        <div class="balls-row" id="resultMainBalls"></div>
+        <div class="extra-label" id="resultExtraLabel"></div>
+        <div class="balls-row" id="resultExtraBalls"></div>
+        <div class="official-text" id="resultNote"></div>
+      </div>
+    </div>
+
+    <button class="btn btn-stats" onclick="openResults()">Voir les résultats FDJ</button>
+  </section>
+
+  <section class="card">
+    <div class="card-title">📊 Vraies statistiques FDJ</div>
+
+    <div class="official-box">
+      <div class="official-label" id="statsTitle">Palmarès officiel</div>
+
+      <div class="official-text">Numéros les plus sortis :</div>
+      <div class="stat-line" id="hotStats"></div>
+
+      <div class="official-text" style="margin-top:14px;">Numéros les moins sortis :</div>
+      <div class="stat-line" id="coldStats"></div>
+
+      <p class="small" id="statsNote"></p>
+    </div>
+
+    <button class="btn btn-stats" onclick="openStats()">Voir les statistiques FDJ</button>
   </section>
 
   <section class="card">
@@ -340,7 +445,7 @@ h1{
   </section>
 
   <div class="footer">
-    Jeu responsable. Les numéros sont générés aléatoirement.<br>
+    Jeu responsable. Les numéros générés ne sont pas des prédictions.<br>
     Cette application n’est pas affiliée à la FDJ.
   </div>
 
@@ -349,18 +454,73 @@ h1{
 <script>
 var currentGame = "euro";
 var lastGrid = null;
-var history = JSON.parse(localStorage.getItem("galactic_history_simple") || "[]");
+var history = JSON.parse(localStorage.getItem("galactic_history_v4") || "[]");
+
+var FDJ = {
+  euro: {
+    name: "EuroMillions",
+    extraName: "Étoiles",
+    resultDate: "Mardi 16 juin 2026",
+    resultMain: [18,25,31,37,45],
+    resultExtra: [4,9],
+    resultNote: "My Million : CK 811 1 065",
+    statsUpdated: "Mise à jour FDJ : 16/06/26 · Période : depuis le 4 février 2020",
+    hot: [
+      {n:35,c:84},
+      {n:42,c:82},
+      {n:21,c:80},
+      {n:29,c:78},
+      {n:34,c:77}
+    ],
+    cold: [
+      {n:22,c:44},
+      {n:1,c:47},
+      {n:43,c:53},
+      {n:3,c:57},
+      {n:31,c:57}
+    ],
+    statsUrl: "https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/statistiques",
+    resultsUrl: "https://www.fdj.fr/jeux-de-tirage/resultats"
+  },
+  loto: {
+    name: "Loto",
+    extraName: "Numéro Chance",
+    resultDate: "Mercredi 17 juin 2026",
+    resultMain: [1,15,32,37,39],
+    resultExtra: [1],
+    resultNote: "+ Option 2nd tirage · + 10 gagnants à 20 000 €",
+    statsUpdated: "Mise à jour FDJ : 17/06/26 · Période : depuis le 14 juillet 2019",
+    hot: [
+      {n:30,c:128},
+      {n:31,c:126},
+      {n:24,c:121},
+      {n:3,c:120},
+      {n:28,c:119}
+    ],
+    cold: [
+      {n:43,c:89},
+      {n:1,c:92},
+      {n:33,c:92},
+      {n:14,c:94},
+      {n:37,c:98}
+    ],
+    statsUrl: "https://www.fdj.fr/jeux-de-tirage/loto/statistiques",
+    resultsUrl: "https://www.fdj.fr/jeux-de-tirage/resultats"
+  }
+};
 
 function init(){
   createStars();
   resetBalls();
   renderHistory();
+  renderOfficialData();
   updateNextDraw();
   setInterval(updateNextDraw, 1000);
 }
 
 function createStars(){
   var stars = document.getElementById("stars");
+  stars.innerHTML = "";
   for(var i=0;i<110;i++){
     var s=document.createElement("div");
     s.className="star";
@@ -384,6 +544,7 @@ function switchGame(game){
 
   lastGrid = null;
   resetBalls();
+  renderOfficialData();
   updateNextDraw();
   hideStatus();
 }
@@ -410,6 +571,41 @@ function resetBalls(){
   }
 }
 
+function renderOfficialData(){
+  var data = FDJ[currentGame];
+
+  document.getElementById("resultDate").textContent = data.name + " · " + data.resultDate;
+
+  renderBalls("resultMainBalls", data.resultMain, false);
+  renderBalls("resultExtraBalls", data.resultExtra, true);
+
+  document.getElementById("resultExtraLabel").textContent = data.extraName;
+  document.getElementById("resultNote").textContent = data.resultNote;
+
+  document.getElementById("statsTitle").textContent = "Palmarès officiel " + data.name;
+  document.getElementById("statsNote").textContent = data.statsUpdated + ". Le hasard ne se contrôle pas.";
+
+  document.getElementById("hotStats").innerHTML = data.hot.map(function(x){
+    return '<span class="chip hot">' + x.n + ' · ' + x.c + ' sorties</span>';
+  }).join("");
+
+  document.getElementById("coldStats").innerHTML = data.cold.map(function(x){
+    return '<span class="chip cold">' + x.n + ' · ' + x.c + ' sorties</span>';
+  }).join("");
+}
+
+function renderBalls(id, nums, extra){
+  var box = document.getElementById(id);
+  box.innerHTML = "";
+
+  nums.forEach(function(n){
+    var b = document.createElement("div");
+    b.className = "ball" + (extra ? " extra" : "");
+    b.textContent = n;
+    box.appendChild(b);
+  });
+}
+
 function pick(min,max,count){
   var arr=[];
   while(arr.length<count){
@@ -424,16 +620,8 @@ function generateGrid(){
   var main = currentGame==="euro" ? pick(1,50,5) : pick(1,49,5);
   var extra = currentGame==="euro" ? pick(1,12,2) : pick(1,10,1);
 
-  var mainBalls = document.querySelectorAll("#mainBalls .ball");
-  var extraBalls = document.querySelectorAll("#extraBalls .ball");
-
-  for(var i=0;i<mainBalls.length;i++){
-    mainBalls[i].textContent = main[i];
-  }
-
-  for(var j=0;j<extraBalls.length;j++){
-    extraBalls[j].textContent = extra[j];
-  }
+  renderBalls("mainBalls", main, false);
+  renderBalls("extraBalls", extra, true);
 
   lastGrid = {
     game: currentGame,
@@ -444,7 +632,7 @@ function generateGrid(){
 
   history.unshift(lastGrid);
   history = history.slice(0,8);
-  localStorage.setItem("galactic_history_simple", JSON.stringify(history));
+  localStorage.setItem("galactic_history_v4", JSON.stringify(history));
 
   renderHistory();
   showStatus("Grille générée ✅");
@@ -474,16 +662,22 @@ function copyGrid(){
   if(navigator.clipboard){
     navigator.clipboard.writeText(text).then(function(){
       showStatus("Grille copiée ✅");
+    }).catch(function(){
+      fallbackCopy(text);
     });
   }else{
-    var area=document.createElement("textarea");
-    area.value=text;
-    document.body.appendChild(area);
-    area.select();
-    document.execCommand("copy");
-    area.remove();
-    showStatus("Grille copiée ✅");
+    fallbackCopy(text);
   }
+}
+
+function fallbackCopy(text){
+  var area=document.createElement("textarea");
+  area.value=text;
+  document.body.appendChild(area);
+  area.select();
+  document.execCommand("copy");
+  area.remove();
+  showStatus("Grille copiée ✅");
 }
 
 function shareWhatsApp(){
@@ -509,21 +703,21 @@ function shareInstagram(){
       text:text,
       url:window.location.href
     }).catch(function(){
-      copyGrid();
+      fallbackCopy(text);
       showStatus("Texte copié ✅ Ouvre Instagram et colle ta grille.");
     });
   }else{
-    copyGrid();
+    fallbackCopy(text);
     showStatus("Texte copié ✅ Ouvre Instagram et colle ta grille.");
   }
 }
 
 function openStats(){
-  if(currentGame==="euro"){
-    window.open("https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/statistiques","_blank");
-  }else{
-    window.open("https://www.fdj.fr/jeux-de-tirage/loto/statistiques","_blank");
-  }
+  window.open(FDJ[currentGame].statsUrl, "_blank");
+}
+
+function openResults(){
+  window.open(FDJ[currentGame].resultsUrl, "_blank");
 }
 
 function getNextDraw(){
@@ -593,7 +787,7 @@ function renderHistory(){
 function clearHistory(){
   history = [];
   lastGrid = null;
-  localStorage.removeItem("galactic_history_simple");
+  localStorage.removeItem("galactic_history_v4");
   resetBalls();
   renderHistory();
   showStatus("Historique effacé ✅");
