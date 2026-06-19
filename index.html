@@ -1,49 +1,906 @@
-<div class="logo">
-  <svg viewBox="0 0 120 120" aria-label="Galactic Lottery Logo">
-    <defs>
-      <radialGradient id="bgGlow" cx="50%" cy="50%" r="65%">
-        <stop offset="0%" stop-color="#7b2fff"/>
-        <stop offset="55%" stop-color="#18003a"/>
-        <stop offset="100%" stop-color="#05000b"/>
-      </radialGradient>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galactic Lottery</title>
+<meta name="theme-color" content="#0a0012">
 
-      <linearGradient id="goldLogo" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#fff7c2"/>
-        <stop offset="45%" stop-color="#f0c040"/>
-        <stop offset="100%" stop-color="#9c6500"/>
-      </linearGradient>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;700;800&display=swap');
 
-      <linearGradient id="purpleLogo" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#caa7ff"/>
-        <stop offset="100%" stop-color="#4d16b8"/>
-      </linearGradient>
+:root{
+  --bg:#090011;
+  --bg2:#160030;
+  --card:rgba(255,255,255,.06);
+  --line:rgba(145,80,255,.30);
+  --gold:#f0c040;
+  --gold2:#fff1a8;
+  --txt:#f6f0ff;
+  --muted:rgba(246,240,255,.74);
+  --blue:#0061ff;
+  --red:#df2d2d;
+}
 
-      <filter id="glow">
-        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-        <feMerge>
-          <feMergeNode in="coloredBlur"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
-    </defs>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    <rect x="4" y="4" width="112" height="112" rx="28" fill="url(#bgGlow)" stroke="rgba(240,192,64,.45)" stroke-width="2"/>
+body{
+  min-height:100vh;
+  color:var(--txt);
+  font-family:Inter,sans-serif;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 20% 14%,rgba(123,47,255,.22),transparent 30%),
+    radial-gradient(circle at 80% 80%,rgba(240,192,64,.08),transparent 30%),
+    linear-gradient(180deg,var(--bg),var(--bg2) 58%,#05000b);
+}
 
-    <circle cx="60" cy="60" r="28" fill="#12002a" stroke="url(#goldLogo)" stroke-width="5"/>
-    <circle cx="60" cy="60" r="44" fill="none" stroke="url(#purpleLogo)" stroke-width="4" opacity=".9"/>
-    <ellipse cx="60" cy="60" rx="50" ry="20" fill="none" stroke="url(#goldLogo)" stroke-width="5" transform="rotate(-18 60 60)" filter="url(#glow)"/>
-    <ellipse cx="60" cy="60" rx="48" ry="18" fill="none" stroke="#7b2fff" stroke-width="2" transform="rotate(22 60 60)" opacity=".75"/>
+#stars{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
 
-    <path d="M60 35 L67 52 L85 52 L70 63 L76 82 L60 70 L44 82 L50 63 L35 52 L53 52 Z"
-          fill="url(#goldLogo)" filter="url(#glow)"/>
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  border-radius:50%;
+  background:white;
+  opacity:.65;
+  animation:twinkle 3s infinite alternate;
+}
 
-    <circle cx="91" cy="38" r="10" fill="#1b0038" stroke="url(#goldLogo)" stroke-width="3"/>
-    <text x="91" y="43" text-anchor="middle" font-size="13" font-weight="900" fill="#fff1a8" font-family="Arial">7</text>
+@keyframes twinkle{
+  from{opacity:.12;transform:scale(.7)}
+  to{opacity:.9;transform:scale(1.4)}
+}
 
-    <circle cx="29" cy="78" r="10" fill="#1b0038" stroke="url(#goldLogo)" stroke-width="3"/>
-    <text x="29" y="83" text-anchor="middle" font-size="12" font-weight="900" fill="#fff1a8" font-family="Arial">12</text>
+.wrap{
+  position:relative;
+  z-index:1;
+  max-width:540px;
+  margin:0 auto;
+  padding:14px 14px 24px;
+}
 
-    <circle cx="75" cy="96" r="10" fill="#1b0038" stroke="url(#goldLogo)" stroke-width="3"/>
-    <text x="75" y="101" text-anchor="middle" font-size="11" font-weight="900" fill="#fff1a8" font-family="Arial">24</text>
-  </svg>
+.head{
+  text-align:center;
+  margin-bottom:12px;
+}
+
+.logo{
+  width:72px;
+  height:72px;
+  border-radius:22px;
+  margin:0 auto 10px;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(240,192,64,.35);
+  box-shadow:0 0 30px rgba(240,192,64,.22);
+}
+
+.logo svg{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+h1{
+  font-family:Orbitron,sans-serif;
+  font-size:25px;
+  letter-spacing:2px;
+  line-height:1;
+  background:linear-gradient(135deg,var(--gold),#fff6c9,var(--gold));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  margin-bottom:7px;
+}
+
+.sub{
+  font-size:13px;
+  line-height:1.35;
+  color:var(--muted);
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  background:rgba(255,255,255,.045);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:5px;
+  margin:12px 0;
+}
+
+.tab{
+  flex:1;
+  border:0;
+  border-radius:12px;
+  padding:12px 6px;
+  background:transparent;
+  color:rgba(246,240,255,.52);
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.tab.on.euro{
+  background:linear-gradient(135deg,#0030a8,#0061ff);
+  color:var(--gold2);
+}
+
+.tab.on.loto{
+  background:linear-gradient(135deg,#850000,#df2d2d);
+  color:var(--gold2);
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:15px;
+  margin-bottom:12px;
+  box-shadow:0 18px 50px rgba(0,0,0,.26);
+  backdrop-filter:blur(12px);
+}
+
+.title{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:1.4px;
+  color:#c19cff;
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+.next{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.3;
+  margin-bottom:10px;
+}
+
+.timer{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  margin:8px 0 12px;
+}
+
+.time{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:13px;
+  padding:7px 4px;
+  text-align:center;
+}
+
+.time b{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:14px;
+  color:var(--gold2);
+}
+
+.time span{
+  display:block;
+  font-size:9px;
+  letter-spacing:.8px;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-top:2px;
+}
+
+.balls{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  margin:8px 0;
+}
+
+.ball{
+  width:47px;
+  height:47px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-family:Orbitron,sans-serif;
+  font-size:16px;
+  font-weight:900;
+  background:
+    radial-gradient(circle at 32% 28%,rgba(255,255,255,.35),transparent 18%),
+    radial-gradient(circle at 50% 55%,rgba(255,255,255,.10),rgba(0,0,0,.42));
+  border:2px solid rgba(255,255,255,.15);
+  box-shadow:0 0 16px rgba(123,47,255,.25);
+}
+
+.ball.extra{
+  width:43px;
+  height:43px;
+  color:var(--gold2);
+  border-color:rgba(240,192,64,.52);
+  box-shadow:0 0 16px rgba(240,192,64,.22);
+}
+
+.extraLabel{
+  text-align:center;
+  font-size:11px;
+  color:rgba(246,240,255,.65);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1.3px;
+  margin-top:8px;
+}
+
+.btn{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  padding:13px 10px;
+  margin-top:9px;
+  color:white;
+  font-weight:800;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.btn:active{
+  transform:scale(.98);
+}
+
+.mainBtn{
+  background:linear-gradient(135deg,#003399,#0061ff);
+  color:var(--gold2);
+  box-shadow:0 0 24px rgba(0,97,255,.28);
+}
+
+.mainBtn.loto{
+  background:linear-gradient(135deg,#880000,#df2d2d);
+  box-shadow:0 0 24px rgba(223,45,45,.28);
+}
+
+.grid2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.copy{
+  background:rgba(255,255,255,.11);
+}
+
+.wa{
+  background:rgba(37,211,102,.20);
+  border:1px solid rgba(37,211,102,.33);
+}
+
+.insta{
+  background:linear-gradient(135deg,rgba(255,0,128,.22),rgba(255,180,70,.16),rgba(123,47,255,.2));
+  border:1px solid rgba(255,255,255,.12);
+}
+
+.threads{
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.24);
+}
+
+.link{
+  background:rgba(240,192,64,.12);
+  border:1px solid rgba(240,192,64,.32);
+  color:var(--gold2);
+}
+
+.status{
+  display:none;
+  margin-top:10px;
+  border-radius:12px;
+  padding:10px;
+  font-size:13px;
+  line-height:1.35;
+  background:rgba(31,209,139,.12);
+  border:1px solid rgba(31,209,139,.28);
+  color:#ddfff2;
+}
+
+.status.show{
+  display:block;
+}
+
+.infoTabs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-bottom:10px;
+}
+
+.infoTab{
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.045);
+  color:rgba(246,240,255,.70);
+  border-radius:13px;
+  padding:10px 4px;
+  font-weight:800;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.infoTab.active{
+  color:var(--gold2);
+  border-color:rgba(240,192,64,.45);
+  background:rgba(240,192,64,.10);
+}
+
+.panel{
+  display:none;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:15px;
+  padding:12px;
+}
+
+.panel.active{
+  display:block;
+}
+
+.label{
+  font-size:13px;
+  font-weight:800;
+  color:var(--gold2);
+  margin-bottom:7px;
+}
+
+.small{
+  font-size:12.5px;
+  color:var(--muted);
+  line-height:1.35;
+}
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:7px;
+}
+
+.chip{
+  padding:7px 9px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  font-size:12px;
+  font-weight:800;
+}
+
+.hot{
+  color:var(--gold2);
+}
+
+.cold{
+  color:#c2dcff;
+}
+
+.gainOk{
+  color:#8dffd2;
+}
+
+.gainNo{
+  color:#ffd4dc;
+}
+
+.history{
+  max-height:120px;
+  overflow:auto;
+}
+
+.hist{
+  padding:7px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  font-size:12.5px;
+  color:var(--muted);
+}
+
+.footer{
+  text-align:center;
+  color:rgba(246,240,255,.42);
+  font-size:11px;
+  line-height:1.4;
+  margin-top:12px;
+}
+</style>
+</head>
+
+<body>
+<div id="stars"></div>
+
+<div class="wrap">
+
+<header class="head">
+  <div class="logo">
+    <svg viewBox="0 0 120 120" aria-label="Galactic Lottery Logo">
+      <defs>
+        <radialGradient id="bgGlow" cx="50%" cy="50%" r="65%">
+          <stop offset="0%" stop-color="#7b2fff"/>
+          <stop offset="55%" stop-color="#18003a"/>
+          <stop offset="100%" stop-color="#05000b"/>
+        </radialGradient>
+
+        <linearGradient id="goldLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fff7c2"/>
+          <stop offset="45%" stop-color="#f0c040"/>
+          <stop offset="100%" stop-color="#9c6500"/>
+        </linearGradient>
+
+        <linearGradient id="purpleLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#caa7ff"/>
+          <stop offset="100%" stop-color="#4d16b8"/>
+        </linearGradient>
+      </defs>
+
+      <rect x="6" y="6" width="108" height="108" rx="28" fill="url(#bgGlow)" stroke="#f0c040" stroke-width="2"/>
+      <circle cx="60" cy="60" r="28" fill="#12002a" stroke="url(#goldLogo)" stroke-width="5"/>
+      <ellipse cx="60" cy="60" rx="46" ry="18" fill="none" stroke="url(#goldLogo)" stroke-width="5" transform="rotate(-18 60 60)"/>
+      <ellipse cx="60" cy="60" rx="44" ry="17" fill="none" stroke="url(#purpleLogo)" stroke-width="3" transform="rotate(22 60 60)"/>
+
+      <path d="M60 36 L67 52 L84 52 L70 63 L76 81 L60 70 L44 81 L50 63 L36 52 L53 52 Z" fill="url(#goldLogo)"/>
+
+      <circle cx="91" cy="39" r="10" fill="#1b0038" stroke="url(#goldLogo)" stroke-width="3"/>
+      <text x="91" y="44" text-anchor="middle" font-size="13" font-weight="900" fill="#fff1a8" font-family="Arial">7</text>
+
+      <circle cx="30" cy="78" r="10" fill="#1b0038" stroke="url(#goldLogo)" stroke-width="3"/>
+      <text x="30" y="83" text-anchor="middle" font-size="12" font-weight="900" fill="#fff1a8" font-family="Arial">12</text>
+
+      <circle cx="75" cy="96" r="10" fill="#1b0038" stroke="url(#goldLogo)" stroke-width="3"/>
+      <text x="75" y="101" text-anchor="middle" font-size="11" font-weight="900" fill="#fff1a8" font-family="Arial">24</text>
+    </svg>
+  </div>
+
+  <h1>GALACTIC LOTTERY</h1>
+  <div class="sub">Générateur aléatoire EuroMillions et Loto.<br>Sans garantie de gain.</div>
+</header>
+
+<div class="tabs">
+  <button id="tabEuro" class="tab euro on" type="button">⭐ EuroMillions</button>
+  <button id="tabLoto" class="tab loto" type="button">🎱 Loto</button>
 </div>
+
+<section class="card">
+  <div class="title" id="gameTitle">✦ EuroMillions · Votre grille</div>
+  <div class="next" id="nextDraw">Prochain tirage : calcul...</div>
+
+  <div class="timer">
+    <div class="time"><b id="d">--</b><span>Jours</span></div>
+    <div class="time"><b id="h">--</b><span>Heures</span></div>
+    <div class="time"><b id="m">--</b><span>Min</span></div>
+    <div class="time"><b id="s">--</b><span>Sec</span></div>
+  </div>
+
+  <div id="mainBalls" class="balls"></div>
+
+  <div id="extraLabel" class="extraLabel">Étoiles</div>
+  <div id="extraBalls" class="balls"></div>
+
+  <button id="generateBtn" class="btn mainBtn" type="button">🔮 Générer ma grille</button>
+
+  <div class="grid2">
+    <button id="copyBtn" class="btn copy" type="button">📋 Copier</button>
+    <button id="waBtn" class="btn wa" type="button">🟢 WhatsApp</button>
+  </div>
+
+  <div class="grid2">
+    <button id="instaBtn" class="btn insta" type="button">📸 Instagram</button>
+    <button id="threadsBtn" class="btn threads" type="button">🧵 Threads</button>
+  </div>
+
+  <div id="status" class="status"></div>
+</section>
+
+<section class="card">
+  <div class="infoTabs">
+    <button class="infoTab active" type="button" data-panel="tirage">Tirage</button>
+    <button class="infoTab" type="button" data-panel="gain">Gain</button>
+    <button class="infoTab" type="button" data-panel="stats">Stats</button>
+    <button class="infoTab" type="button" data-panel="historique">Historique</button>
+  </div>
+
+  <div id="tirage" class="panel active">
+    <div class="title">🏆 Dernier tirage FDJ</div>
+    <div class="label" id="resultDate">Chargement...</div>
+    <div id="resMain" class="balls"></div>
+    <div id="resExtraLabel" class="extraLabel"></div>
+    <div id="resExtra" class="balls"></div>
+    <div class="small" id="resultNote"></div>
+    <button id="openResultsBtn" class="btn link" type="button">Voir les résultats FDJ</button>
+  </div>
+
+  <div id="gain" class="panel">
+    <div class="title">💰 Gain remporté ou pas</div>
+    <div class="label" id="gainStatus">Aucune grille</div>
+    <div class="small" id="gainText">Génère une grille pour comparer avec le dernier tirage affiché.</div>
+  </div>
+
+  <div id="stats" class="panel">
+    <div class="title">📊 Stats FDJ</div>
+    <div class="small">Plus sortis :</div>
+    <div id="hot" class="chips"></div>
+    <div class="small" style="margin-top:8px">Moins sortis :</div>
+    <div id="cold" class="chips"></div>
+    <div id="statNote" class="small" style="margin-top:8px"></div>
+    <button id="openStatsBtn" class="btn link" type="button">Voir les statistiques FDJ</button>
+  </div>
+
+  <div id="historique" class="panel">
+    <div class="title">📜 Historique</div>
+    <div id="history" class="history small">Aucune grille encore...</div>
+    <button id="clearBtn" class="btn copy" type="button">🧹 Effacer</button>
+  </div>
+</section>
+
+<div class="footer">
+  Application indépendante non affiliée à la FDJ.<br>
+  Montants exacts à vérifier sur les rapports officiels FDJ.
+</div>
+
+</div>
+
+<script>
+var game = "euro";
+var lastGrid = null;
+var historyKey = "galactic_history_v11";
+var historyList = [];
+
+try {
+  historyList = JSON.parse(localStorage.getItem(historyKey) || "[]");
+} catch(e) {
+  historyList = [];
+}
+
+var FDJ = {
+  euro:{
+    name:"EuroMillions",
+    extra:"Étoiles",
+    date:"Mardi 16 juin 2026",
+    main:[18,25,31,37,45],
+    ex:[4,9],
+    note:"My Million : CK 811 1065",
+    hot:[[35,84],[42,82],[21,80]],
+    cold:[[22,44],[1,47],[43,53]],
+    stat:"Palmarès officiel FDJ à vérifier sur la page statistiques.",
+    statsUrl:"https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/statistiques",
+    resUrl:"https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/resultats/mardi-16-juin-2026"
+  },
+  loto:{
+    name:"Loto",
+    extra:"Numéro Chance",
+    date:"Mercredi 17 juin 2026",
+    main:[1,15,32,37,39],
+    ex:[1],
+    note:"Codes Loto et Numéro7 disponibles sur FDJ.",
+    hot:[[30,128],[31,126],[24,121]],
+    cold:[[43,89],[1,92],[33,92]],
+    stat:"Palmarès officiel FDJ à vérifier sur la page statistiques.",
+    statsUrl:"https://www.fdj.fr/jeux-de-tirage/loto/statistiques",
+    resUrl:"https://www.fdj.fr/jeux-de-tirage/loto/resultats/mercredi-17-juin-2026"
+  }
+};
+
+function $(id){
+  return document.getElementById(id);
+}
+
+function safe(id,text){
+  var e = $(id);
+  if(e) e.textContent = text;
+}
+
+function createStars(){
+  var box = $("stars");
+  if(!box) return;
+
+  box.innerHTML = "";
+
+  for(var i=0;i<100;i++){
+    var st = document.createElement("i");
+    st.className = "star";
+    st.style.left = Math.random()*100 + "%";
+    st.style.top = Math.random()*100 + "%";
+    st.style.animationDelay = Math.random()*4 + "s";
+    box.appendChild(st);
+  }
+}
+
+function renderBalls(id, arr, extra){
+  var box = $(id);
+  if(!box) return;
+
+  box.innerHTML = "";
+
+  arr.forEach(function(n){
+    var b = document.createElement("div");
+    b.className = "ball" + (extra ? " extra" : "");
+    b.textContent = n;
+    box.appendChild(b);
+  });
+}
+
+function pick(min,max,count){
+  var arr = [];
+
+  while(arr.length < count){
+    var n = Math.floor(Math.random()*(max-min+1)) + min;
+
+    if(arr.indexOf(n) === -1){
+      arr.push(n);
+    }
+  }
+
+  return arr.sort(function(a,b){return a-b;});
+}
+
+function renderOfficial(){
+  var f = FDJ[game];
+
+  safe("resultDate", f.name + " · " + f.date);
+  safe("resExtraLabel", f.extra);
+  safe("resultNote", f.note);
+  safe("statNote", f.stat);
+
+  renderBalls("resMain", f.main, false);
+  renderBalls("resExtra", f.ex, true);
+
+  var hot = $("hot");
+  var cold = $("cold");
+
+  if(hot){
+    hot.innerHTML = f.hot.map(function(x){
+      return '<span class="chip hot">' + x[0] + ' · ' + x[1] + '</span>';
+    }).join("");
+  }
+
+  if(cold){
+    cold.innerHTML = f.cold.map(function(x){
+      return '<span class="chip cold">' + x[0] + ' · ' + x[1] + '</span>';
+    }).join("");
+  }
+}
+
+function displayGrid(main, ex){
+  renderBalls("mainBalls", main, false);
+  renderBalls("extraBalls", ex, true);
+
+  lastGrid = {
+    game:game,
+    main:main,
+    ex:ex,
+    date:new Date().toISOString()
+  };
+
+  evaluateGain();
+}
+
+function starterGrid(){
+  displayGrid(
+    game === "euro" ? pick(1,50,5) : pick(1,49,5),
+    game === "euro" ? pick(1,12,2) : pick(1,10,1)
+  );
+}
+
+function generateGrid(){
+  displayGrid(
+    game === "euro" ? pick(1,50,5) : pick(1,49,5),
+    game === "euro" ? pick(1,12,2) : pick(1,10,1)
+  );
+
+  historyList.unshift(lastGrid);
+  historyList = historyList.slice(0,8);
+
+  localStorage.setItem(historyKey, JSON.stringify(historyList));
+
+  renderHistory();
+  msg("Nouvelle grille générée ✅");
+}
+
+function countMatches(a,b){
+  var c = 0;
+
+  a.forEach(function(n){
+    if(b.indexOf(n) > -1){
+      c++;
+    }
+  });
+
+  return c;
+}
+
+function getRank(g,m,e){
+  if(g === "euro"){
+    var r = {
+      "5+2":"Rang 1",
+      "5+1":"Rang 2",
+      "5+0":"Rang 3",
+      "4+2":"Rang 4",
+      "4+1":"Rang 5",
+      "3+2":"Rang 6",
+      "4+0":"Rang 7",
+      "2+2":"Rang 8",
+      "3+1":"Rang 9",
+      "3+0":"Rang 10",
+      "1+2":"Rang 11",
+      "2+1":"Rang 12",
+      "2+0":"Rang 13"
+    };
+
+    return r[m + "+" + e] || "Aucun";
+  }
+
+  var l = {
+    "5+1":"Rang 1",
+    "5+0":"Rang 2",
+    "4+1":"Rang 3",
+    "4+0":"Rang 4",
+    "3+1":"Rang 5",
+    "3+0":"Rang 6",
+    "2+1":"Rang 7",
+    "2+0":"Rang 8",
+    "1+1":"Rang 9",
+    "0+1":"Rang 10"
+  };
+
+  return l[m + "+" + e] || "Aucun";
+}
+
+function evaluateGain(){
+  if(!lastGrid){
+    safe("gainStatus","Aucune grille");
+    safe("gainText","Génère une grille pour comparer avec le dernier tirage affiché.");
+    return;
+  }
+
+  var f = FDJ[game];
+  var m = countMatches(lastGrid.main, f.main);
+  var e = countMatches(lastGrid.ex, f.ex);
+  var rank = getRank(game,m,e);
+
+  var status = $("gainStatus");
+  var text = $("gainText");
+
+  if(status){
+    status.textContent = rank === "Aucun" ? "❌ Non gagnant" : "✅ Gagnant";
+    status.className = "label " + (rank === "Aucun" ? "gainNo" : "gainOk");
+  }
+
+  if(text){
+    text.innerHTML =
+      m + " numéro(s) + " + e + " " + f.extra.toLowerCase() +
+      "<br>Rang estimé : <b>" + rank + "</b>" +
+      "<br>Montant exact à vérifier sur FDJ.";
+  }
+}
+
+function shareText(){
+  if(!lastGrid) return "";
+
+  var f = FDJ[lastGrid.game];
+
+  return "Ma grille Galactic Lottery\n" +
+    f.name + "\n" +
+    "Numéros : " + lastGrid.main.join(" - ") + "\n" +
+    f.extra + " : " + lastGrid.ex.join(" - ") + "\n" +
+    window.location.href;
+}
+
+function copyGrid(){
+  var text = shareText();
+
+  if(!text){
+    msg("Aucune grille disponible.");
+    return;
+  }
+
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){
+      msg("Grille copiée ✅");
+    }).catch(function(){
+      fallbackCopy(text);
+    });
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text){
+  var area = document.createElement("textarea");
+  area.value = text;
+  document.body.appendChild(area);
+  area.select();
+  document.execCommand("copy");
+  area.remove();
+
+  msg("Grille copiée ✅");
+}
+
+function shareWhatsApp(){
+  var text = shareText();
+
+  if(!text){
+    msg("Aucune grille disponible.");
+    return;
+  }
+
+  window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
+}
+
+function shareInstagram(){
+  var text = shareText();
+
+  if(!text){
+    msg("Aucune grille disponible.");
+    return;
+  }
+
+  if(navigator.share){
+    navigator.share({
+      title:"Galactic Lottery",
+      text:text,
+      url:window.location.href
+    }).catch(function(){
+      fallbackCopy(text);
+    });
+  } else {
+    fallbackCopy(text);
+    msg("Texte copié ✅ Ouvre Instagram et colle ta grille.");
+  }
+}
+
+function shareThreads(){
+  var text = shareText();
+
+  if(!text){
+    msg("Aucune grille disponible.");
+    return;
+  }
+
+  window.open("https://www.threads.net/intent/post?text=" + encodeURIComponent(text), "_blank");
+}
+
+function msg(text){
+  var b = $("status");
+  if(!b) return;
+
+  b.textContent = text;
+  b.className = "status show";
+
+  setTimeout(function(){
+    b.className = "status";
+  },3500);
+}
+
+function nextDraw(){
+  var now = new Date();
+  var days = game === "euro" ? [2,5] : [1,3,6];
+  var hour = game === "euro" ? 21 : 20;
+  var minute = game === "euro" ? 5 : 20;
+
+  for(var i=0;i<8;i++){
+    var d = new Date(now);
+    d.setDate(now.getDate()+i);
+    d.setHours(hour,minute,0,0);
+
+    if(days.indexOf(d.getDay()) > -1 && d > now){
+      return d;
+    }
+  }
+
+  return now;
+}
+
+function 
