@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Galactic Lottery</title>
+<title>Galactic Euromillions - Loto</title>
 <meta name="theme-color" content="#0a0012">
 
 <style>
@@ -93,20 +93,28 @@ body{
 
 h1{
   font-family:Orbitron,sans-serif;
-  font-size:25px;
+  font-size:23px;
   letter-spacing:2px;
-  line-height:1;
+  line-height:1.15;
+  text-align:center;
+  width:100%;
+  margin:0 auto 8px;
   background:linear-gradient(135deg,var(--gold),#fff6c9,var(--gold));
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-  margin-bottom:7px;
+}
+
+h1 span{
+  font-size:18px;
+  letter-spacing:3px;
 }
 
 .sub{
   font-size:13px;
   line-height:1.35;
   color:var(--muted);
+  text-align:center;
 }
 
 .tabs{
@@ -424,7 +432,7 @@ h1{
 
 <header class="head">
   <div class="logo">
-    <svg viewBox="0 0 120 120" aria-label="Galactic Lottery Logo">
+    <svg viewBox="0 0 120 120" aria-label="Galactic Euromillions Loto Logo">
       <defs>
         <radialGradient id="bgGlow" cx="50%" cy="50%" r="65%">
           <stop offset="0%" stop-color="#7b2fff"/>
@@ -462,7 +470,11 @@ h1{
     </svg>
   </div>
 
-  <h1>GALACTIC LOTTERY</h1>
+  <h1>
+    GALACTIC EUROMILLIONS<br>
+    <span>- LOTO -</span>
+  </h1>
+
   <div class="sub">Générateur aléatoire EuroMillions et Loto.<br>Sans garantie de gain.</div>
 </header>
 
@@ -554,7 +566,7 @@ h1{
 var appReady = false;
 var game = "euro";
 var lastGrid = null;
-var historyKey = "galactic_history_v12";
+var historyKey = "galactic_history_v13";
 var historyList = [];
 
 try {
@@ -795,7 +807,7 @@ function shareText(){
 
   var f = FDJ[lastGrid.game];
 
-  return "Ma grille Galactic Lottery\n" +
+  return "Ma grille Galactic Euromillions - Loto\n" +
     f.name + "\n" +
     "Numéros : " + lastGrid.main.join(" - ") + "\n" +
     f.extra + " : " + lastGrid.ex.join(" - ") + "\n" +
@@ -853,7 +865,7 @@ function shareInstagram(){
 
   if(navigator.share){
     navigator.share({
-      title:"Galactic Lottery",
+      title:"Galactic Euromillions - Loto",
       text:text,
       url:window.location.href
     }).catch(function(){
@@ -873,14 +885,4 @@ function shareThreads(){
     return;
   }
 
-  window.open("https://www.threads.net/intent/post?text=" + encodeURIComponent(text), "_blank");
-}
-
-function message(text){
-  var box = get("status");
-  if(!box) return;
-
-  box.textContent = text;
-  box.className = "status show";
-
-  setTi
+  window.open("https://www.threads.ne
