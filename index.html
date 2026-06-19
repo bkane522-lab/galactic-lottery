@@ -1,491 +1,456 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galactic Lottery</title>
+<meta name="theme-color" content="#0a0012">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;700;800&display=swap');
+
+:root{
+  --bg:#090011;--bg2:#160030;--card:rgba(255,255,255,.06);
+  --line:rgba(145,80,255,.30);--gold:#f0c040;--gold2:#fff1a8;
+  --txt:#f6f0ff;--muted:rgba(246,240,255,.74);--blue:#0061ff;--red:#df2d2d;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;color:var(--txt);font-family:Inter,sans-serif;overflow-x:hidden;
+  background:radial-gradient(circle at 20% 14%,rgba(123,47,255,.22),transparent 30%),
+  radial-gradient(circle at 80% 80%,rgba(240,192,64,.08),transparent 30%),
+  linear-gradient(180deg,var(--bg),var(--bg2) 58%,#05000b);
+}
+#stars{position:fixed;inset:0;pointer-events:none;z-index:0}
+.star{position:absolute;width:2px;height:2px;border-radius:50%;background:white;opacity:.65;animation:twinkle 3s infinite alternate}
+@keyframes twinkle{from{opacity:.12;transform:scale(.7)}to{opacity:.9;transform:scale(1.4)}}
+.wrap{position:relative;z-index:1;max-width:540px;margin:0 auto;padding:14px 14px 24px}
+.head{text-align:center;margin-bottom:12px}
+.logo{width:58px;height:58px;border-radius:20px;margin:0 auto 8px;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(240,192,64,.25);box-shadow:0 0 26px rgba(240,192,64,.13)}
+.logo svg{width:44px;height:44px}
+h1{font-family:Orbitron,sans-serif;font-size:25px;letter-spacing:2px;line-height:1;background:linear-gradient(135deg,var(--gold),#fff6c9,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:7px}
+.sub{font-size:13px;line-height:1.35;color:var(--muted)}
+.tabs{display:flex;gap:8px;background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:16px;padding:5px;margin:12px 0}
+.tab{flex:1;border:0;border-radius:12px;padding:12px 6px;background:transparent;color:rgba(246,240,255,.52);font-size:14px;font-weight:800;cursor:pointer}
+.tab.on.euro{background:linear-gradient(135deg,#0030a8,#0061ff);color:var(--gold2)}
+.tab.on.loto{background:linear-gradient(135deg,#850000,#df2d2d);color:var(--gold2)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:15px;margin-bottom:12px;box-shadow:0 18px 50px rgba(0,0,0,.26);backdrop-filter:blur(12px)}
+.title{font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:#c19cff;font-weight:800;margin-bottom:10px}
+.next{font-size:13px;color:var(--muted);line-height:1.3;margin-bottom:10px}
+.timer{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:8px 0 12px}
+.time{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:7px 4px;text-align:center}
+.time b{display:block;font-family:Orbitron,sans-serif;font-size:14px;color:var(--gold2)}
+.time span{display:block;font-size:9px;letter-spacing:.8px;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.balls{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:8px 0}
+.ball{width:47px;height:47px;border-radius:50%;display:grid;place-items:center;font-family:Orbitron,sans-serif;font-size:16px;font-weight:900;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.35),transparent 18%),radial-gradient(circle at 50% 55%,rgba(255,255,255,.10),rgba(0,0,0,.42));border:2px solid rgba(255,255,255,.15);box-shadow:0 0 16px rgba(123,47,255,.25)}
+.ball.extra{width:43px;height:43px;color:var(--gold2);border-color:rgba(240,192,64,.52);box-shadow:0 0 16px rgba(240,192,64,.22)}
+.extraLabel{text-align:center;font-size:11px;color:rgba(246,240,255,.65);font-weight:800;text-transform:uppercase;letter-spacing:1.3px;margin-top:8px}
+.btn{width:100%;border:0;border-radius:15px;padding:13px 10px;margin-top:9px;color:white;font-weight:800;font-size:14px;cursor:pointer}
+.btn:active{transform:scale(.98)}
+.mainBtn{background:linear-gradient(135deg,#003399,#0061ff);color:var(--gold2);box-shadow:0 0 24px rgba(0,97,255,.28)}
+.mainBtn.loto{background:linear-gradient(135deg,#880000,#df2d2d);box-shadow:0 0 24px rgba(223,45,45,.28)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.copy{background:rgba(255,255,255,.11)}
+.wa{background:rgba(37,211,102,.20);border:1px solid rgba(37,211,102,.33)}
+.insta{background:linear-gradient(135deg,rgba(255,0,128,.22),rgba(255,180,70,.16),rgba(123,47,255,.2));border:1px solid rgba(255,255,255,.12)}
+.threads{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.24)}
+.link{background:rgba(240,192,64,.12);border:1px solid rgba(240,192,64,.32);color:var(--gold2)}
+.status{display:none;margin-top:10px;border-radius:12px;padding:10px;font-size:13px;line-height:1.35;background:rgba(31,209,139,.12);border:1px solid rgba(31,209,139,.28);color:#ddfff2}
+.status.show{display:block}
+.infoTabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.infoTab{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);color:rgba(246,240,255,.70);border-radius:13px;padding:10px 4px;font-weight:800;font-size:12px;cursor:pointer}
+.infoTab.active{color:var(--gold2);border-color:rgba(240,192,64,.45);background:rgba(240,192,64,.10)}
+.panel{display:none;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:12px}
+.panel.active{display:block}
+.label{font-size:13px;font-weight:800;color:var(--gold2);margin-bottom:7px}
+.small{font-size:12.5px;color:var(--muted);line-height:1.35}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.chip{padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-size:12px;font-weight:800}
+.hot{color:var(--gold2)}.cold{color:#c2dcff}.gainOk{color:#8dffd2}.gainNo{color:#ffd4dc}
+.history{max-height:120px;overflow:auto}.hist{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:12.5px;color:var(--muted)}
+.footer{text-align:center;color:rgba(246,240,255,.42);font-size:11px;line-height:1.4;margin-top:12px}
+</style>
+</head>
+
+<body>
+<div id="stars"></div>
+<div class="wrap">
+
+<header class="head">
+  <div class="logo">
+    <svg viewBox="0 0 120 120">
+      <defs>
+        <linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff2b0"/><stop offset=".5" stop-color="#f0c040"/><stop offset="1" stop-color="#8d5d00"/></linearGradient>
+        <linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c599ff"/><stop offset="1" stop-color="#5520c6"/></linearGradient>
+      </defs>
+      <circle cx="60" cy="60" r="19" fill="url(#a)"/>
+      <circle cx="60" cy="60" r="34" fill="none" stroke="url(#b)" stroke-width="6"/>
+      <circle cx="60" cy="60" r="47" fill="none" stroke="url(#a)" stroke-width="3"/>
+      <path d="M60 24 66 40 83 40 69 50 75 66 60 56 45 66 51 50 37 40 54 40Z" fill="url(#a)"/>
+      <circle cx="25" cy="60" r="6" fill="url(#a)"/><circle cx="95" cy="60" r="6" fill="url(#a)"/><circle cx="60" cy="95" r="6" fill="url(#b)"/>
+    </svg>
+  </div>
+  <h1>GALACTIC LOTTERY</h1>
+  <div class="sub">Générateur aléatoire EuroMillions et Loto.<br>Sans garantie de gain.</div>
+</header>
+
+<div class="tabs">
+  <button id="tabEuro" class="tab euro on" type="button">⭐ EuroMillions</button>
+  <button id="tabLoto" class="tab loto" type="button">🎱 Loto</button>
+</div>
+
+<section class="card">
+  <div class="title" id="gameTitle">✦ EuroMillions · Votre grille</div>
+  <div class="next" id="nextDraw">Prochain tirage : calcul...</div>
+
+  <div class="timer">
+    <div class="time"><b id="d">--</b><span>Jours</span></div>
+    <div class="time"><b id="h">--</b><span>Heures</span></div>
+    <div class="time"><b id="m">--</b><span>Min</span></div>
+    <div class="time"><b id="s">--</b><span>Sec</span></div>
+  </div>
+
+  <div id="mainBalls" class="balls"></div>
+  <div id="extraLabel" class="extraLabel">Étoiles</div>
+  <div id="extraBalls" class="balls"></div>
+
+  <button id="generateBtn" class="btn mainBtn" type="button">🔮 Générer ma grille</button>
+
+  <div class="grid2">
+    <button id="copyBtn" class="btn copy" type="button">📋 Copier</button>
+    <button id="waBtn" class="btn wa" type="button">🟢 WhatsApp</button>
+  </div>
+
+  <div class="grid2">
+    <button id="instaBtn" class="btn insta" type="button">📸 Instagram</button>
+    <button id="threadsBtn" class="btn threads" type="button">🧵 Threads</button>
+  </div>
+
+  <div id="status" class="status"></div>
+</section>
+
+<section class="card">
+  <div class="infoTabs">
+    <button class="infoTab active" type="button" data-panel="tirage">Tirage</button>
+    <button class="infoTab" type="button" data-panel="gain">Gain</button>
+    <button class="infoTab" type="button" data-panel="stats">Stats</button>
+    <button class="infoTab" type="button" data-panel="historique">Historique</button>
+  </div>
+
+  <div id="tirage" class="panel active">
+    <div class="title">🏆 Dernier tirage FDJ</div>
+    <div class="label" id="resultDate">Chargement...</div>
+    <div id="resMain" class="balls"></div>
+    <div id="resExtraLabel" class="extraLabel"></div>
+    <div id="resExtra" class="balls"></div>
+    <div class="small" id="resultNote"></div>
+    <button id="openResultsBtn" class="btn link" type="button">Voir les résultats FDJ</button>
+  </div>
+
+  <div id="gain" class="panel">
+    <div class="title">💰 Gain remporté ou pas</div>
+    <div class="label" id="gainStatus">Aucune grille</div>
+    <div class="small" id="gainText">Génère une grille pour comparer avec le dernier tirage affiché.</div>
+  </div>
+
+  <div id="stats" class="panel">
+    <div class="title">📊 Stats FDJ</div>
+    <div class="small">Plus sortis :</div>
+    <div id="hot" class="chips"></div>
+    <div class="small" style="margin-top:8px">Moins sortis :</div>
+    <div id="cold" class="chips"></div>
+    <div id="statNote" class="small" style="margin-top:8px"></div>
+    <button id="openStatsBtn" class="btn link" type="button">Voir les statistiques FDJ</button>
+  </div>
+
+  <div id="historique" class="panel">
+    <div class="title">📜 Historique</div>
+    <div id="history" class="history small">Aucune grille encore...</div>
+    <button id="clearBtn" class="btn copy" type="button">🧹 Effacer</button>
+  </div>
+</section>
+
+<div class="footer">
+  Application indépendante non affiliée à la FDJ.<br>
+  Montants exacts à vérifier sur les rapports officiels FDJ.
+</div>
+</div>
+
 <script>
-var appStarted = false;
 var game = "euro";
 var lastGrid = null;
-var historyKey = "galactic_history_v9";
+var historyKey = "galactic_history_v10";
 var historyList = [];
-
-try {
-  historyList = JSON.parse(localStorage.getItem(historyKey) || "[]");
-} catch(e) {
-  historyList = [];
-}
+try { historyList = JSON.parse(localStorage.getItem(historyKey) || "[]"); } catch(e) { historyList = []; }
 
 var FDJ = {
-  euro: {
-    name: "EuroMillions",
-    extra: "Étoiles",
-    date: "Mardi 16 juin 2026",
-    main: [18,25,31,37,45],
-    ex: [4,9],
-    note: "My Million : CK 811 1065",
-    hot: [[35,84],[42,82],[21,80]],
-    cold: [[22,44],[1,47],[43,53]],
-    stat: "Palmarès officiel FDJ à vérifier sur la page statistiques.",
-    statsUrl: "https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/statistiques",
-    resUrl: "https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/resultats/mardi-16-juin-2026"
+  euro:{
+    name:"EuroMillions", extra:"Étoiles", date:"Mardi 16 juin 2026",
+    main:[18,25,31,37,45], ex:[4,9], note:"My Million : CK 811 1065",
+    hot:[[35,84],[42,82],[21,80]], cold:[[22,44],[1,47],[43,53]],
+    stat:"Palmarès officiel FDJ à vérifier sur la page statistiques.",
+    statsUrl:"https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/statistiques",
+    resUrl:"https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/resultats/mardi-16-juin-2026"
   },
-  loto: {
-    name: "Loto",
-    extra: "Numéro Chance",
-    date: "Mercredi 17 juin 2026",
-    main: [1,15,32,37,39],
-    ex: [1],
-    note: "Codes Loto et Numéro7 disponibles sur FDJ.",
-    hot: [[30,128],[31,126],[24,121]],
-    cold: [[43,89],[1,92],[33,92]],
-    stat: "Palmarès officiel FDJ à vérifier sur la page statistiques.",
-    statsUrl: "https://www.fdj.fr/jeux-de-tirage/loto/statistiques",
-    resUrl: "https://www.fdj.fr/jeux-de-tirage/loto/resultats/mercredi-17-juin-2026"
+  loto:{
+    name:"Loto", extra:"Numéro Chance", date:"Mercredi 17 juin 2026",
+    main:[1,15,32,37,39], ex:[1], note:"Codes Loto et Numéro7 disponibles sur FDJ.",
+    hot:[[30,128],[31,126],[24,121]], cold:[[43,89],[1,92],[33,92]],
+    stat:"Palmarès officiel FDJ à vérifier sur la page statistiques.",
+    statsUrl:"https://www.fdj.fr/jeux-de-tirage/loto/statistiques",
+    resUrl:"https://www.fdj.fr/jeux-de-tirage/loto/resultats/mercredi-17-juin-2026"
   }
 };
 
-function getEl(id) {
-  return document.getElementById(id);
-}
+function $(id){ return document.getElementById(id); }
+function safe(id,text){ var e=$(id); if(e) e.textContent=text; }
 
-function safeText(id, text) {
-  var element = getEl(id);
-  if (element) element.textContent = text;
-}
-
-function startApp() {
-  if (appStarted) return;
-  appStarted = true;
-
-  createStars();
-  bindButtons();
-  renderOfficial();
-  renderHistory();
-  generateStarterGrid();
-  updateTimer();
-  setInterval(updateTimer, 1000);
-}
-
-function bindButtons() {
-  if (getEl("tabEuro")) getEl("tabEuro").onclick = function(){ switchGame("euro"); };
-  if (getEl("tabLoto")) getEl("tabLoto").onclick = function(){ switchGame("loto"); };
-
-  if (getEl("generateBtn")) getEl("generateBtn").onclick = generateGrid;
-  if (getEl("generate")) getEl("generate").onclick = generateGrid;
-
-  if (getEl("copy")) getEl("copy").onclick = copyGrid;
-  if (getEl("wa")) getEl("wa").onclick = shareWhatsApp;
-  if (getEl("insta")) getEl("insta").onclick = shareInstagram;
-  if (getEl("threads")) getEl("threads").onclick = shareThreads;
-
-  if (getEl("openResults")) getEl("openResults").onclick = openResults;
-  if (getEl("openStats")) getEl("openStats").onclick = openStats;
-  if (getEl("clear")) getEl("clear").onclick = clearHistory;
-
-  var infoTabs = document.getElementsByClassName("infoTab");
-  for (var i = 0; i < infoTabs.length; i++) {
-    infoTabs[i].onclick = function() {
-      var target = this.getAttribute("data-panel");
-      if (!target) {
-        if (this.id === "tabInfoTirage") target = "tirage";
-        if (this.id === "tabInfoGain") target = "gain";
-        if (this.id === "tabInfoStats") target = "stats";
-        if (this.id === "tabInfoHistorique") target = "historique";
-      }
-      switchPanel(target);
-    };
+function createStars(){
+  var box=$("stars"); if(!box) return;
+  box.innerHTML="";
+  for(var i=0;i<100;i++){
+    var st=document.createElement("i");
+    st.className="star";
+    st.style.left=Math.random()*100+"%";
+    st.style.top=Math.random()*100+"%";
+    st.style.animationDelay=Math.random()*4+"s";
+    box.appendChild(st);
   }
 }
 
-function createStars() {
-  var box = getEl("stars");
-  if (!box) return;
-
-  box.innerHTML = "";
-
-  for (var i = 0; i < 100; i++) {
-    var star = document.createElement("i");
-    star.className = "star";
-    star.style.left = Math.random() * 100 + "%";
-    star.style.top = Math.random() * 100 + "%";
-    star.style.animationDelay = Math.random() * 4 + "s";
-    box.appendChild(star);
-  }
+function renderBalls(id, arr, extra){
+  var box=$(id); if(!box) return;
+  box.innerHTML="";
+  arr.forEach(function(n){
+    var b=document.createElement("div");
+    b.className="ball"+(extra?" extra":"");
+    b.textContent=n;
+    box.appendChild(b);
+  });
 }
 
-function renderBalls(id, arr, extra) {
-  var box = getEl(id);
-  if (!box) return;
-
-  box.innerHTML = "";
-
-  for (var i = 0; i < arr.length; i++) {
-    var ball = document.createElement("div");
-    ball.className = "ball" + (extra ? " extra" : "");
-    ball.textContent = arr[i];
-    box.appendChild(ball);
+function pick(min,max,count){
+  var arr=[];
+  while(arr.length<count){
+    var n=Math.floor(Math.random()*(max-min+1))+min;
+    if(arr.indexOf(n)===-1) arr.push(n);
   }
+  return arr.sort(function(a,b){return a-b;});
 }
 
-function pickNumbers(min, max, count) {
-  var arr = [];
-
-  while (arr.length < count) {
-    var n = Math.floor(Math.random() * (max - min + 1)) + min;
-    if (arr.indexOf(n) === -1) arr.push(n);
-  }
-
-  return arr.sort(function(a,b){ return a-b; });
-}
-
-function renderOfficial() {
-  var f = FDJ[game];
-
-  safeText("resultDate", f.name + " · " + f.date);
-  safeText("resExtraLabel", f.extra);
-  safeText("resultNote", f.note);
-  safeText("statNote", f.stat);
-
+function renderOfficial(){
+  var f=FDJ[game];
+  safe("resultDate", f.name+" · "+f.date);
+  safe("resExtraLabel", f.extra);
+  safe("resultNote", f.note);
+  safe("statNote", f.stat);
   renderBalls("resMain", f.main, false);
   renderBalls("resExtra", f.ex, true);
 
-  var hot = getEl("hot");
-  if (hot) {
-    hot.innerHTML = "";
-    for (var i = 0; i < f.hot.length; i++) {
-      hot.innerHTML += '<span class="chip hot">' + f.hot[i][0] + ' · ' + f.hot[i][1] + '</span>';
-    }
-  }
-
-  var cold = getEl("cold");
-  if (cold) {
-    cold.innerHTML = "";
-    for (var j = 0; j < f.cold.length; j++) {
-      cold.innerHTML += '<span class="chip cold">' + f.cold[j][0] + ' · ' + f.cold[j][1] + '</span>';
-    }
-  }
+  var hot=$("hot"), cold=$("cold");
+  if(hot) hot.innerHTML=f.hot.map(function(x){return '<span class="chip hot">'+x[0]+' · '+x[1]+'</span>';}).join("");
+  if(cold) cold.innerHTML=f.cold.map(function(x){return '<span class="chip cold">'+x[0]+' · '+x[1]+'</span>';}).join("");
 }
 
-function generateStarterGrid() {
-  var main = game === "euro" ? pickNumbers(1,50,5) : pickNumbers(1,49,5);
-  var ex = game === "euro" ? pickNumbers(1,12,2) : pickNumbers(1,10,1);
-
-  displayGrid(main, ex);
-}
-
-function generateGrid() {
-  var main = game === "euro" ? pickNumbers(1,50,5) : pickNumbers(1,49,5);
-  var ex = game === "euro" ? pickNumbers(1,12,2) : pickNumbers(1,10,1);
-
-  displayGrid(main, ex);
-
-  historyList.unshift(lastGrid);
-  historyList = historyList.slice(0,8);
-  localStorage.setItem(historyKey, JSON.stringify(historyList));
-
-  renderHistory();
-  showMessage("Nouvelle grille générée ✅");
-}
-
-function displayGrid(main, ex) {
+function displayGrid(main, ex){
   renderBalls("mainBalls", main, false);
   renderBalls("extraBalls", ex, true);
-
-  lastGrid = {
-    game: game,
-    main: main,
-    ex: ex,
-    date: new Date().toISOString()
-  };
-
+  lastGrid={game:game, main:main, ex:ex, date:new Date().toISOString()};
   evaluateGain();
 }
 
-function countMatches(a,b) {
-  var count = 0;
-
-  for (var i = 0; i < a.length; i++) {
-    if (b.indexOf(a[i]) > -1) count++;
-  }
-
-  return count;
+function starterGrid(){
+  displayGrid(
+    game==="euro" ? pick(1,50,5) : pick(1,49,5),
+    game==="euro" ? pick(1,12,2) : pick(1,10,1)
+  );
 }
 
-function getRank(g,m,e) {
-  if (g === "euro") {
-    var euroRanks = {
-      "5+2":"Rang 1",
-      "5+1":"Rang 2",
-      "5+0":"Rang 3",
-      "4+2":"Rang 4",
-      "4+1":"Rang 5",
-      "3+2":"Rang 6",
-      "4+0":"Rang 7",
-      "2+2":"Rang 8",
-      "3+1":"Rang 9",
-      "3+0":"Rang 10",
-      "1+2":"Rang 11",
-      "2+1":"Rang 12",
-      "2+0":"Rang 13"
-    };
-
-    return euroRanks[m + "+" + e] || "Aucun";
-  }
-
-  var lotoRanks = {
-    "5+1":"Rang 1",
-    "5+0":"Rang 2",
-    "4+1":"Rang 3",
-    "4+0":"Rang 4",
-    "3+1":"Rang 5",
-    "3+0":"Rang 6",
-    "2+1":"Rang 7",
-    "2+0":"Rang 8",
-    "1+1":"Rang 9",
-    "0+1":"Rang 10"
-  };
-
-  return lotoRanks[m + "+" + e] || "Aucun";
+function generateGrid(){
+  displayGrid(
+    game==="euro" ? pick(1,50,5) : pick(1,49,5),
+    game==="euro" ? pick(1,12,2) : pick(1,10,1)
+  );
+  historyList.unshift(lastGrid);
+  historyList=historyList.slice(0,8);
+  localStorage.setItem(historyKey, JSON.stringify(historyList));
+  renderHistory();
+  msg("Nouvelle grille générée ✅");
 }
 
-function evaluateGain() {
-  if (!lastGrid) {
-    safeText("gainStatus", "Aucune grille");
-    safeText("gainText", "Génère une grille pour comparer avec le dernier tirage affiché.");
-    return;
+function countMatches(a,b){
+  var c=0;
+  a.forEach(function(n){ if(b.indexOf(n)>-1) c++; });
+  return c;
+}
+
+function getRank(g,m,e){
+  if(g==="euro"){
+    var r={"5+2":"Rang 1","5+1":"Rang 2","5+0":"Rang 3","4+2":"Rang 4","4+1":"Rang 5","3+2":"Rang 6","4+0":"Rang 7","2+2":"Rang 8","3+1":"Rang 9","3+0":"Rang 10","1+2":"Rang 11","2+1":"Rang 12","2+0":"Rang 13"};
+    return r[m+"+"+e] || "Aucun";
   }
+  var l={"5+1":"Rang 1","5+0":"Rang 2","4+1":"Rang 3","4+0":"Rang 4","3+1":"Rang 5","3+0":"Rang 6","2+1":"Rang 7","2+0":"Rang 8","1+1":"Rang 9","0+1":"Rang 10"};
+  return l[m+"+"+e] || "Aucun";
+}
 
-  var f = FDJ[game];
-  var m = countMatches(lastGrid.main, f.main);
-  var e = countMatches(lastGrid.ex, f.ex);
-  var rank = getRank(game, m, e);
-
-  var status = getEl("gainStatus");
-  var text = getEl("gainText");
-
-  if (status) {
-    status.textContent = rank === "Aucun" ? "❌ Non gagnant" : "✅ Gagnant";
-    status.className = "label " + (rank === "Aucun" ? "gainNo" : "gainOk");
+function evaluateGain(){
+  if(!lastGrid){ safe("gainStatus","Aucune grille"); safe("gainText","Génère une grille pour comparer avec le dernier tirage affiché."); return; }
+  var f=FDJ[game];
+  var m=countMatches(lastGrid.main, f.main);
+  var e=countMatches(lastGrid.ex, f.ex);
+  var rank=getRank(game,m,e);
+  var status=$("gainStatus"), text=$("gainText");
+  if(status){
+    status.textContent = rank==="Aucun" ? "❌ Non gagnant" : "✅ Gagnant";
+    status.className = "label " + (rank==="Aucun" ? "gainNo" : "gainOk");
   }
-
-  if (text) {
-    text.innerHTML =
-      m + " numéro(s) + " + e + " " + f.extra.toLowerCase() +
-      "<br>Rang estimé : <b>" + rank + "</b>" +
-      "<br>Montant exact à vérifier sur FDJ.";
+  if(text){
+    text.innerHTML = m+" numéro(s) + "+e+" "+f.extra.toLowerCase()+"<br>Rang estimé : <b>"+rank+"</b><br>Montant exact à vérifier sur FDJ.";
   }
 }
 
-function makeShareText() {
-  if (!lastGrid) return "";
-
-  var f = FDJ[lastGrid.game];
-
-  return "Ma grille Galactic Lottery\n" +
-    f.name + "\n" +
-    "Numéros : " + lastGrid.main.join(" - ") + "\n" +
-    f.extra + " : " + lastGrid.ex.join(" - ") + "\n" +
-    window.location.href;
+function shareText(){
+  if(!lastGrid) return "";
+  var f=FDJ[lastGrid.game];
+  return "Ma grille Galactic Lottery\n"+f.name+"\nNuméros : "+lastGrid.main.join(" - ")+"\n"+f.extra+" : "+lastGrid.ex.join(" - ")+"\n"+window.location.href;
 }
 
-function copyGrid() {
-  var text = makeShareText();
-
-  if (!text) {
-    showMessage("Aucune grille disponible.");
-    return;
-  }
-
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(text).then(function(){
-      showMessage("Grille copiée ✅");
-    }).catch(function(){
-      copyFallback(text);
-    });
-  } else {
-    copyFallback(text);
-  }
+function copyGrid(){
+  var text=shareText();
+  if(!text){ msg("Aucune grille disponible."); return; }
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){msg("Grille copiée ✅");}).catch(function(){fallbackCopy(text);});
+  } else fallbackCopy(text);
 }
 
-function copyFallback(text) {
-  var area = document.createElement("textarea");
-  area.value = text;
+function fallbackCopy(text){
+  var area=document.createElement("textarea");
+  area.value=text;
   document.body.appendChild(area);
   area.select();
   document.execCommand("copy");
   area.remove();
-  showMessage("Grille copiée ✅");
+  msg("Grille copiée ✅");
 }
 
-function shareWhatsApp() {
-  var text = makeShareText();
-
-  if (!text) {
-    showMessage("Aucune grille disponible.");
-    return;
-  }
-
-  window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
+function shareWhatsApp(){
+  var text=shareText();
+  if(!text){ msg("Aucune grille disponible."); return; }
+  window.open("https://wa.me/?text="+encodeURIComponent(text), "_blank");
 }
 
-function shareInstagram() {
-  var text = makeShareText();
-
-  if (!text) {
-    showMessage("Aucune grille disponible.");
-    return;
-  }
-
-  if (navigator.share) {
-    navigator.share({
-      title: "Galactic Lottery",
-      text: text,
-      url: window.location.href
-    }).catch(function(){
-      copyFallback(text);
-    });
+function shareInstagram(){
+  var text=shareText();
+  if(!text){ msg("Aucune grille disponible."); return; }
+  if(navigator.share){
+    navigator.share({title:"Galactic Lottery", text:text, url:window.location.href}).catch(function(){fallbackCopy(text);});
   } else {
-    copyFallback(text);
-    showMessage("Texte copié ✅ Ouvre Instagram et colle ta grille.");
+    fallbackCopy(text);
+    msg("Texte copié ✅ Ouvre Instagram et colle ta grille.");
   }
 }
 
-function shareThreads() {
-  var text = makeShareText();
-
-  if (!text) {
-    showMessage("Aucune grille disponible.");
-    return;
-  }
-
-  window.open("https://www.threads.net/intent/post?text=" + encodeURIComponent(text), "_blank");
+function shareThreads(){
+  var text=shareText();
+  if(!text){ msg("Aucune grille disponible."); return; }
+  window.open("https://www.threads.net/intent/post?text="+encodeURIComponent(text), "_blank");
 }
 
-function showMessage(text) {
-  var box = getEl("status");
-  if (!box) return;
-
-  box.textContent = text;
-  box.className = "status show";
-
-  setTimeout(function(){
-    box.className = "status";
-  },3500);
+function msg(text){
+  var b=$("status"); if(!b) return;
+  b.textContent=text;
+  b.className="status show";
+  setTimeout(function(){b.className="status";},3500);
 }
 
-function getNextDraw() {
-  var now = new Date();
-  var days = game === "euro" ? [2,5] : [1,3,6];
-  var hour = game === "euro" ? 21 : 20;
-  var minute = game === "euro" ? 5 : 20;
-
-  for (var i = 0; i < 8; i++) {
-    var d = new Date(now);
-    d.setDate(now.getDate() + i);
-    d.setHours(hour, minute, 0, 0);
-
-    if (days.indexOf(d.getDay()) > -1 && d > now) {
-      return d;
-    }
+function nextDraw(){
+  var now=new Date();
+  var days=game==="euro" ? [2,5] : [1,3,6];
+  var hour=game==="euro" ? 21 : 20;
+  var minute=game==="euro" ? 5 : 20;
+  for(var i=0;i<8;i++){
+    var d=new Date(now);
+    d.setDate(now.getDate()+i);
+    d.setHours(hour,minute,0,0);
+    if(days.indexOf(d.getDay())>-1 && d>now) return d;
   }
-
   return now;
 }
 
-function updateTimer() {
-  var d0 = getNextDraw();
-  var diff = Math.max(0, d0 - new Date());
-
-  var da = Math.floor(diff / 86400000);
-  var ho = Math.floor((diff % 86400000) / 3600000);
-  var mi = Math.floor((diff % 3600000) / 60000);
-  var se = Math.floor((diff % 60000) / 1000);
-
-  safeText("d", ("0" + da).slice(-2));
-  safeText("h", ("0" + ho).slice(-2));
-  safeText("m", ("0" + mi).slice(-2));
-  safeText("s", ("0" + se).slice(-2));
-
-  safeText(
-    "nextDraw",
-    "Prochain tirage : " +
-    d0.toLocaleDateString("fr-FR",{weekday:"long",day:"2-digit",month:"long"}) +
-    " vers " +
-    d0.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})
-  );
+function updateTimer(){
+  var d0=nextDraw();
+  var diff=Math.max(0,d0-new Date());
+  safe("d", ("0"+Math.floor(diff/86400000)).slice(-2));
+  safe("h", ("0"+Math.floor((diff%86400000)/3600000)).slice(-2));
+  safe("m", ("0"+Math.floor((diff%3600000)/60000)).slice(-2));
+  safe("s", ("0"+Math.floor((diff%60000)/1000)).slice(-2));
+  safe("nextDraw", "Prochain tirage : "+d0.toLocaleDateString("fr-FR",{weekday:"long",day:"2-digit",month:"long"})+" vers "+d0.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}));
 }
 
-function switchGame(g) {
-  game = g;
-
-  if (getEl("tabEuro")) getEl("tabEuro").className = "tab euro" + (g === "euro" ? " on" : "");
-  if (getEl("tabLoto")) getEl("tabLoto").className = "tab loto" + (g === "loto" ? " on" : "");
-
-  if (getEl("generateBtn")) getEl("generateBtn").className = "btn mainBtn" + (g === "loto" ? " loto" : "");
-  if (getEl("generate")) getEl("generate").className = "btn mainBtn" + (g === "loto" ? " loto" : "");
-
-  safeText("gameTitle", g === "euro" ? "✦ EuroMillions · Votre grille" : "✦ Loto · Votre grille");
-  safeText("extraLabel", g === "euro" ? "Étoiles" : "Numéro Chance");
-
+function switchGame(g){
+  game=g;
+  $("tabEuro").className="tab euro"+(g==="euro" ? " on" : "");
+  $("tabLoto").className="tab loto"+(g==="loto" ? " on" : "");
+  $("generateBtn").className="btn mainBtn"+(g==="loto" ? " loto" : "");
+  safe("gameTitle", g==="euro" ? "✦ EuroMillions · Votre grille" : "✦ Loto · Votre grille");
+  safe("extraLabel", g==="euro" ? "Étoiles" : "Numéro Chance");
   renderOfficial();
-  generateStarterGrid();
+  starterGrid();
   updateTimer();
 }
 
-function switchPanel(panelId) {
-  var allTabs = document.getElementsByClassName("infoTab");
-  var panels = document.getElementsByClassName("panel");
-
-  for (var i = 0; i < allTabs.length; i++) {
-    allTabs[i].className = "infoTab";
-  }
-
-  for (var j = 0; j < panels.length; j++) {
-    panels[j].className = "panel";
-  }
-
-  if (panelId === "tirage" && getEl("tabInfoTirage")) getEl("tabInfoTirage").className = "infoTab active";
-  if (panelId === "gain" && getEl("tabInfoGain")) getEl("tabInfoGain").className = "infoTab active";
-  if (panelId === "stats" && getEl("tabInfoStats")) getEl("tabInfoStats").className = "infoTab active";
-  if (panelId === "historique" && getEl("tabInfoHistorique")) getEl("tabInfoHistorique").className = "infoTab active";
-
-  if (getEl(panelId)) getEl(panelId).className = "panel active";
+function switchPanel(panelId){
+  document.querySelectorAll(".infoTab").forEach(function(t){t.classList.remove("active");});
+  document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active");});
+  var btn=document.querySelector('[data-panel="'+panelId+'"]');
+  if(btn) btn.classList.add("active");
+  if($(panelId)) $(panelId).classList.add("active");
 }
 
-function openResults() {
-  window.open(FDJ[game].resUrl, "_blank");
+function openResults(){ window.open(FDJ[game].resUrl, "_blank"); }
+function openStats(){ window.open(FDJ[game].statsUrl, "_blank"); }
+
+function renderHistory(){
+  var box=$("history"); if(!box) return;
+  if(historyList.length===0){ box.textContent="Aucune grille encore..."; return; }
+  box.innerHTML=historyList.map(function(item){
+    return '<div class="hist">'+(item.game==="euro" ? "⭐ EuroMillions" : "🎱 Loto")+" : "+item.main.join(" - ")+" | "+item.ex.join(" - ")+"</div>";
+  }).join("");
 }
 
-function openStats() {
-  window.open(FDJ[game].statsUrl, "_blank");
-}
-
-function renderHistory() {
-  var box = getEl("history");
-  if (!box) return;
-
-  if (historyList.length === 0) {
-    box.textContent = "Aucune grille encore...";
-    return;
-  }
-
-  var html = "";
-
-  for (var i = 0; i < historyList.length; i++) {
-    var item = historyList[i];
-
-    html += '<div class="hist">' +
-      (item.game === "euro" ? "⭐ EuroMillions" : "🎱 Loto") +
-      " : " + item.main.join(" - ") + " | " + item.ex.join(" - ") +
-      "</div>";
-  }
-
-  box.innerHTML = html;
-}
-
-function clearHistory() {
-  historyList = [];
+function clearHistory(){
+  historyList=[];
   localStorage.setItem(historyKey, JSON.stringify(historyList));
   renderHistory();
-  showMessage("Historique effacé ✅");
+  msg("Historique effacé ✅");
 }
 
-document.addEventListener("DOMContentLoaded", startApp);
-window.addEventListener("load", startApp);
+function bind(){
+  $("tabEuro").onclick=function(){switchGame("euro");};
+  $("tabLoto").onclick=function(){switchGame("loto");};
+  $("generateBtn").onclick=generateGrid;
+  $("copyBtn").onclick=copyGrid;
+  $("waBtn").onclick=shareWhatsApp;
+  $("instaBtn").onclick=shareInstagram;
+  $("threadsBtn").onclick=shareThreads;
+  $("openResultsBtn").onclick=openResults;
+  $("openStatsBtn").onclick=openStats;
+  $("clearBtn").onclick=clearHistory;
+  document.querySelectorAll(".infoTab").forEach(function(btn){
+    btn.onclick=function(){switchPanel(btn.getAttribute("data-panel"));};
+  });
+}
+
+function start(){
+  createStars();
+  bind();
+  renderOfficial();
+  renderHistory();
+  starterGrid();
+  updateTimer();
+  setInterval(updateTimer,1000);
+}
+
+document.addEventListener("DOMContentLoaded", start);
 </script>
+</body>
+</html>
