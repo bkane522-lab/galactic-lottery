@@ -22,15 +22,18 @@
   padding:0;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   min-height:100vh;
   font-family:Inter,sans-serif;
-  color:#f7f3ff;
   background:
-    radial-gradient(circle at 20% 0%,rgba(116,69,255,.38),transparent 32%),
-    radial-gradient(circle at 84% 14%,rgba(240,198,73,.16),transparent 22%),
-    radial-gradient(circle at 50% 100%,rgba(0,98,255,.20),transparent 36%),
-    linear-gradient(180deg,#060014 0%,#0b0826 42%,#04000c 100%);
+    radial-gradient(circle at 20% 0%,rgba(116,69,255,.35),transparent 30%),
+    radial-gradient(circle at 80% 8%,rgba(248,217,92,.16),transparent 22%),
+    linear-gradient(180deg,#060014 0%,#071A5A 38%,#04000c 100%);
+  color:#071A5A;
 }
 
 .app{
@@ -46,9 +49,9 @@ body{
   padding:20px 18px 24px;
   color:white;
   background:
-    radial-gradient(circle at 82% 10%,rgba(255,220,95,.28),transparent 23%),
+    radial-gradient(circle at 85% 8%,rgba(255,220,95,.28),transparent 23%),
     radial-gradient(circle at 12% 22%,rgba(120,77,255,.38),transparent 30%),
-    linear-gradient(135deg,#071a5a 0%,#071f76 54%,#08001b 100%);
+    linear-gradient(135deg,#071a5a 0%,#08247f 55%,#08001b 100%);
   border-bottom-left-radius:30px;
   border-bottom-right-radius:30px;
   box-shadow:0 18px 42px rgba(0,0,0,.32);
@@ -59,12 +62,11 @@ body{
   position:absolute;
   inset:0;
   background-image:
-    radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1px),
-    radial-gradient(circle,rgba(255,255,255,.35) 1px,transparent 1px);
-  background-size:38px 38px,62px 62px;
-  background-position:4px 8px,18px 28px;
+    radial-gradient(circle,rgba(255,255,255,.75) 1px,transparent 1px),
+    radial-gradient(circle,rgba(255,255,255,.30) 1px,transparent 1px);
+  background-size:42px 42px,70px 70px;
+  background-position:4px 8px,20px 30px;
   opacity:.12;
-  pointer-events:none;
 }
 
 .heroTop,
@@ -95,17 +97,13 @@ body{
   display:grid;
   place-items:center;
   overflow:hidden;
-  box-shadow:0 0 22px rgba(240,198,73,.14);
+  box-shadow:0 0 22px rgba(240,198,73,.18);
 }
 
 .logo svg{
   width:46px;
   height:46px;
   display:block;
-}
-
-.brandText{
-  line-height:1.05;
 }
 
 .brandText strong{
@@ -136,12 +134,12 @@ body{
 }
 
 .heroMain{
-  margin-top:24px;
+  margin-top:22px;
 }
 
 .kicker{
   font-size:15px;
-  color:rgba(255,255,255,.80);
+  color:rgba(255,255,255,.82);
   font-weight:900;
 }
 
@@ -149,7 +147,7 @@ body{
   margin-top:7px;
   font-family:Orbitron,sans-serif;
   color:#f8d95c;
-  font-size:30px;
+  font-size:28px;
   line-height:1.05;
   letter-spacing:1.4px;
   text-transform:uppercase;
@@ -158,7 +156,7 @@ body{
 .bigTitle span{
   display:block;
   color:#fff;
-  font-size:18px;
+  font-size:17px;
   letter-spacing:2px;
   margin-top:6px;
 }
@@ -198,42 +196,9 @@ body{
   padding:16px 14px 0;
 }
 
-.quickRow{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-bottom:14px;
-}
-
-.quickCard{
-  background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(246,248,255,.92));
-  border:1px solid rgba(255,255,255,.70);
-  border-radius:18px;
-  min-height:74px;
-  padding:10px 6px;
-  text-align:center;
-  box-shadow:0 10px 22px rgba(0,0,0,.14);
-  cursor:pointer;
-}
-
-.quickCard b{
-  display:block;
-  font-size:20px;
-  line-height:1;
-  margin-bottom:7px;
-}
-
-.quickCard span{
-  display:block;
-  color:#071A5A;
-  font-size:11px;
-  font-weight:900;
-  line-height:1.15;
-}
-
 .card{
-  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(245,248,255,.93));
-  border:1px solid rgba(255,255,255,.72);
+  background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(244,247,255,.95));
+  border:1px solid rgba(255,255,255,.74);
   border-radius:24px;
   padding:16px;
   box-shadow:0 12px 28px rgba(0,0,0,.16);
@@ -250,14 +215,14 @@ body{
 }
 
 .cardTitle{
-  font-size:18px;
+  font-size:19px;
   font-weight:900;
   color:#071A5A;
   line-height:1.15;
 }
 
 .cardSub{
-  margin-top:4px;
+  margin-top:5px;
   font-size:13px;
   color:#6b7284;
   font-weight:700;
@@ -388,10 +353,10 @@ body{
 }
 
 .wa{
-  background:linear-gradient(135deg,#16c65b,#25D366);
+  background:linear-gradient(135deg,#128C4A,#25D366);
   color:#fff;
-  border:1px solid rgba(37,211,102,.65);
-  box-shadow:0 10px 20px rgba(37,211,102,.22);
+  border:1px solid rgba(37,211,102,.75);
+  box-shadow:0 10px 20px rgba(37,211,102,.25);
 }
 
 .share{
@@ -400,7 +365,7 @@ body{
 }
 
 .verify{
-  background:#11172f;
+  background:#101832;
   color:#fff;
 }
 
@@ -574,14 +539,6 @@ body{
     font-size:25px;
   }
 
-  .quickCard{
-    min-height:68px;
-  }
-
-  .quickCard span{
-    font-size:10px;
-  }
-
   .ball{
     width:43px;
     height:43px;
@@ -599,7 +556,7 @@ body{
 
 <div class="app">
 
-  <section class="hero">
+  <section class="hero" id="top">
     <div class="heroTop">
       <div class="brand">
         <div class="logo">
@@ -652,25 +609,6 @@ body{
   </section>
 
   <main class="content">
-
-    <div class="quickRow">
-      <div class="quickCard" id="quickFlash">
-        <b>⚡</b>
-        <span>Flash</span>
-      </div>
-      <div class="quickCard" id="quickGrid">
-        <b>🎲</b>
-        <span>Grille</span>
-      </div>
-      <div class="quickCard" id="quickCopy">
-        <b>📋</b>
-        <span>Copier</span>
-      </div>
-      <div class="quickCard" id="quickHistory">
-        <b>↻</b>
-        <span>Historique</span>
-      </div>
-    </div>
 
     <section class="card" id="gridSection">
       <div class="cardHeader">
@@ -917,4 +855,55 @@ function renderStats(){
   hotBox.innerHTML = "";
   coldBox.innerHTML = "";
 
-  r.hot.forEach(function(item
+  r.hot.forEach(function(item){
+    var chip = document.createElement("div");
+    chip.className = "chip hot";
+    chip.textContent = item[0] + " · " + item[1];
+    hotBox.appendChild(chip);
+  });
+
+  r.cold.forEach(function(item){
+    var chip = document.createElement("div");
+    chip.className = "chip cold";
+    chip.textContent = item[0] + " · " + item[1];
+    coldBox.appendChild(chip);
+  });
+
+  el("statsNote").textContent = r.note;
+}
+
+function countMatches(a,b){
+  var count = 0;
+  a.forEach(function(n){
+    if(b.indexOf(n) !== -1){
+      count++;
+    }
+  });
+  return count;
+}
+
+function updateGain(){
+  if(!lastGrid){
+    return;
+  }
+
+  var r = results[currentGame];
+  var mainMatch = countMatches(lastGrid.main,r.main);
+  var extraMatch = countMatches(lastGrid.extra,r.extra);
+  var win = false;
+
+  if(currentGame === "euro"){
+    if(mainMatch >= 2 || extraMatch === 2){
+      win = true;
+    }
+  }else{
+    if(mainMatch >= 2 || extraMatch === 1){
+      win = true;
+    }
+  }
+
+  el("gainTitle").textContent = win ? "✅ Potentiellement gagnant" : "❌ Non gagnant";
+  el("gainText").innerHTML =
+    mainMatch + " numéro(s) trouvé(s)<br>" +
+    extraMatch + " " + r.extraName.toLowerCase() + " trouvé(s)<br>" +
+    "Montant exact à vérifier sur
