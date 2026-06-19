@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Galactic Euromillions - Loto</title>
+
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0012">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Galactic Loto">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;700;800&display=swap');
@@ -231,12 +239,6 @@ h1 span{
   background:linear-gradient(135deg,#7b2fff66,#ff007f55,#ffbf0055);
 }
 
-.link{
-  background:rgba(240,192,64,.16);
-  border:1px solid rgba(240,192,64,.35);
-  color:#fff1a8;
-}
-
 .status{
   display:none;
   margin-top:12px;
@@ -327,14 +329,18 @@ h1 span{
           <stop offset="100%" stop-color="#9c6500"/>
         </linearGradient>
       </defs>
+
       <rect x="7" y="7" width="106" height="106" rx="28" fill="#14002b" stroke="#f0c040" stroke-width="3"/>
       <ellipse cx="60" cy="60" rx="48" ry="18" fill="none" stroke="url(#g)" stroke-width="6" transform="rotate(-18 60 60)"/>
       <ellipse cx="60" cy="60" rx="45" ry="17" fill="none" stroke="#7b2fff" stroke-width="4" transform="rotate(22 60 60)"/>
       <path d="M60 34 L68 52 L87 52 L71 64 L77 84 L60 72 L43 84 L49 64 L33 52 L52 52 Z" fill="url(#g)"/>
+
       <circle cx="91" cy="39" r="11" fill="#180030" stroke="url(#g)" stroke-width="3"/>
       <text x="91" y="44" text-anchor="middle" font-size="13" font-weight="900" fill="#fff1a8">7</text>
+
       <circle cx="30" cy="78" r="11" fill="#180030" stroke="url(#g)" stroke-width="3"/>
       <text x="30" y="83" text-anchor="middle" font-size="12" font-weight="900" fill="#fff1a8">12</text>
+
       <circle cx="75" cy="96" r="11" fill="#180030" stroke="url(#g)" stroke-width="3"/>
       <text x="75" y="101" text-anchor="middle" font-size="11" font-weight="900" fill="#fff1a8">24</text>
     </svg>
@@ -458,12 +464,16 @@ function pickNumbers(min,max,count){
 
   while(numbers.length < count){
     var n = Math.floor(Math.random() * (max - min + 1)) + min;
+
     if(numbers.indexOf(n) === -1){
       numbers.push(n);
     }
   }
 
-  numbers.sort(function(a,b){ return a-b; });
+  numbers.sort(function(a,b){
+    return a-b;
+  });
+
   return numbers;
 }
 
@@ -511,6 +521,7 @@ function generateGrid(){
   renderBalls("extraBalls",extra,true);
 
   historyList.unshift(lastGrid);
+
   if(historyList.length > 8){
     historyList.pop();
   }
@@ -600,9 +611,9 @@ function shareText(){
   var r = results[lastGrid.game];
 
   return "Ma grille Galactic Euromillions - Loto\n" +
-  r.name + "\n" +
-  "Numéros : " + lastGrid.main.join(" - ") + "\n" +
-  r.extraName + " : " + lastGrid.extra.join(" - ");
+    r.name + "\n" +
+    "Numéros : " + lastGrid.main.join(" - ") + "\n" +
+    r.extraName + " : " + lastGrid.extra.join(" - ");
 }
 
 function copyText(){
@@ -712,15 +723,23 @@ function updateTimer(){
 }
 
 function start(){
-  el("btnEuro").addEventListener("click",function(){ switchGame("euro"); });
-  el("btnLoto").addEventListener("click",function(){ switchGame("loto"); });
+  el("btnEuro").addEventListener("click",function(){
+    switchGame("euro");
+  });
+
+  el("btnLoto").addEventListener("click",function(){
+    switchGame("loto");
+  });
+
   el("generateBtn").addEventListener("click",generateGrid);
   el("copyBtn").addEventListener("click",copyText);
   el("whatsappBtn").addEventListener("click",shareWhatsApp);
+
   el("instagramBtn").addEventListener("click",function(){
     copyText();
     showMessage("Texte copié ✅ Colle-le dans Instagram.");
   });
+
   el("clearBtn").addEventListener("click",clearHistory);
 
   document.querySelectorAll(".infoTab").forEach(function(btn){
