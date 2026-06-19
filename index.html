@@ -40,7 +40,7 @@ body{
   max-width:540px;
   margin:0 auto;
   min-height:100vh;
-  padding-bottom:92px;
+  padding-bottom:34px;
 }
 
 .hero{
@@ -314,36 +314,46 @@ body{
     inset 0 -2px 5px rgba(8,21,64,.04);
 }
 
-.mainAction{
+.generatorGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
   margin-top:16px;
+}
+
+.actionGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+  margin-top:10px;
 }
 
 .btn{
   width:100%;
   border:0;
   border-radius:18px;
-  padding:15px 12px;
+  padding:14px 10px;
   color:white;
-  font-size:15px;
+  font-size:14px;
   font-weight:900;
   cursor:pointer;
+  min-height:54px;
 }
 
 .btn:active{
   transform:scale(.98);
 }
 
-.generate{
+.classic{
   background:linear-gradient(135deg,#003cbb,#0077ff);
   color:#fff6bd;
-  box-shadow:0 10px 24px rgba(0,92,255,.26);
+  box-shadow:0 10px 24px rgba(0,92,255,.24);
 }
 
-.actionGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:10px;
+.premium{
+  background:linear-gradient(135deg,#8a5cff,#f3c83d);
+  color:#071A5A;
+  box-shadow:0 10px 24px rgba(243,200,61,.22);
 }
 
 .copy{
@@ -357,11 +367,6 @@ body{
   color:#fff;
   border:1px solid rgba(37,211,102,.75);
   box-shadow:0 10px 20px rgba(37,211,102,.25);
-}
-
-.share{
-  background:linear-gradient(135deg,#6f3cff,#a044ff);
-  color:#fff;
 }
 
 .verify{
@@ -471,51 +476,10 @@ body{
   padding:8px 18px 0;
 }
 
-.bottomNav{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  background:rgba(7,14,46,.96);
-  border-top:1px solid rgba(255,255,255,.10);
-  box-shadow:0 -8px 26px rgba(0,0,0,.22);
-  z-index:10;
-  backdrop-filter:blur(14px);
-}
-
-.bottomNavInner{
-  max-width:540px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:2px;
-  padding:8px 8px 10px;
-}
-
-.navItem{
-  border:0;
-  background:transparent;
-  color:rgba(255,255,255,.55);
-  font-size:11px;
-  font-weight:900;
-  padding:5px 2px;
-}
-
-.navItem b{
-  display:block;
-  font-size:21px;
-  line-height:1;
-  margin-bottom:3px;
-}
-
-.navItem.active{
-  color:#f8d95c;
-}
-
 .toast{
   position:fixed;
   left:50%;
-  bottom:82px;
+  bottom:28px;
   transform:translateX(-50%);
   background:#071A5A;
   color:#fff;
@@ -528,6 +492,8 @@ body{
   pointer-events:none;
   transition:.2s;
   z-index:20;
+  max-width:92%;
+  text-align:center;
 }
 
 .toast.show{
@@ -546,7 +512,11 @@ body{
   }
 
   .btn{
-    font-size:14px;
+    font-size:13px;
+  }
+
+  .actionGrid{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -632,14 +602,14 @@ body{
       <div id="extraLabel" class="gridLabel">Étoiles</div>
       <div id="extraBalls" class="balls"></div>
 
-      <div class="mainAction">
-        <button id="generateBtn" class="btn generate" type="button">🔮 Générer ma grille</button>
+      <div class="generatorGrid">
+        <button id="classicBtn" class="btn classic" type="button">🎲 Grille classique</button>
+        <button id="premiumBtn" class="btn premium" type="button">✨ Grille Premium</button>
       </div>
 
       <div class="actionGrid">
         <button id="copyBtn" class="btn copy" type="button">📋 Copier</button>
         <button id="whatsappBtn" class="btn wa" type="button">🟢 WhatsApp</button>
-        <button id="shareBtn" class="btn share" type="button">📤 Partager</button>
         <button id="verifyBtn" class="btn verify" type="button">🔎 Vérifier</button>
       </div>
     </section>
@@ -701,21 +671,14 @@ body{
 
 </div>
 
-<nav class="bottomNav">
-  <div class="bottomNavInner">
-    <button class="navItem active" type="button" data-go="top"><b>⌂</b>Accueil</button>
-    <button class="navItem" type="button" data-go="gridSection"><b>🎟️</b>Grille</button>
-    <button class="navItem" type="button" data-go="infoSection"><b>📊</b>Infos</button>
-    <button class="navItem" type="button" data-go="history"><b>↻</b>Historique</button>
-  </div>
-</nav>
-
 <div id="toast" class="toast"></div>
 
 <script>
 var currentGame = "euro";
 var lastGrid = null;
 var historyList = [];
+var premiumUnlocked = localStorage.getItem("galactic_premium_unlocked") === "yes";
+var PREMIUM_CODE = "GALAXY2026";
 
 var results = {
   euro:{
@@ -726,8 +689,10 @@ var results = {
     officialUrl:"https://www.fdj.fr/jeux-de-tirage/euromillions-my-million/resultats",
     main:[18,25,31,37,45],
     extra:[4,9],
-    hot:[[35,84],[42,82],[21,80],[23,79],[19,77]],
-    cold:[[22,44],[1,47],[43,53],[34,54],[13,55]],
+    hot:[35,42,21,23,19],
+    cold:[22,1,43,34,13],
+    hotDisplay:[[35,84],[42,82],[21,80],[23,79],[19,77]],
+    coldDisplay:[[22,44],[1,47],[43,53],[34,54],[13,55]],
     note:"Statistiques indicatives à vérifier régulièrement sur FDJ."
   },
   loto:{
@@ -738,8 +703,10 @@ var results = {
     officialUrl:"https://www.fdj.fr/jeux-de-tirage/loto/resultats",
     main:[1,15,32,37,39],
     extra:[1],
-    hot:[[30,128],[31,126],[24,121],[7,119],[41,117]],
-    cold:[[43,89],[1,92],[33,92],[46,95],[8,96]],
+    hot:[30,31,24,7,41],
+    cold:[43,1,33,46,8],
+    hotDisplay:[[30,128],[31,126],[24,121],[7,119],[41,117]],
+    coldDisplay:[[43,89],[1,92],[33,92],[46,95],[8,96]],
     note:"Statistiques indicatives à vérifier régulièrement sur FDJ."
   }
 };
@@ -783,7 +750,7 @@ function renderBalls(boxId,numbers,isExtra){
   });
 }
 
-function generateGrid(){
+function randomGrid(){
   var main;
   var extra;
 
@@ -795,115 +762,176 @@ function generateGrid(){
     extra = pickNumbers(1,10,1);
   }
 
-  lastGrid = {
+  return {
     game:currentGame,
     main:main,
-    extra:extra
+    extra:extra,
+    mode:"classique"
   };
+}
 
-  renderBalls("mainBalls",main,false);
-  renderBalls("extraBalls",extra,true);
+function scoreGrid(grid){
+  var r = results[currentGame];
+  var main = grid.main;
+  var extra = grid.extra;
+  var score = 0;
 
-  historyList.unshift(lastGrid);
+  var odd = main.filter(function(n){ return n % 2 !== 0; }).length;
+  var even = main.length - odd;
+
+  if((odd === 2 && even === 3) || (odd === 3 && even === 2)){
+    score += 25;
+  }else{
+    score -= 10;
+  }
+
+  var middle = currentGame === "euro" ? 25 : 24;
+  var low = main.filter(function(n){ return n <= middle; }).length;
+  var high = main.length - low;
+
+  if((low === 2 && high === 3) || (low === 3 && high === 2)){
+    score += 25;
+  }else{
+    score -= 8;
+  }
+
+  var under31 = main.filter(function(n){ return n <= 31; }).length;
+
+  if(under31 <= 3){
+    score += 22;
+  }else{
+    score -= 22;
+  }
+
+  var consecutive = 0;
+
+  for(var i=1;i<main.length;i++){
+    if(main[i] === main[i-1] + 1){
+      consecutive++;
+    }
+  }
+
+  if(consecutive === 0){
+    score += 18;
+  }else if(consecutive === 1){
+    score += 6;
+  }else{
+    score -= 24;
+  }
+
+  var sum = main.reduce(function(a,b){ return a+b; },0);
+
+  if(currentGame === "euro"){
+    if(sum >= 95 && sum <= 180){
+      score += 18;
+    }else{
+      score -= 12;
+    }
+  }else{
+    if(sum >= 90 && sum <= 170){
+      score += 18;
+    }else{
+      score -= 12;
+    }
+  }
+
+  var zones = {};
+
+  main.forEach(function(n){
+    var z = Math.ceil(n / 10);
+    zones[z] = true;
+  });
+
+  var zoneCount = Object.keys(zones).length;
+
+  if(zoneCount >= 4){
+    score += 22;
+  }else if(zoneCount === 3){
+    score += 10;
+  }else{
+    score -= 14;
+  }
+
+  var hotCount = main.filter(function(n){ return r.hot.indexOf(n) !== -1; }).length;
+  var coldCount = main.filter(function(n){ return r.cold.indexOf(n) !== -1; }).length;
+
+  if(hotCount >= 1 && hotCount <= 2){
+    score += 12;
+  }
+
+  if(coldCount <= 1){
+    score += 8;
+  }
+
+  if(extra.length === 2 && Math.abs(extra[0] - extra[1]) >= 3){
+    score += 8;
+  }
+
+  if(extra.length === 1){
+    score += 4;
+  }
+
+  score += Math.random() * 8;
+
+  return score;
+}
+
+function smartGrid(){
+  var best = null;
+  var bestScore = -99999;
+
+  for(var i=0;i<700;i++){
+    var candidate = randomGrid();
+    var score = scoreGrid(candidate);
+
+    if(score > bestScore){
+      bestScore = score;
+      best = candidate;
+    }
+  }
+
+  best.mode = "premium";
+  best.privateScore = Math.round(bestScore);
+
+  return best;
+}
+
+function applyGrid(grid){
+  lastGrid = grid;
+
+  renderBalls("mainBalls",grid.main,false);
+  renderBalls("extraBalls",grid.extra,true);
+
+  historyList.unshift(grid);
   if(historyList.length > 8){
     historyList.pop();
   }
 
   updateGain();
   updateHistory();
-  toast("Nouvelle grille générée ✅");
 }
 
-function switchGame(game){
-  currentGame = game;
-  var r = results[currentGame];
+function generateClassic(){
+  applyGrid(randomGrid());
+  toast("Grille classique générée ✅");
+}
 
-  if(game === "euro"){
-    el("tabEuro").className = "gameBtn active";
-    el("tabLoto").className = "gameBtn";
-  }else{
-    el("tabEuro").className = "gameBtn";
-    el("tabLoto").className = "gameBtn active";
+function unlockPremium(){
+  if(premiumUnlocked){
+    return true;
   }
 
-  el("gameTitle").textContent = r.name;
-  el("gameBadge").textContent = r.badge;
-  el("priceTag").textContent = r.price;
-  el("extraLabel").textContent = r.extraName;
+  var code = prompt("Code Premium :");
 
-  renderResult();
-  renderStats();
-  generateGrid();
-  updateTimer();
-}
-
-function renderResult(){
-  var r = results[currentGame];
-
-  el("resultTitle").textContent = r.name + " · résultat de référence";
-  el("resultExtraLabel").textContent = r.extraName;
-
-  renderBalls("resultMain",r.main,false);
-  renderBalls("resultExtra",r.extra,true);
-}
-
-function renderStats(){
-  var r = results[currentGame];
-  var hotBox = el("hotStats");
-  var coldBox = el("coldStats");
-
-  hotBox.innerHTML = "";
-  coldBox.innerHTML = "";
-
-  r.hot.forEach(function(item){
-    var chip = document.createElement("div");
-    chip.className = "chip hot";
-    chip.textContent = item[0] + " · " + item[1];
-    hotBox.appendChild(chip);
-  });
-
-  r.cold.forEach(function(item){
-    var chip = document.createElement("div");
-    chip.className = "chip cold";
-    chip.textContent = item[0] + " · " + item[1];
-    coldBox.appendChild(chip);
-  });
-
-  el("statsNote").textContent = r.note;
-}
-
-function countMatches(a,b){
-  var count = 0;
-  a.forEach(function(n){
-    if(b.indexOf(n) !== -1){
-      count++;
-    }
-  });
-  return count;
-}
-
-function updateGain(){
-  if(!lastGrid){
-    return;
+  if(code === null){
+    return false;
   }
 
-  var r = results[currentGame];
-  var mainMatch = countMatches(lastGrid.main,r.main);
-  var extraMatch = countMatches(lastGrid.extra,r.extra);
-  var win = false;
-
-  if(currentGame === "euro"){
-    if(mainMatch >= 2 || extraMatch === 2){
-      win = true;
-    }
-  }else{
-    if(mainMatch >= 2 || extraMatch === 1){
-      win = true;
-    }
+  if(code.trim().toUpperCase() === PREMIUM_CODE){
+    premiumUnlocked = true;
+    localStorage.setItem("galactic_premium_unlocked","yes");
+    toast("Accès Premium activé ✨");
+    return true;
   }
 
-  el("gainTitle").textContent = win ? "✅ Potentiellement gagnant" : "❌ Non gagnant";
-  el("gainText").innerHTML =
-    mainMatch + " numéro(s) trouvé(s)<br>" +
-    extraMatch + " " + r.extraName.toLowerCase() + " trouvé(s)<br>" +
-    "Montant exact à vérifier sur
+  toas
