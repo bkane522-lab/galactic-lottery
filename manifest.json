@@ -1,19 +1,61 @@
 {
-  "name": "Galactic Euromillions - Loto",
-  "short_name": "Galactic Loto",
-  "description": "Générateur aléatoire EuroMillions et Loto.",
-  "start_url": "/",
+  "id": "/",
+  "name": "Galactic Lottery - Euromillions & Loto",
+  "short_name": "Galactic Lottery",
+  "description": "Application indépendante de génération de grilles Euromillions et Loto, avec favoris, statistiques internes et rappels. Non officielle FDJ. Aucun gain garanti.",
+  "lang": "fr-FR",
+  "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#090011",
-  "theme_color": "#0a0012",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "orientation": "portrait",
+  "theme_color": "#13002e",
+  "background_color": "#05030d",
+  "categories": ["games", "utilities", "entertainment"],
   "icons": [
     {
-      "src": "/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Générer Euromillions",
+      "short_name": "Euromillions",
+      "description": "Ouvrir Galactic Lottery en mode Euromillions",
+      "url": "/?mode=euromillions",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Générer Loto",
+      "short_name": "Loto",
+      "description": "Ouvrir Galactic Lottery en mode Loto",
+      "url": "/?mode=loto",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }
